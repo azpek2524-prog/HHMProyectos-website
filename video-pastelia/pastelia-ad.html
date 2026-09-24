@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Pastelia Ad</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=block" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF4E6; --cream2:#F5E7D0; --cacao:#7B5B4B; --cacao-d:#5A4236;
+    --dark:#201811; --caramel:#E7B676; --pink:#EF7C8E; --white:#fff; --ok:#5BA873;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1080px;height:1920px;overflow:hidden;background:var(--cream)}
+  body{font-family:'Fredoka',sans-serif;color:var(--cacao-d)}
+  #stage{position:absolute;inset:0;overflow:hidden}
+  #bg{position:absolute;inset:0;background:var(--cream)}
+  #dots{position:absolute;inset:0;opacity:.35;
+    background-image:radial-gradient(circle,#D9C3A5 2px,transparent 2.5px);background-size:36px 36px;
+    -webkit-mask-image:radial-gradient(ellipse at center,transparent 35%,#000 90%);
+            mask-image:radial-gradient(ellipse at center,transparent 35%,#000 90%)}
+  .abs{position:absolute;will-change:transform,opacity,filter}
+  .word{font-weight:600;font-size:150px;letter-spacing:-4px;line-height:1;color:var(--cacao-d);white-space:nowrap}
+  .pill{display:inline-block;padding:4px 36px 14px;border-radius:90px;background:var(--pink);color:#fff}
+  .chip{width:150px;height:150px;border-radius:40px;background:#fff;box-shadow:0 20px 50px rgba(90,66,54,.18);
+    display:flex;align-items:center;justify-content:center}
+  /* phone */
+  #phone{left:140px;top:330px;width:800px;height:1480px;border-radius:90px;background:#0E0B08;padding:22px;
+    box-shadow:0 60px 120px rgba(58,42,36,.35)}
+  #screen{width:100%;height:100%;border-radius:70px;background:#fff;overflow:hidden;position:relative}
+  #chathead{height:190px;padding:90px 44px 0;display:flex;align-items:center;gap:22px;border-bottom:2px solid #F1E6D6}
+  .avatar{width:74px;height:74px;border-radius:50%;background:linear-gradient(135deg,#F9A8B8,#E7B676)}
+  .msg{position:absolute;max-width:560px;padding:26px 32px;border-radius:40px;font-size:38px;line-height:1.25;font-weight:500}
+  .in{left:40px;background:#F1E6D6;color:#3A2A24;border-bottom-left-radius:12px}
+  .out{right:40px;background:var(--cacao);color:#FFF7EC;border-bottom-right-radius:12px}
+  .typing{position:absolute;right:40px;padding:26px 34px;border-radius:40px;background:var(--cacao);display:flex;gap:12px}
+  .typing i{width:16px;height:16px;border-radius:50%;background:#FFF7EC;display:block}
+  #paycard{position:absolute;right:40px;width:560px;border-radius:40px;background:var(--cream);border:3px solid var(--caramel);padding:30px}
+  #paybtn{margin-top:22px;height:96px;border-radius:30px;background:var(--cacao);color:#fff;font-size:38px;font-weight:600;
+    display:flex;align-items:center;justify-content:center;gap:14px}
+  #toast{left:90px;right:90px;top:120px;border-radius:44px;background:#fff;padding:34px 40px;display:flex;gap:28px;align-items:center;
+    box-shadow:0 30px 80px rgba(58,42,36,.30)}
+  .check{width:84px;height:84px;border-radius:50%;background:var(--ok);display:flex;align-items:center;justify-content:center;flex:none}
+  /* dashboard */
+  .card{border-radius:56px;padding:48px 52px;background:#F1E6CE}
+  .card.big{background:linear-gradient(135deg,#7B5B4B,#5A4236);color:#FFF7EC;box-shadow:0 40px 90px rgba(90,66,54,.35)}
+  .card .lbl{font-size:40px;font-weight:500;opacity:.85}
+  .card .num{font-size:170px;font-weight:600;letter-spacing:-5px;line-height:1.05}
+  .row{border-radius:44px;background:#fff;padding:34px 44px;display:flex;align-items:center;gap:30px;box-shadow:0 20px 50px rgba(90,66,54,.12)}
+  .tag{margin-left:auto;padding:12px 26px;border-radius:30px;font-size:30px;font-weight:600}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="bg"></div><div id="dots"></div>
+
+  <!-- S1: verbs -->
+  <div class="abs word" id="w1" style="left:110px;top:560px">Cotizar.</div>
+  <div class="abs word" id="w2" style="left:110px;top:740px">Agendar.</div>
+  <div class="abs word" id="w3" style="left:110px;top:920px">Cobrar.</div>
+  <div class="abs word" id="w4" style="left:110px;top:1100px">Responder.</div>
+  <div class="abs" id="w5" style="left:110px;top:1330px;font-size:64px;font-weight:500;color:var(--cacao)">…y todo a mano.</div>
+
+  <!-- S2: headline + social chips -->
+  <div class="abs word" id="h1" style="left:0;width:1080px;text-align:center;top:720px;font-size:120px">¿Y si tu pastelería</div>
+  <div class="abs word" id="h2" style="left:0;width:1080px;text-align:center;top:870px;font-size:120px">trabajara <span class="pill" id="h3">sola?</span></div>
+  <div class="abs chip" id="c1" style="left:120px;top:330px"><svg width="84" height="84" viewBox="0 0 24 24"><defs><linearGradient id="ig" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FEDA75"/><stop offset=".5" stop-color="#D62976"/><stop offset="1" stop-color="#4F5BD5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="none" stroke="url(#ig)" stroke-width="2.4"/><circle cx="12" cy="12" r="4.6" fill="none" stroke="url(#ig)" stroke-width="2.4"/><circle cx="17.6" cy="6.4" r="1.4" fill="#D62976"/></svg></div>
+  <div class="abs chip" id="c2" style="left:800px;top:420px"><svg width="84" height="84" viewBox="0 0 24 24"><path d="M12 2.5a9.5 9.5 0 0 0-8.2 14.3L2.5 21.5l4.8-1.3A9.5 9.5 0 1 0 12 2.5z" fill="#25D366"/><path d="M8.6 7.6c.3-.6.6-.6.9-.6h.6c.2 0 .5 0 .7.5l.9 2.1c.1.3 0 .5-.1.7l-.6.7c-.2.2-.1.4 0 .6.6 1 1.6 2 2.7 2.6.2.1.4.2.6 0l.8-.9c.2-.2.4-.2.7-.1l2 1c.3.1.4.3.3.6-.2 1-1.1 1.8-2.1 1.9-1 .1-2.6-.3-4.5-2-1.8-1.6-2.8-3.4-2.9-4.5-.1-1 .5-1.9.9-2.6z" fill="#fff"/></svg></div>
+  <div class="abs chip" id="c3" style="left:160px;top:1260px"><svg width="84" height="84" viewBox="0 0 24 24"><path d="M12 2C6.4 2 2 6.1 2 11.4c0 2.9 1.3 5.4 3.5 7.1V22l3.2-1.8c1 .3 2.1.4 3.3.4 5.6 0 10-4.1 10-9.3S17.6 2 12 2z" fill="#0084FF"/><path d="M6.5 14.2l3-4.7 2.2 1.7 3.4-1.8-3 4.7-2.2-1.7z" fill="#fff"/></svg></div>
+  <div class="abs chip" id="c4" style="left:780px;top:1180px"><svg width="84" height="84" viewBox="0 0 24 24"><path d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-1.8-2.5V9.7a5.8 5.8 0 1 0 4.9 5.7V9.1a7.4 7.4 0 0 0 4.3 1.4V7.4a4.3 4.3 0 0 1-3.2-1.6z" fill="#111"/></svg></div>
+
+  <!-- S3: phone chat -->
+  <div class="abs" id="cap" style="left:0;width:1080px;text-align:center;top:150px;font-size:66px;font-weight:600;color:var(--cacao-d)">Tu <span style="color:var(--pink)">agente IA</span> contesta por ti</div>
+  <div class="abs" id="phone"><div id="screen">
+    <div id="chathead"><div class="avatar"></div><div><div style="font-size:38px;font-weight:600;color:#3A2A24">dulce.lu</div><div style="font-size:28px;color:#A08878">Instagram · Mensaje directo</div></div></div>
+    <div class="msg in"  id="m1">¡Hola! ¿Cuánto cuesta un pastel de 3 leches para 20 personas?</div>
+    <div class="typing" id="t1"><i></i><i></i><i></i></div>
+    <div class="msg out" id="m2">¡Hola Lu! 3 leches para 20 personas: <b>$850</b>. Tengo libre el sábado 28, ¿te lo aparto?</div>
+    <div class="msg in"  id="m3">¡Sí, porfa!</div>
+    <div class="typing" id="t2"><i></i><i></i><i></i></div>
+    <div id="paycard">
+      <div style="font-size:30px;font-weight:500;color:#A08878">Pedido #0428 · Sáb 28 sep</div>
+      <div style="font-size:44px;font-weight:600;color:#3A2A24;margin-top:6px">Anticipo para apartar</div>
+      <div style="font-size:86px;font-weight:600;color:var(--cacao);letter-spacing:-2px">$300</div>
+      <div id="paybtn"><span id="paytxt">Pagar anticipo</span></div>
+    </div>
+    <div class="abs" id="tap" style="width:90px;height:90px;border-radius:50%;background:rgba(58,42,36,.25);border:4px solid rgba(255,255,255,.9)"></div>
+  </div></div>
+  <div class="abs" id="toast">
+    <div class="check"><svg width="48" height="48" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div><div style="font-size:40px;font-weight:600;color:#3A2A24">Pedido confirmado</div>
+    <div style="font-size:32px;color:#8A7060">Sáb 28 · Anticipo $300 recibido · Agendado</div></div>
+  </div>
+
+  <!-- S4: dashboard -->
+  <div class="abs word" id="d0" style="left:90px;top:230px;font-size:108px">Mientras tú</div>
+  <div class="abs word" id="d0b" style="left:90px;top:360px;font-size:108px"><span class="pill" style="background:var(--caramel);color:var(--cacao-d)">horneas.</span></div>
+  <div class="abs card big" id="d1" style="left:90px;top:640px;width:900px;height:380px">
+    <div class="lbl">Entregas de hoy</div><div class="num" id="n1">0</div>
+  </div>
+  <div class="abs card" id="d2" style="left:90px;top:1060px;width:430px;height:300px">
+    <div class="lbl">Pedidos esta semana</div><div class="num" style="font-size:130px" id="n2">0</div>
+  </div>
+  <div class="abs card" id="d3" style="left:560px;top:1060px;width:430px;height:300px">
+    <div class="lbl">Ingresos del mes</div><div class="num" style="font-size:104px;margin-top:14px" id="n3">$0</div>
+  </div>
+  <div class="abs row" id="r1" style="left:90px;top:1400px;width:900px">
+    <div class="avatar" style="width:84px;height:84px"></div>
+    <div><div style="font-size:38px;font-weight:600;color:#3A2A24">3 leches · 20 personas</div><div style="font-size:30px;color:#A08878">dulce.lu · Sáb 28 · vía Instagram</div></div>
+    <div class="tag" style="background:#E3F2E7;color:#3E8A58">Anticipo</div>
+  </div>
+  <div class="abs row" id="r2" style="left:90px;top:1560px;width:900px">
+    <div class="avatar" style="width:84px;height:84px;background:linear-gradient(135deg,#B7D3F2,#E7B676)"></div>
+    <div><div style="font-size:38px;font-weight:600;color:#3A2A24">Red velvet · 35 personas</div><div style="font-size:30px;color:#A08878">Mariana · Dom 29 · vía WhatsApp</div></div>
+    <div class="tag" style="background:#F7E7C9;color:#7B5B4B">Cotizado</div>
+  </div>
+
+  <!-- S5: outro -->
+  <div class="abs word" id="o1" style="left:0;width:1080px;text-align:center;top:700px;font-size:104px;color:#FFF7EC">Tu pastelería,</div>
+  <div class="abs word" id="o2" style="left:0;width:1080px;text-align:center;top:830px;font-size:104px;color:var(--caramel)">en piloto automático.</div>
+  <div class="abs" id="logo" style="left:160px;top:820px;width:760px">
+    <svg viewBox="0 0 380 100" width="760" height="200"><rect width="100" height="100" rx="24" fill="#FDF5EC"/><rect x="28" y="24" width="14" height="54" rx="7" fill="#3A2A24"/><circle cx="53" cy="38" r="16" fill="none" stroke="#3A2A24" stroke-width="14"/><circle cx="73" cy="72" r="7" fill="#EF7C8E"/><text x="120" y="68" font-family="Fredoka, sans-serif" font-size="46" font-weight="600" letter-spacing="-0.7" fill="#FDF5EC">Pastelia</text></svg>
+  </div>
+  <div class="abs" id="o3" style="left:0;width:1080px;text-align:center;top:1080px;font-size:44px;font-weight:500;color:#D9C3A5">Cotiza · Agenda · Cobra · con tu agente IA</div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const clamp = (v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+const easeOut = x => 1-Math.pow(1-x,3);
+const easeIn  = x => x*x*x;
+const easeInOut = x => x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+// damped spring 0→1 (slight overshoot)
+const spring = x => x<=0?0:x>=1?1:1-Math.exp(-6*x)*Math.cos(9*x);
+const prog = (t,a,d)=>clamp((t-a)/d);
+
+// Generic in/out: blur+rise in, blur+lift out
+function io(el,t,tin,tout,{dy=60,blur=18,dur=.55,outDur=.4,scale=0,outDy=-50}={}){
+  const pi = spring(prog(t,tin,dur*1.6)), ei = easeOut(prog(t,tin,dur));
+  const po = tout==null?0:easeIn(prog(t,tout,outDur));
+  const op = ei*(1-po);
+  el.style.opacity = op;
+  el.style.filter = `blur(${(1-ei)*blur + po*blur}px)`;
+  const s = 1 + (scale? (1-pi)*scale : 0) - po*0.04;
+  el.style.transform = `translateY(${(1-pi)*dy + po*outDy}px) scale(${s})`;
+  el.style.visibility = op<0.002?'hidden':'visible';
+}
+const fmt = n => '$'+Math.round(n).toLocaleString('en-US');
+
+// chat layout positions (inside screen)
+const Y = {m1:240,t1:470,m2:470,m3:790,t2:910,pay:910};
+
+function seek(t){
+  // background: cream → dark at outro
+  const dk = easeInOut(prog(t,13.1,.6));
+  $('bg').style.background = `rgb(${255+(32-255)*dk},${244+(24-244)*dk},${230+(17-230)*dk})`;
+  $('dots').style.opacity = .35*(1-dk)+.12*dk;
+
+  // S1 verbs
+  ['w1','w2','w3','w4'].forEach((id,i)=>io($(id),t,.15+i*.28,2.35+i*.05,{dy:90}));
+  io($('w5'),t,1.45,2.4,{dy:30,blur:10});
+  // strike-through feel: fade verbs to light color after 1.6
+  const dim = easeOut(prog(t,1.6,.4));
+  ['w1','w2','w3','w4'].forEach(id=>$(id).style.color=`rgb(${90+(200-90)*dim},${66+(175-66)*dim},${54+(150-54)*dim})`);
+
+  // S2 headline
+  io($('h1'),t,2.7,4.75,{dy:70});
+  io($('h2'),t,2.95,4.8,{dy:70});
+  const hp = spring(prog(t,3.3,.9));
+  $('h3').style.transform = `scale(${.4+.6*hp}) rotate(${(1-hp)*-8}deg)`;
+  $('h3').style.display='inline-block';
+  ['c1','c2','c3','c4'].forEach((id,i)=>{
+    const el=$(id); io(el,t,3.0+i*.12,4.7,{dy:120,scale:.5,blur:10});
+    const bob = Math.sin((t+i)*2.2)*14;
+    el.style.transform += ` translateY(${bob}px) rotate(${Math.sin((t+i*2)*1.4)*6}deg)`;
+  });
+
+  // S3 phone
+  const ph = spring(prog(t,5.0,1.0)), phOut = easeIn(prog(t,10.3,.5));
+  const phone=$('phone');
+  phone.style.opacity = clamp(prog(t,5.0,.3))*(1-phOut);
+  phone.style.visibility = (t<5||t>10.9)?'hidden':'visible';
+  phone.style.transform = `translateY(${(1-ph)*900 + phOut*-200}px) scale(${1-phOut*.15})`;
+  io($('cap'),t,5.25,10.2,{dy:40});
+  const place=(id,y,tin,tout)=>{const el=$(id);el.style.top=y+'px';io(el,t,tin,tout,{dy:40,blur:6,scale:.12,dur:.4,outDur:.15,outDy:0});};
+  place('m1',Y.m1,5.7,null);
+  place('t1',Y.t1,6.25,7.0); place('m2',Y.m2,7.05,null);
+  place('m3',Y.m3,7.95,null);
+  place('t2',Y.t2,8.3,8.75); place('paycard',Y.pay,8.8,null);
+  ['t1','t2'].forEach(id=>[...$(id).children].forEach((d,i)=>d.style.transform=`translateY(${Math.sin(t*10-i*1.1)*-7}px)`));
+  // tap on pay button
+  const tap=$('tap'), tp=prog(t,9.2,.5);
+  tap.style.left='360px'; tap.style.top=(Y.pay+300)+'px';
+  tap.style.opacity = t>9.0&&t<9.75 ? (1-tp)*.9+ (t<9.2?.9:0) : 0;
+  tap.style.transform=`scale(${t<9.2?1:1+tp*1.2})`;
+  const paid = t>=9.35;
+  $('paybtn').style.background = paid?'var(--ok)':'var(--cacao)';
+  $('paybtn').style.transform = `scale(${t>9.2&&t<9.35?.95:1})`;
+  $('paytxt').textContent = paid?'Anticipo pagado ✓':'Pagar anticipo';
+  // toast
+  const tt=spring(prog(t,9.55,.8)), to=easeIn(prog(t,10.2,.35));
+  $('toast').style.opacity = clamp(prog(t,9.55,.2))*(1-to);
+  $('toast').style.visibility = t<9.5||t>10.6?'hidden':'visible';
+  $('toast').style.transform=`translateY(${(1-tt)*-260 + to*-120}px)`;
+
+  // S4 dashboard
+  io($('d0'),t,10.6,12.95,{dy:70}); io($('d0b'),t,10.8,13.0,{dy:70});
+  const b = $('d0b').firstElementChild, bp=spring(prog(t,11.0,.9));
+  b.style.display='inline-block'; b.style.transform=`scale(${.4+.6*bp}) rotate(${(1-bp)*6}deg)`;
+  io($('d1'),t,10.9,12.95,{dy:120,scale:.08}); io($('d2'),t,11.1,13.0,{dy:120,scale:.08});
+  io($('d3'),t,11.2,13.0,{dy:120,scale:.08}); io($('r1'),t,11.6,13.05,{dy:80}); io($('r2'),t,11.8,13.05,{dy:80});
+  const c = easeOut(prog(t,11.1,1.5));
+  $('n1').textContent = Math.round(7*c); $('n2').textContent=Math.round(23*c); $('n3').textContent=fmt(12450*c);
+
+  // S5 outro
+  io($('o1'),t,13.5,14.9,{dy:60}); io($('o2'),t,13.75,14.95,{dy:60});
+  io($('logo'),t,15.15,null,{dy:40,scale:.25,blur:20,dur:.6});
+  io($('o3'),t,15.55,null,{dy:30,blur:8});
+}
+window.seek=seek;
+seek(0);
+</script>
+</body>
+</html>
