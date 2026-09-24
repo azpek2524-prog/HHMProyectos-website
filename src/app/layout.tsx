@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import { LogoSprite } from "@/components/brand/Logo";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,9 +29,6 @@ export const metadata: Metadata = {
     "constructoras",
     "proyecto ejecutivo",
   ],
-  icons: {
-    icon: "/logo.jpeg",
-  },
   openGraph: {
     title: "HHM Proyectos | Plomería y Electricidad para Construcción",
     description:
@@ -60,6 +58,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} flex min-h-screen flex-col bg-white font-sans text-ink antialiased`}
       >
+        <LogoSprite />
         <Navbar />
         <main className="flex-grow">{children}</main>
         <Footer />

@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
+import Logo from "@/components/brand/Logo";
 
 const navLinks = [
   { href: "/empresa", label: "Empresa" },
@@ -40,16 +40,9 @@ export default function Navbar() {
           href="/"
           onClick={() => setOpen(false)}
           aria-label="HHM Proyectos · Inicio"
-          className="relative block h-12 w-12 overflow-hidden md:h-16 md:w-16"
+          className="shrink-0 text-ink"
         >
-          <Image
-            src="/logo.jpeg"
-            alt="HHM Proyectos"
-            fill
-            sizes="64px"
-            priority
-            className="scale-[1.45] object-cover"
-          />
+          <Logo variant="horizontal" className="h-9 w-auto md:h-12" />
         </Link>
 
         {/* Escritorio */}

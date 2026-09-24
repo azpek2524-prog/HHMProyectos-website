@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import Logo from "@/components/brand/Logo";
 import { site, whatsappUrl } from "@/lib/site";
 
 const siteLinks = [
@@ -17,15 +17,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-5 pb-7 pt-12 md:px-8 md:pt-[72px]">
         <div className="grid gap-10 border-b border-gray-800 pb-10 sm:grid-cols-2 lg:grid-cols-3">
           <div className="flex flex-col gap-4">
-            <div className="relative h-[72px] w-[72px] overflow-hidden bg-white">
-              <Image
-                src="/logo.jpeg"
-                alt="HHM Proyectos"
-                fill
-                sizes="72px"
-                className="scale-[1.4] object-cover"
-              />
-            </div>
+            <Logo variant="horizontal" title="HHM Proyectos" className="h-11 w-auto self-start text-white" />
             <p className="max-w-[260px] text-sm leading-relaxed">
               Especialistas en plomería y electricidad para el sector
               construcción.
