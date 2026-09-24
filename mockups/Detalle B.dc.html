@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><script src="./image-slot.js"></script><style>*{box-sizing:border-box}a{color:inherit;text-decoration:none}a:hover{color:inherit}h1,h2,h3,h4,p{margin:0}</style></helmet>
+<div style="font-family:Inter,system-ui,sans-serif;color:#101828;background:#fff;container-type:inline-size">
+  <dc-import name="HHM Nav" mobile="{{ mobile }}" theme="light" active="Portafolio" hint-size="100%,84px"></dc-import>
+  <section style="position:relative;height:clamp(420px,46cqw,640px);background:#030712">
+    <div style="position:absolute;inset:0"><image-slot id="proj-1" shape="rect" placeholder="Foto o video principal a pantalla completa"></image-slot></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,7,18,0) 40%,rgba(3,7,18,.8));pointer-events:none"></div>
+    <div style="position:absolute;left:0;right:0;bottom:0;padding:clamp(20px,4cqw,48px) clamp(20px,4cqw,32px);pointer-events:none;color:#fff">
+      <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:14px"><p style="font:600 12px ui-monospace,Menlo,monospace;letter-spacing:.06em">OBRA 01 · RESIDENCIAL · 2025</p><h1 style="font-size:clamp(34px,5.6cqw,80px);font-weight:800;letter-spacing:-0.045em;line-height:.95;max-width:1000px;text-wrap:balance">Edificio de departamentos, 12 niveles</h1></div>
+    </div>
+  </section>
+  <section style="padding:clamp(40px,5cqw,72px) clamp(20px,4cqw,32px)">
+    <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(32px,5cqw,72px);align-items:start">
+      <aside style="position:sticky;top:24px;display:flex;flex-direction:column;border-top:1px solid #101828">
+        <div style="display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid #d1d5dc;font-size:15px"><span style="color:#6a7282">Alcance</span><span style="font-weight:600;text-align:right">Plomería + Electricidad</span></div>
+        <div style="display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid #d1d5dc;font-size:15px"><span style="color:#6a7282">Arquitectura</span><span style="font-weight:600">Despacho</span></div>
+        <div style="display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid #d1d5dc;font-size:15px"><span style="color:#6a7282">Constructora</span><span style="font-weight:600">Constructora</span></div>
+        <div style="display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid #d1d5dc;font-size:15px"><span style="color:#6a7282">Ubicación</span><span style="font-weight:600">Ciudad</span></div>
+        <div style="display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid #d1d5dc;font-size:15px"><span style="color:#6a7282">Entramos en</span><span style="font-weight:600">Proyecto ejecutivo</span></div>
+        <p style="font-size:17px;line-height:1.65;color:#364153;padding:24px 0;text-wrap:pretty">Ductos hidrosanitarios y eléctricos coordinados en 12 niveles con losas postensadas, sin perforaciones posteriores y dentro del programa.</p>
+        <a href="#" style="background:#162456;color:#fff;padding:16px 20px;font-weight:600;display:flex;justify-content:space-between" style-hover="background:#1c398e">Cotizar algo similar <span>→</span></a>
+      </aside>
+      <div style="display:flex;flex-direction:column;gap:clamp(28px,3cqw,40px);grid-column:{{ spanCol }};min-width:0">
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div style="aspect-ratio:{{ s.ratio }};overflow:hidden;background:#f3f4f6"><image-slot id="{{ s.id }}" shape="rect" placeholder="{{ s.ph }}"></image-slot></div>
+            <div style="display:flex;gap:20px;align-items:baseline;flex-wrap:wrap"><span style="font:600 12px ui-monospace,Menlo,monospace;color:#1c398e;width:72px">{{ s.stage }}</span><p style="flex:1;min-width:220px;font-size:16px;line-height:1.55;color:#364153"><b style="color:#101828">{{ s.title }}.</b> {{ s.text }}</p></div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+  <section style="background:#162456;color:#fff;padding:clamp(48px,6cqw,96px) clamp(20px,4cqw,32px)">
+    <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:28px"><p style="font-size:clamp(24px,3.2cqw,42px);font-weight:600;letter-spacing:-0.03em;line-height:1.18;max-width:1000px;text-wrap:balance">“En obra no tuvimos que improvisar nada.”</p><p style="color:#bedbff">Arq. Nombre Apellido · Despacho de arquitectura</p></div>
+  </section>
+  <section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))">
+    <a href="#" style="padding:clamp(28px,4cqw,48px) clamp(20px,4cqw,32px);border-right:1px solid #e5e7eb;display:flex;flex-direction:column;gap:6px" style-hover="background:#f9fafb"><span style="font-size:13px;color:#6a7282">← Anterior</span><span style="font-size:clamp(18px,2cqw,24px);font-weight:700;letter-spacing:-0.02em">Local comercial en plaza</span></a>
+    <a href="#" style="padding:clamp(28px,4cqw,48px) clamp(20px,4cqw,32px);display:flex;flex-direction:column;gap:6px;text-align:right" style-hover="background:#f9fafb"><span style="font-size:13px;color:#6a7282">Siguiente →</span><span style="font-size:clamp(18px,2cqw,24px);font-weight:700;letter-spacing:-0.02em">Oficinas corporativas, planta libre</span></a>
+  </section>
+  <dc-import name="HHM Footer" hint-size="100%,320px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;mobile&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const m = !!this.props.mobile;
+    return {
+      mobile: m,
+      spanCol: m ? 'auto' : 'span 2',
+      steps: [
+        { id: 'det-g1', stage: 'SEM 01', ratio: '16/10', ph: 'Foto: revisión de planos', title: 'Revisión de planos', text: 'Detectamos interferencias con estructura antes del colado de losas.' },
+        { id: 'det-g2', stage: 'SEM 06', ratio: m ? '4/5' : '16/9', ph: 'Foto: ductos y preparaciones', title: 'Preparaciones en losa', text: 'Camisas y ductos dejados en cada nivel según isométricos.' },
+        { id: 'det-g3', stage: 'SEM 18', ratio: '16/10', ph: 'Video: montaje de subestación', title: 'Subestación y tablero general', text: 'Montaje, pruebas y liberación con la compañía suministradora.' },
+        { id: 'det-g4', stage: 'SEM 30', ratio: '16/10', ph: 'Foto: entrega final', title: 'Entrega', text: 'Pruebas de presión y carga, planos as-built y garantía por escrito.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

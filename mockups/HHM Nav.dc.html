@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>*{box-sizing:border-box}a{color:inherit;text-decoration:none}</style></helmet>
+<sc-if value="{{ navy }}" hint-placeholder-val="{{ true }}">
+<nav style="background:#162456;color:#fff;box-shadow:0 4px 6px -1px rgba(0,0,0,.1);font-family:Inter,system-ui,sans-serif">
+  <div style="max-width:1280px;margin:0 auto;padding:0 clamp(16px,4vw,32px);display:flex;justify-content:space-between;align-items:center;height:{{ h }}px">
+    <a href="#" style="display:flex;align-items:center;gap:12px"><img src="public/logo.jpeg" alt="HHM Proyectos" style="width:{{ logo }}px;height:{{ logo }}px;object-fit:contain;border-radius:6px;background:#fff;padding:4px"></a>
+    <sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;gap:32px;align-items:center;font-weight:500;font-size:16px">
+        <sc-for list="{{ links }}" as="l" hint-placeholder-count="4"><a href="#" style="position:relative;padding:6px 0;color:{{ l.color }}" style-hover="color:#bedbff">{{ l.label }}<sc-if value="{{ l.on }}"><span style="position:absolute;left:0;right:0;bottom:-4px;height:2px;background:#bedbff"></span></sc-if></a></sc-for>
+        <a href="#" style="background:#fff;color:#162456;padding:8px 20px;border-radius:6px;font-weight:700;box-shadow:0 1px 2px rgba(0,0,0,.05)" style-hover="background:#f3f4f6">Solicitar Cotización</a>
+      </div>
+    </sc-if>
+    <sc-if value="{{ mobile }}">
+      <div style="display:flex;gap:12px;align-items:center">
+        <a href="#" style="background:#fff;color:#162456;padding:8px 14px;border-radius:6px;font-weight:700;font-size:14px">Cotizar</a>
+        <div style="width:44px;height:44px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px"><span style="width:22px;height:2px;background:#fff"></span><span style="width:22px;height:2px;background:#fff"></span><span style="width:22px;height:2px;background:#fff"></span></div>
+      </div>
+    </sc-if>
+  </div>
+</nav>
+</sc-if>
+<sc-if value="{{ light }}">
+<nav style="background:#fff;color:#101828;border-bottom:1px solid #e5e7eb;font-family:Inter,system-ui,sans-serif">
+  <div style="max-width:1280px;margin:0 auto;padding:0 clamp(16px,4vw,32px);display:flex;justify-content:space-between;align-items:center;height:{{ h }}px">
+    <a href="#" style="display:flex;align-items:center;gap:14px"><img src="public/logo.jpeg" alt="HHM Proyectos" style="width:{{ logo }}px;height:{{ logo }}px;object-fit:cover"></a>
+    <sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;gap:36px;align-items:center;font-weight:500;font-size:15px">
+        <sc-for list="{{ links }}" as="l" hint-placeholder-count="4"><a href="#" style="display:flex;align-items:center;gap:8px;color:{{ l.colorLight }}" style-hover="color:#162456"><sc-if value="{{ l.on }}"><span style="width:6px;height:6px;background:#162456"></span></sc-if>{{ l.label }}</a></sc-for>
+        <a href="#" style="background:#162456;color:#fff;padding:11px 20px;font-weight:600;display:flex;gap:10px;align-items:center" style-hover="background:#1c398e">Solicitar cotización <span>→</span></a>
+      </div>
+    </sc-if>
+    <sc-if value="{{ mobile }}">
+      <div style="display:flex;gap:10px;align-items:center">
+        <a href="#" style="background:#162456;color:#fff;padding:9px 14px;font-weight:600;font-size:14px">Cotizar</a>
+        <div style="width:44px;height:44px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px"><span style="width:22px;height:2px;background:#101828"></span><span style="width:22px;height:2px;background:#101828"></span></div>
+      </div>
+    </sc-if>
+  </div>
+</nav>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:90},&quot;mobile&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;&quot;,&quot;Empresa&quot;,&quot;Servicios&quot;,&quot;Portafolio&quot;,&quot;Contacto&quot;],&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;navy&quot;,&quot;light&quot;],&quot;default&quot;:&quot;navy&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const mobile = !!this.props.mobile;
+    const active = this.props.active ?? '';
+    const links = ['Empresa', 'Servicios', 'Portafolio', 'Contacto'].map(label => {
+      const on = label === active;
+      return { label, on, color: on ? '#bedbff' : '#fff', colorLight: on ? '#162456' : '#4a5565' };
+    });
+    const light = this.props.theme === 'light';
+    return { mobile, desktop: !mobile, links, light, navy: !light, h: mobile ? 64 : (light ? 84 : 80), logo: mobile ? (light ? 48 : 52) : (light ? 64 : 80) };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><script src="./image-slot.js"></script><script src="./hhm-data.js"></script><style>*{box-sizing:border-box}a{color:inherit;text-decoration:none}a:hover{color:inherit}h1,h2,h3,h4,p{margin:0}button{font:inherit;cursor:pointer}</style></helmet>
+<div style="font-family:Inter,system-ui,sans-serif;color:#101828;background:#fff;container-type:inline-size">
+  <dc-import name="HHM Nav" mobile="{{ mobile }}" active="Portafolio" hint-size="100%,80px"></dc-import>
+  <section style="background-color:#162456;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:40px 40px;color:#fff;padding:clamp(40px,6cqw,80px) clamp(20px,4cqw,32px)">
+    <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:18px">
+      <p style="font-size:14px;color:#bedbff">Inicio / Portafolio</p>
+      <h1 style="font-size:clamp(34px,4.4cqw,56px);font-weight:700;letter-spacing:-0.025em;line-height:1.1">Portafolio de Proyectos</h1>
+      <p style="font-size:clamp(17px,1.6cqw,20px);color:#dbeafe;line-height:1.6;max-width:600px">Fotos y videos de obras donde diseñamos e instalamos plomería y electricidad.</p>
+    </div>
+  </section>
+  <section style="padding:24px clamp(20px,4cqw,32px);border-bottom:1px solid #f3f4f6;position:sticky;top:0;background:#fff;z-index:5">
+    <div style="max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+      <sc-for list="{{ filters }}" as="f" hint-placeholder-count="5"><button onClick="{{ f.pick }}" style="padding:9px 16px;border-radius:999px;font-size:14px;font-weight:600;border:1px solid {{ f.bd }};background:{{ f.bg }};color:{{ f.fg }}">{{ f.label }} <span style="opacity:.6;font-weight:500">{{ f.count }}</span></button></sc-for>
+    </div>
+  </section>
+  <section style="padding:clamp(32px,4cqw,56px) clamp(20px,4cqw,32px) clamp(56px,6cqw,88px);background:#f9fafb">
+    <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:24px">
+      <sc-for list="{{ list }}" as="p" hint-placeholder-count="6">
+        <a href="#" style="background:#fff;border:1px solid #f3f4f6;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.08);display:flex;flex-direction:column" style-hover="box-shadow:0 10px 25px -5px rgba(22,36,86,.2)">
+          <div style="aspect-ratio:4/3;position:relative"><image-slot id="{{ p.id }}" shape="rect" placeholder="Foto de obra"></image-slot><sc-if value="{{ p.video }}"><span style="position:absolute;right:12px;top:12px;background:rgba(3,7,18,.75);color:#fff;font-size:12px;font-weight:600;padding:5px 9px;border-radius:4px;pointer-events:none">▶ Video</span></sc-if></div>
+          <div style="padding:20px 22px 22px;display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;flex-wrap:wrap;gap:8px"><span style="font-size:12px;font-weight:600;color:#162456;background:#dbeafe;padding:4px 8px;border-radius:4px">{{ p.type }}</span><span style="font-size:12px;font-weight:600;color:#4a5565;background:#f3f4f6;padding:4px 8px;border-radius:4px">{{ p.scope }}</span></div>
+            <h3 style="font-size:18px;font-weight:700;line-height:1.35">{{ p.title }}</h3>
+            <p style="font-size:14px;color:#6a7282">{{ p.place }} · {{ p.year }}</p>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+  <section style="padding:clamp(48px,6cqw,80px) clamp(20px,4cqw,32px)">
+    <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:28px">
+      <h2 style="font-size:clamp(24px,2.6cqw,34px);font-weight:700;letter-spacing:-0.02em">Videos de obra</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px">
+        <div style="display:flex;flex-direction:column;gap:12px"><div style="aspect-ratio:16/9;border-radius:8px;overflow:hidden;position:relative"><image-slot id="vid-1" shape="rect" placeholder="Video: recorrido de instalación"></image-slot></div><p style="font-weight:600">Recorrido de instalación hidrosanitaria</p></div>
+        <div style="display:flex;flex-direction:column;gap:12px"><div style="aspect-ratio:16/9;border-radius:8px;overflow:hidden;position:relative"><image-slot id="vid-2" shape="rect" placeholder="Video: montaje de tablero"></image-slot></div><p style="font-weight:600">Montaje de tablero general</p></div>
+        <div style="display:flex;flex-direction:column;gap:12px"><div style="aspect-ratio:16/9;border-radius:8px;overflow:hidden;position:relative"><image-slot id="vid-3" shape="rect" placeholder="Video: pruebas de presión"></image-slot></div><p style="font-weight:600">Pruebas de presión y entrega</p></div>
+      </div>
+    </div>
+  </section>
+  <dc-import name="HHM Footer" hint-size="100%,320px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;mobile&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { f: 'Todos' };
+  componentDidMount() { if (!window.HHM) { this.t = setInterval(() => { if (window.HHM) { clearInterval(this.t); this.forceUpdate(); } }, 50); } }
+  componentWillUnmount() { clearInterval(this.t); }
+  renderVals() {
+    const P = (window.HHM || { projects: [] }).projects;
+    const types = ['Todos', 'Residencial', 'Corporativo', 'Comercial', 'Industrial'];
+    return {
+      mobile: !!this.props.mobile,
+      filters: types.map(label => { const on = label === this.state.f; return { label, count: label === 'Todos' ? P.length : P.filter(p => p.type === label).length, bg: on ? '#162456' : '#fff', fg: on ? '#fff' : '#364153', bd: on ? '#162456' : '#d1d5dc', pick: () => this.setState({ f: label }) }; }),
+      list: P.filter(p => this.state.f === 'Todos' || p.type === this.state.f).map((p, i) => ({ ...p, video: i % 3 === 0 }))
+    };
+  }
+}
+</script>
+</body>
+</html>

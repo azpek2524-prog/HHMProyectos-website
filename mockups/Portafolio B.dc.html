@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><script src="./image-slot.js"></script><script src="./hhm-data.js"></script><style>*{box-sizing:border-box}a{color:inherit;text-decoration:none}a:hover{color:inherit}h1,h2,h3,h4,p{margin:0}button{font:inherit;cursor:pointer}</style></helmet>
+<div style="font-family:Inter,system-ui,sans-serif;color:#101828;background:#fff;container-type:inline-size">
+  <dc-import name="HHM Nav" mobile="{{ mobile }}" theme="light" active="Portafolio" hint-size="100%,84px"></dc-import>
+  <section style="padding:clamp(48px,7cqw,104px) clamp(20px,4cqw,32px) clamp(28px,3cqw,40px)">
+    <div style="max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px">
+      <h1 style="font-size:clamp(44px,8cqw,120px);font-weight:800;letter-spacing:-0.05em;line-height:.9">Obras</h1>
+      <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:center">
+        <div style="display:flex;border:1px solid #101828"><sc-for list="{{ scopes }}" as="s" hint-placeholder-count="4"><button onClick="{{ s.pick }}" style="border:0;border-right:1px solid #101828;margin-right:-1px;padding:10px 14px;font-size:14px;font-weight:600;background:{{ s.bg }};color:{{ s.fg }}">{{ s.label }}</button></sc-for></div>
+        <div style="display:flex;gap:4px"><button onClick="{{ setGrid }}" style="border:1px solid #d1d5dc;padding:10px 12px;font-size:13px;font-weight:600;background:{{ gridBg }};color:{{ gridFg }}">Galería</button><button onClick="{{ setList }}" style="border:1px solid #d1d5dc;padding:10px 12px;font-size:13px;font-weight:600;background:{{ listBg }};color:{{ listFg }}">Lista</button></div>
+      </div>
+    </div>
+  </section>
+  <sc-if value="{{ isList }}">
+    <section style="padding:0 clamp(20px,4cqw,32px) clamp(56px,7cqw,104px)">
+      <div style="max-width:1280px;margin:0 auto;border-top:1px solid #101828">
+        <sc-for list="{{ list }}" as="p" hint-placeholder-count="6">
+          <a href="#" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px 32px;align-items:center;padding:20px 0;border-bottom:1px solid #d1d5dc" style-hover="background:#f9fafb">
+            <div style="display:flex;gap:20px;align-items:center"><div style="width:120px;flex:none;aspect-ratio:4/3;overflow:hidden"><image-slot id="{{ p.id }}" shape="rect" placeholder="Foto"></image-slot></div><h3 style="font-size:clamp(18px,2cqw,26px);font-weight:700;letter-spacing:-0.02em;line-height:1.2">{{ p.title }}</h3></div>
+            <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:14px;color:#4a5565"><span>{{ p.type }}</span><span>{{ p.scope }}</span><span style="font-family:ui-monospace,Menlo,monospace">{{ p.year }} ↗</span></div>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+  </sc-if>
+  <sc-if value="{{ isGrid }}" hint-placeholder-val="{{ true }}">
+    <section style="padding:0 clamp(20px,4cqw,32px) clamp(56px,7cqw,104px)">
+      <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,380px),1fr));gap:clamp(20px,2.5cqw,32px) 16px">
+        <sc-for list="{{ list }}" as="p" hint-placeholder-count="6">
+          <a href="#" style="display:flex;flex-direction:column;gap:14px;grid-column:{{ p.span }}">
+            <div style="aspect-ratio:{{ p.ratio }};position:relative;overflow:hidden;background:#030712"><image-slot id="{{ p.id }}" shape="rect" placeholder="Foto o video de obra"></image-slot><span style="position:absolute;left:12px;top:12px;background:#fff;font:600 11px ui-monospace,Menlo,monospace;padding:5px 8px;pointer-events:none">{{ p.num }}</span></div>
+            <div style="display:flex;justify-content:space-between;gap:16px;align-items:baseline"><h3 style="font-size:clamp(17px,1.6cqw,21px);font-weight:700;letter-spacing:-0.015em">{{ p.title }}</h3><span style="font-size:13px;color:#6a7282;white-space:nowrap">{{ p.scope }}</span></div>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+  </sc-if>
+  <section style="background:#162456;color:#fff;padding:clamp(40px,5cqw,72px) clamp(20px,4cqw,32px)">
+    <div style="max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px"><h2 style="font-size:clamp(26px,3.4cqw,44px);font-weight:800;letter-spacing:-0.04em;line-height:1.05;max-width:700px">Tu proyecto puede ser el siguiente.</h2><a href="#" style="background:#fff;color:#162456;padding:16px 24px;font-weight:700;white-space:nowrap" style-hover="background:#dbeafe">Cotizar proyecto →</a></div>
+  </section>
+  <dc-import name="HHM Footer" hint-size="100%,320px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;mobile&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { s: 'Todo', view: 'grid' };
+  componentDidMount() { if (!window.HHM) { this.t = setInterval(() => { if (window.HHM) { clearInterval(this.t); this.forceUpdate(); } }, 50); } }
+  componentWillUnmount() { clearInterval(this.t); }
+  renderVals() {
+    const P = (window.HHM || { projects: [] }).projects;
+    const mobile = !!this.props.mobile;
+    const match = p => this.state.s === 'Todo' || (this.state.s === 'Ambos' ? p.scope.includes('+') : p.scope.includes(this.state.s));
+    const g = this.state.view === 'grid';
+    return {
+      mobile,
+      scopes: ['Todo', 'Plomería', 'Electricidad', 'Ambos'].map(label => { const on = label === this.state.s; return { label, bg: on ? '#101828' : '#fff', fg: on ? '#fff' : '#101828', pick: () => this.setState({ s: label }) }; }),
+      isGrid: g, isList: !g,
+      gridBg: g ? '#101828' : '#fff', gridFg: g ? '#fff' : '#101828', listBg: g ? '#fff' : '#101828', listFg: g ? '#101828' : '#fff',
+      setGrid: () => this.setState({ view: 'grid' }), setList: () => this.setState({ view: 'list' }),
+      list: P.filter(match).map((p, i) => ({ ...p, num: String(i + 1).padStart(2, '0'), span: !mobile && i % 3 === 0 ? 'span 2' : 'auto', ratio: !mobile && i % 3 === 0 ? '16/8' : '4/3' }))
+    };
+  }
+}
+</script>
+</body>
+</html>

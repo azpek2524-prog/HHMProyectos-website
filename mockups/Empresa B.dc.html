@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><script src="./image-slot.js"></script><style>*{box-sizing:border-box}a{color:inherit;text-decoration:none}a:hover{color:inherit}h1,h2,h3,h4,p{margin:0}</style></helmet>
+<div style="font-family:Inter,system-ui,sans-serif;color:#101828;background:#fff;container-type:inline-size">
+  <dc-import name="HHM Nav" mobile="{{ mobile }}" theme="light" active="Empresa" hint-size="100%,84px"></dc-import>
+  <section style="padding:clamp(48px,8cqw,120px) clamp(20px,4cqw,32px) clamp(40px,5cqw,72px)">
+    <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(24px,3cqw,40px)">
+      <p style="font:600 13px ui-monospace,Menlo,monospace;color:#6a7282;letter-spacing:.06em">EMPRESA</p>
+      <h1 style="font-size:clamp(38px,6.4cqw,92px);font-weight:800;letter-spacing:-0.045em;line-height:.98;max-width:1180px;text-wrap:balance">No se ven cuando la obra está terminada. <span style="color:#99a1af">Por eso tienen que quedar bien.</span></h1>
+      <p style="font-size:clamp(16px,1.5cqw,19px);line-height:1.6;max-width:600px;color:#4a5565">HHM Proyectos diseña e instala plomería y electricidad para arquitectos y constructoras. Tuberías, cableado y tableros que nadie vuelve a ver — y que tienen que funcionar por décadas.</p>
+    </div>
+  </section>
+  <section style="padding:0 clamp(20px,4cqw,32px)">
+    <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px">
+      <div style="grid-column:{{ wide }};aspect-ratio:16/10;overflow:hidden"><image-slot id="emp-equipo" shape="rect" placeholder="Foto del equipo en obra"></image-slot></div>
+      <div style="aspect-ratio:{{ tallRatio }};overflow:hidden"><image-slot id="emp-detalle" shape="rect" placeholder="Detalle: tubería o tablero"></image-slot></div>
+    </div>
+  </section>
+  <section style="padding:clamp(56px,8cqw,120px) clamp(20px,4cqw,32px)">
+    <div style="max-width:1280px;margin:0 auto">
+      <p style="font:600 13px ui-monospace,Menlo,monospace;color:#6a7282;letter-spacing:.06em;margin-bottom:32px">CÓMO TRABAJAMOS</p>
+      <sc-for list="{{ principles }}" as="p" hint-placeholder-count="3">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px 40px;padding:clamp(24px,3cqw,36px) 0;border-top:1px solid #101828">
+          <div style="display:flex;gap:20px;align-items:baseline"><span style="font:600 14px ui-monospace,Menlo,monospace;color:#1c398e">{{ p.n }}</span><h3 style="font-size:clamp(26px,3.2cqw,42px);font-weight:800;letter-spacing:-0.035em;line-height:1.05">{{ p.t }}</h3></div>
+          <p style="font-size:17px;line-height:1.6;color:#4a5565;max-width:520px;padding-top:6px">{{ p.d }}</p>
+        </div>
+      </sc-for>
+      <div style="border-top:1px solid #101828"></div>
+    </div>
+  </section>
+  <section style="background:#030712;color:#fff;padding:clamp(56px,7cqw,104px) clamp(20px,4cqw,32px)">
+    <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:32px">
+      <h2 style="font-size:clamp(30px,4cqw,52px);font-weight:800;letter-spacing:-0.04em;line-height:1">Las personas detrás.</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px">
+        <sc-for list="{{ team }}" as="t" hint-placeholder-count="4"><div style="display:flex;flex-direction:column;gap:12px"><div style="aspect-ratio:3/4;overflow:hidden"><image-slot id="{{ t.id }}" shape="rect" placeholder="Retrato"></image-slot></div><div style="display:flex;justify-content:space-between;gap:12px;font-size:15px"><span style="font-weight:600">Nombre Apellido</span><span style="color:#99a1af">{{ t.role }}</span></div></div></sc-for>
+      </div>
+    </div>
+  </section>
+  <section style="padding:clamp(56px,7cqw,104px) clamp(20px,4cqw,32px)">
+    <div style="max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px"><h2 style="font-size:clamp(30px,4.4cqw,60px);font-weight:800;letter-spacing:-0.045em;line-height:1;max-width:760px">¿Arrancas un proyecto? Llámanos desde el anteproyecto.</h2><a href="#" style="background:#162456;color:#fff;padding:16px 24px;font-weight:600;white-space:nowrap" style-hover="background:#1c398e">Cotizar proyecto →</a></div>
+  </section>
+  <dc-import name="HHM Footer" hint-size="100%,320px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;mobile&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const m = !!this.props.mobile;
+    return {
+      mobile: m, wide: m ? 'auto' : 'span 2', tallRatio: m ? '4/3' : 'auto',
+      principles: [
+        { n: '01', t: 'Entramos temprano.', d: 'Revisar el arquitectónico antes de que se cuele la primera losa evita perforaciones, cambios y sobrecostos.' },
+        { n: '02', t: 'Un solo responsable.', d: 'Plomería y electricidad en el mismo contrato. Un interlocutor para tu residente y tu programa de obra.' },
+        { n: '03', t: 'Todo por escrito.', d: 'Memorias de cálculo, pruebas documentadas, planos as-built y garantía en cada entrega.' }
+      ],
+      team: [{ id: 'team-1', role: 'Dirección' }, { id: 'team-2', role: 'Eléctrica' }, { id: 'team-3', role: 'Hidrosanitaria' }, { id: 'team-4', role: 'Obra' }]
+    };
+  }
+}
+</script>
+</body>
+</html>

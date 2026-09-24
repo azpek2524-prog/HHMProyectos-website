@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><script src="./image-slot.js"></script><script src="./hhm-data.js"></script><style>*{box-sizing:border-box}a{color:inherit;text-decoration:none}a:hover{color:inherit}h1,h2,h3,h4,p{margin:0}</style></helmet>
+<div style="font-family:Inter,system-ui,sans-serif;color:#101828;background:#fff;container-type:inline-size">
+  <dc-import name="HHM Nav" mobile="{{ mobile }}" active="Servicios" hint-size="100%,80px"></dc-import>
+  <section style="background-color:#162456;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:40px 40px;color:#fff;padding:clamp(40px,6cqw,88px) clamp(20px,4cqw,32px)">
+    <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:20px">
+      <p style="font-size:14px;color:#bedbff">Inicio / Servicios</p>
+      <h1 style="font-size:clamp(34px,4.4cqw,56px);font-weight:700;letter-spacing:-0.025em;line-height:1.1">Nuestros Servicios</h1>
+      <p style="font-size:clamp(17px,1.6cqw,20px);color:#dbeafe;line-height:1.6;max-width:640px;text-wrap:pretty">Todo lo relacionado con plomería y electricidad en construcción: diseño, cálculo, instalación y mantenimiento, con un solo responsable.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
+        <sc-for list="{{ cats }}" as="c" hint-placeholder-count="4"><a href="#" style="border:1px solid rgba(255,255,255,.35);padding:8px 14px;border-radius:999px;font-size:14px;font-weight:500" style-hover="background:#fff;color:#162456">{{ c.n }} · {{ c.name }}</a></sc-for>
+      </div>
+    </div>
+  </section>
+  <sc-for list="{{ cats }}" as="c" hint-placeholder-count="2">
+    <section style="padding:clamp(48px,6cqw,88px) clamp(20px,4cqw,32px);background:{{ c.bg }}">
+      <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(28px,4cqw,56px);align-items:start">
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <span style="font:600 13px ui-monospace,Menlo,monospace;color:#1c398e">{{ c.n }}</span>
+          <h2 style="font-size:clamp(28px,3cqw,40px);font-weight:700;letter-spacing:-0.02em;color:#162456">{{ c.name }}</h2>
+          <p style="font-size:17px;line-height:1.6;color:#4a5565;max-width:460px;text-wrap:pretty">{{ c.lead }}</p>
+          <div style="aspect-ratio:16/10;border-radius:8px;overflow:hidden;margin-top:8px"><image-slot id="{{ c.img }}" shape="rect" placeholder="Foto de instalación"></image-slot></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px">
+          <sc-for list="{{ c.items }}" as="it"><div style="background:#fff;border:1px solid #f3f4f6;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.08);padding:24px;display:flex;flex-direction:column;gap:8px"><h3 style="font-size:17px;font-weight:700;color:#101828">{{ it.t }}</h3><p style="font-size:15px;line-height:1.5;color:#4a5565">{{ it.d }}</p></div></sc-for>
+        </div>
+      </div>
+    </section>
+  </sc-for>
+  <section style="padding:clamp(48px,6cqw,88px) clamp(20px,4cqw,32px);border-top:1px solid #f3f4f6">
+    <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:32px">
+      <h2 style="font-size:clamp(26px,2.6cqw,36px);font-weight:700;letter-spacing:-0.02em">A quién le trabajamos</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:24px">
+        <div style="border-top:2px solid #162456;padding-top:20px;display:flex;flex-direction:column;gap:8px"><h3 style="font-size:19px;font-weight:700">Despachos de arquitectura</h3><p style="color:#4a5565;line-height:1.55">Ingeniería MEP que respeta tu diseño y se entrega en tu formato.</p></div>
+        <div style="border-top:2px solid #162456;padding-top:20px;display:flex;flex-direction:column;gap:8px"><h3 style="font-size:19px;font-weight:700">Constructoras</h3><p style="color:#4a5565;line-height:1.55">Cuadrillas que siguen tu programa de obra y reportan avance.</p></div>
+        <div style="border-top:2px solid #162456;padding-top:20px;display:flex;flex-direction:column;gap:8px"><h3 style="font-size:19px;font-weight:700">Desarrolladores</h3><p style="color:#4a5565;line-height:1.55">Un solo contrato por todas las instalaciones del desarrollo.</p></div>
+      </div>
+    </div>
+  </section>
+  <section style="padding:0 clamp(20px,4cqw,32px) clamp(48px,6cqw,80px)">
+    <div style="max-width:1280px;margin:0 auto;background:#162456;color:#fff;border-radius:8px;padding:clamp(28px,4cqw,48px);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px">
+      <h2 style="font-size:clamp(22px,2.4cqw,30px);font-weight:700;max-width:600px">¿No ves tu instalación en la lista? Si va dentro de la obra, la hacemos.</h2>
+      <a href="#" style="padding:14px 24px;background:#fff;color:#162456;font-weight:700;border-radius:6px;white-space:nowrap" style-hover="background:#f3f4f6">Solicitar Cotización</a>
+    </div>
+  </section>
+  <dc-import name="HHM Footer" hint-size="100%,320px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;mobile&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  componentDidMount() { if (!window.HHM) { this.t = setInterval(() => { if (window.HHM) { clearInterval(this.t); this.forceUpdate(); } }, 50); } }
+  componentWillUnmount() { clearInterval(this.t); }
+  renderVals() {
+    const D = window.HHM || { categories: [] };
+    return {
+      mobile: !!this.props.mobile,
+      cats: D.categories.map((c, i) => ({ ...c, bg: i % 2 ? '#fff' : '#f9fafb', items: c.items.map(([t, d]) => ({ t, d })) }))
+    };
+  }
+}
+</script>
+</body>
+</html>

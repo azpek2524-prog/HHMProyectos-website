@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><script src="./image-slot.js"></script><style>*{box-sizing:border-box}a{color:inherit;text-decoration:none}a:hover{color:inherit}h1,h2,h3,h4,p{margin:0}</style></helmet>
+<div style="font-family:Inter,system-ui,sans-serif;color:#101828;background:#fff;container-type:inline-size">
+  <dc-import name="HHM Nav" mobile="{{ mobile }}" hint-size="100%,80px"></dc-import>
+  <section style="background-color:#162456;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:40px 40px;color:#fff;padding:clamp(48px,8cqw,112px) clamp(20px,4cqw,32px)">
+    <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(32px,5cqw,64px);align-items:center">
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <p style="font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#bedbff">Plomería · Electricidad · B2B</p>
+        <h1 style="font-size:clamp(36px,4.6cqw,60px);font-weight:700;letter-spacing:-0.025em;line-height:1.1;text-wrap:balance">Plomería y electricidad para arquitectos y constructoras.</h1>
+        <p style="font-size:clamp(17px,1.6cqw,20px);color:#dbeafe;line-height:1.6;max-width:540px;text-wrap:pretty">Diseño, cálculo e instalación con un solo proveedor. Leemos tus planos, cumplimos la normativa y entregamos a tiempo.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:8px">
+          <a href="#" style="display:inline-flex;align-items:center;gap:10px;white-space:nowrap;padding:16px 28px;background:#fff;color:#162456;font-weight:700;border-radius:6px;font-size:17px;box-shadow:0 10px 15px -3px rgba(0,0,0,.15)" style-hover="background:#f3f4f6">Solicitar Cotización <span>→</span></a>
+          <a href="#" style="display:inline-flex;align-items:center;padding:16px 28px;border:2px solid rgba(255,255,255,.9);color:#fff;font-weight:700;border-radius:6px;font-size:17px" style-hover="background:#fff;color:#162456">Escribir por WhatsApp</a>
+        </div>
+      </div>
+      <div style="position:relative;aspect-ratio:4/3.4;border-radius:8px;overflow:hidden;box-shadow:0 25px 50px -12px rgba(0,0,0,.5)">
+        <image-slot id="home-hero" shape="rect" placeholder="Video o foto de obra (instalación en proceso)"></image-slot>
+        <div style="position:absolute;left:16px;bottom:16px;display:flex;align-items:center;gap:10px;background:#fff;color:#162456;padding:10px 14px 10px 10px;border-radius:6px;font-size:14px;font-weight:600;pointer-events:none"><span style="width:28px;height:28px;border-radius:50%;background:#162456;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px">▶</span>Ver obra en video · 0:45</div>
+      </div>
+    </div>
+  </section>
+  <section style="border-bottom:1px solid #f3f4f6;padding:28px clamp(20px,4cqw,32px)">
+    <div style="max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:20px 40px">
+      <p style="font-size:13px;font-weight:600;color:#6a7282;letter-spacing:.08em;text-transform:uppercase;flex:none">Confían en nosotros</p>
+      <div style="flex:1;display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:16px;min-width:240px">
+        <image-slot id="logo-1" shape="rounded" radius="4" placeholder="Logo" style="height:44px"></image-slot>
+        <image-slot id="logo-2" shape="rounded" radius="4" placeholder="Logo" style="height:44px"></image-slot>
+        <image-slot id="logo-3" shape="rounded" radius="4" placeholder="Logo" style="height:44px"></image-slot>
+        <image-slot id="logo-4" shape="rounded" radius="4" placeholder="Logo" style="height:44px"></image-slot>
+        <image-slot id="logo-5" shape="rounded" radius="4" placeholder="Logo" style="height:44px"></image-slot>
+        <image-slot id="logo-6" shape="rounded" radius="4" placeholder="Logo" style="height:44px"></image-slot>
+      </div>
+    </div>
+  </section>
+  <section style="padding:clamp(56px,7cqw,96px) clamp(20px,4cqw,32px);background:#f9fafb">
+    <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:40px">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px">
+        <h2 style="font-size:clamp(26px,2.6cqw,36px);font-weight:700;letter-spacing:-0.02em;max-width:560px;text-wrap:balance">Todo lo que tu obra necesita en plomería y electricidad.</h2>
+        <a href="#" style="font-weight:600;color:#162456;display:flex;gap:8px" style-hover="color:#1c398e">Ver todos los servicios →</a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:24px">
+        <div style="background:#fff;border:1px solid #f3f4f6;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.1);padding:32px;display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline"><h3 style="font-size:24px;font-weight:700;color:#162456">Plomería</h3><span style="font:600 12px ui-monospace,Menlo,monospace;color:#6a7282">01</span></div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px 24px;color:#4a5565;font-size:15px">
+            <p>— Instalación hidrosanitaria</p><p>— Drenaje y pluviales</p><p>— Redes de gas</p><p>— Bombeo e hidroneumáticos</p><p>— Agua caliente y calentadores</p><p>— Protección contra incendio</p>
+          </div>
+        </div>
+        <div style="background:#fff;border:1px solid #f3f4f6;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.1);padding:32px;display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline"><h3 style="font-size:24px;font-weight:700;color:#162456">Electricidad</h3><span style="font:600 12px ui-monospace,Menlo,monospace;color:#6a7282">02</span></div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px 24px;color:#4a5565;font-size:15px">
+            <p>— Acometidas y subestaciones</p><p>— Tableros y distribución</p><p>— Iluminación interior y exterior</p><p>— Voz, datos y CCTV</p><p>— Tierras físicas y pararrayos</p><p>— Plantas de emergencia</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section style="padding:clamp(56px,7cqw,96px) clamp(20px,4cqw,32px)">
+    <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:40px">
+      <h2 style="font-size:clamp(26px,2.6cqw,36px);font-weight:700;letter-spacing:-0.02em">Cómo trabajamos con tu despacho</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;border-top:2px solid #162456">
+        <div style="padding:24px 24px 0 0;display:flex;flex-direction:column;gap:10px"><span style="font:600 13px ui-monospace,Menlo,monospace;color:#1c398e">01</span><h3 style="font-size:18px;font-weight:700">Revisión de planos</h3><p style="color:#4a5565;font-size:15px;line-height:1.55">Recibimos tu arquitectónico y detectamos interferencias antes de obra.</p></div>
+        <div style="padding:24px 24px 0 0;display:flex;flex-direction:column;gap:10px"><span style="font:600 13px ui-monospace,Menlo,monospace;color:#1c398e">02</span><h3 style="font-size:18px;font-weight:700">Cálculo y proyecto</h3><p style="color:#4a5565;font-size:15px;line-height:1.55">Memorias de cálculo, isométricos y diagramas unifilares conforme a norma.</p></div>
+        <div style="padding:24px 24px 0 0;display:flex;flex-direction:column;gap:10px"><span style="font:600 13px ui-monospace,Menlo,monospace;color:#1c398e">03</span><h3 style="font-size:18px;font-weight:700">Instalación en obra</h3><p style="color:#4a5565;font-size:15px;line-height:1.55">Cuadrillas propias coordinadas con tu residente y tu programa de obra.</p></div>
+        <div style="padding:24px 24px 0 0;display:flex;flex-direction:column;gap:10px"><span style="font:600 13px ui-monospace,Menlo,monospace;color:#1c398e">04</span><h3 style="font-size:18px;font-weight:700">Pruebas y entrega</h3><p style="color:#4a5565;font-size:15px;line-height:1.55">Pruebas de presión y carga, planos as-built y garantía por escrito.</p></div>
+      </div>
+    </div>
+  </section>
+  <section style="padding:0 clamp(20px,4cqw,32px) clamp(56px,7cqw,96px)">
+    <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:32px">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px">
+        <h2 style="font-size:clamp(26px,2.6cqw,36px);font-weight:700;letter-spacing:-0.02em">Proyectos recientes</h2>
+        <a href="#" style="font-weight:600;color:#162456" style-hover="color:#1c398e">Ver portafolio →</a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px">
+        <a href="#" style="display:flex;flex-direction:column;gap:14px"><div style="aspect-ratio:4/3;border-radius:8px;overflow:hidden"><image-slot id="proj-1" shape="rect" placeholder="Foto de obra"></image-slot></div><div style="display:flex;gap:8px"><span style="font-size:12px;font-weight:600;color:#162456;background:#dbeafe;padding:4px 8px;border-radius:4px">Residencial</span><span style="font-size:12px;font-weight:600;color:#4a5565;background:#f3f4f6;padding:4px 8px;border-radius:4px">Plomería + Electricidad</span></div><h3 style="font-size:18px;font-weight:700">Edificio de departamentos, 12 niveles</h3></a>
+        <a href="#" style="display:flex;flex-direction:column;gap:14px"><div style="aspect-ratio:4/3;border-radius:8px;overflow:hidden"><image-slot id="proj-2" shape="rect" placeholder="Foto de obra"></image-slot></div><div style="display:flex;gap:8px"><span style="font-size:12px;font-weight:600;color:#162456;background:#dbeafe;padding:4px 8px;border-radius:4px">Corporativo</span><span style="font-size:12px;font-weight:600;color:#4a5565;background:#f3f4f6;padding:4px 8px;border-radius:4px">Electricidad</span></div><h3 style="font-size:18px;font-weight:700">Oficinas corporativas, planta libre</h3></a>
+        <a href="#" style="display:flex;flex-direction:column;gap:14px"><div style="aspect-ratio:4/3;border-radius:8px;overflow:hidden"><image-slot id="proj-3" shape="rect" placeholder="Foto de obra"></image-slot></div><div style="display:flex;gap:8px"><span style="font-size:12px;font-weight:600;color:#162456;background:#dbeafe;padding:4px 8px;border-radius:4px">Residencial</span><span style="font-size:12px;font-weight:600;color:#4a5565;background:#f3f4f6;padding:4px 8px;border-radius:4px">Plomería</span></div><h3 style="font-size:18px;font-weight:700">Casa habitación con sistema pluvial</h3></a>
+      </div>
+    </div>
+  </section>
+  <section style="background:#f9fafb;padding:clamp(56px,7cqw,96px) clamp(20px,4cqw,32px)">
+    <div style="max-width:880px;margin:0 auto;display:flex;flex-direction:column;gap:28px;align-items:center;text-align:center">
+      <p style="font-size:clamp(22px,2.4cqw,30px);line-height:1.45;font-weight:500;letter-spacing:-0.01em;color:#101828;text-wrap:balance">“Entregaron el proyecto hidrosanitario y eléctrico coordinado con estructura. En obra no tuvimos que improvisar nada.”</p>
+      <div style="display:flex;align-items:center;gap:14px;text-align:left"><image-slot id="testi-1" shape="circle" placeholder="Foto" style="width:52px;height:52px"></image-slot><div><p style="font-weight:700">Arq. Nombre Apellido</p><p style="font-size:14px;color:#6a7282">Despacho de arquitectura</p></div></div>
+    </div>
+  </section>
+  <section style="padding:clamp(40px,5cqw,64px) clamp(20px,4cqw,32px)">
+    <div style="max-width:1280px;margin:0 auto;background:#162456;color:#fff;border-radius:8px;padding:clamp(32px,4cqw,56px);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:28px;position:relative;overflow:hidden">
+      <div style="position:absolute;right:0;top:0;width:40%;height:100%;background:#1c398e;opacity:.3;transform:translateX(96px) skewX(-12deg)"></div>
+      <div style="display:flex;flex-direction:column;gap:10px;position:relative;max-width:560px"><h2 style="font-size:clamp(24px,2.6cqw,34px);font-weight:700;letter-spacing:-0.02em">¿Tienes planos? Cotizamos tu proyecto.</h2><p style="color:#dbeafe;font-size:17px">Adjunta tus planos en el formulario y te respondemos con alcance y propuesta.</p></div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;position:relative"><a href="#" style="padding:14px 24px;background:#fff;color:#162456;font-weight:700;border-radius:6px" style-hover="background:#f3f4f6">Solicitar Cotización</a><a href="#" style="padding:14px 24px;border:2px solid #fff;font-weight:700;border-radius:6px" style-hover="background:#fff;color:#162456">WhatsApp</a></div>
+    </div>
+  </section>
+  <dc-import name="HHM Footer" hint-size="100%,320px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;mobile&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}"></script>
+</body>
+</html>

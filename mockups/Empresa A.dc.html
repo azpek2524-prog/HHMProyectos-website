@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><script src="./image-slot.js"></script><style>*{box-sizing:border-box}a{color:inherit;text-decoration:none}a:hover{color:inherit}h1,h2,h3,h4,p{margin:0}</style></helmet>
+<div style="font-family:Inter,system-ui,sans-serif;color:#101828;background:#fff;container-type:inline-size">
+  <dc-import name="HHM Nav" mobile="{{ mobile }}" active="Empresa" hint-size="100%,80px"></dc-import>
+  <section style="background-color:#162456;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:40px 40px;color:#fff;padding:clamp(40px,6cqw,88px) clamp(20px,4cqw,32px)">
+    <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:18px"><p style="font-size:14px;color:#bedbff">Inicio / Empresa</p><h1 style="font-size:clamp(34px,4.4cqw,56px);font-weight:700;letter-spacing:-0.025em;line-height:1.1;max-width:860px;text-wrap:balance">El equipo de instalaciones que tu despacho no tiene que contratar.</h1></div>
+  </section>
+  <section style="padding:clamp(48px,6cqw,96px) clamp(20px,4cqw,32px)">
+    <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(32px,5cqw,72px);align-items:center">
+      <div style="aspect-ratio:5/4;border-radius:8px;overflow:hidden"><image-slot id="emp-equipo" shape="rect" placeholder="Foto del equipo en obra"></image-slot></div>
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <h2 style="font-size:clamp(24px,2.6cqw,34px);font-weight:700;letter-spacing:-0.02em;color:#162456">Quiénes somos</h2>
+        <p style="font-size:17px;line-height:1.7;color:#4a5565;text-wrap:pretty">HHM Proyectos es una empresa de plomería y electricidad enfocada en el sector construcción. Trabajamos junto a arquitectos y constructoras desde el diseño de las instalaciones hasta su entrega en obra.</p>
+        <p style="font-size:17px;line-height:1.7;color:#4a5565;text-wrap:pretty">Nuestro trabajo es que las instalaciones no sean un problema: que se calculen bien, que se coordinen con el resto del proyecto y que queden listas en el tiempo acordado.</p>
+      </div>
+    </div>
+  </section>
+  <section style="padding:clamp(48px,6cqw,88px) clamp(20px,4cqw,32px);background:#f9fafb">
+    <div style="max-width:1280px;margin:0 auto;text-align:center">
+      <h2 style="font-size:30px;font-weight:700;margin-bottom:48px">Por qué elegir a HHM Proyectos</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:32px;text-align:left">
+        <div style="background:#fff;padding:32px;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.1);border:1px solid #f3f4f6"><h3 style="font-size:20px;font-weight:700;color:#162456;margin-bottom:12px">Experiencia Especializada</h3><p style="color:#4a5565;line-height:1.5">Conocemos las exigencias de arquitectos y desarrolladores. Cumplimos tiempos y normativas estrictas.</p></div>
+        <div style="background:#fff;padding:32px;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.1);border:1px solid #f3f4f6"><h3 style="font-size:20px;font-weight:700;color:#162456;margin-bottom:12px">Soluciones Integrales</h3><p style="color:#4a5565;line-height:1.5">Diseño, cálculo e instalación en plomería y electricidad, todo centralizado con un solo proveedor.</p></div>
+        <div style="background:#fff;padding:32px;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.1);border:1px solid #f3f4f6"><h3 style="font-size:20px;font-weight:700;color:#162456;margin-bottom:12px">Estándares de Calidad</h3><p style="color:#4a5565;line-height:1.5">Uso de materiales certificados y procesos rigurosos para garantizar la seguridad y eficiencia del proyecto.</p></div>
+      </div>
+    </div>
+  </section>
+  <section style="padding:clamp(48px,6cqw,96px) clamp(20px,4cqw,32px)">
+    <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:32px">
+      <h2 style="font-size:clamp(24px,2.6cqw,34px);font-weight:700;letter-spacing:-0.02em">Equipo</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:24px">
+        <sc-for list="{{ team }}" as="t" hint-placeholder-count="4"><div style="display:flex;flex-direction:column;gap:12px"><div style="aspect-ratio:1;border-radius:8px;overflow:hidden"><image-slot id="{{ t.id }}" shape="rect" placeholder="Retrato"></image-slot></div><div><p style="font-weight:700">Nombre Apellido</p><p style="font-size:14px;color:#6a7282">{{ t.role }}</p></div></div></sc-for>
+      </div>
+    </div>
+  </section>
+  <section style="padding:0 clamp(20px,4cqw,32px) clamp(48px,6cqw,80px)">
+    <div style="max-width:1280px;margin:0 auto;background:#162456;color:#fff;border-radius:8px;padding:clamp(28px,4cqw,48px);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px"><h2 style="font-size:clamp(22px,2.4cqw,30px);font-weight:700;max-width:600px">Platiquemos de tu siguiente proyecto.</h2><div style="display:flex;flex-wrap:wrap;gap:12px"><a href="#" style="padding:14px 24px;background:#fff;color:#162456;font-weight:700;border-radius:6px" style-hover="background:#f3f4f6">Solicitar Cotización</a><a href="#" style="padding:14px 24px;border:2px solid #fff;font-weight:700;border-radius:6px" style-hover="background:#fff;color:#162456">WhatsApp</a></div></div>
+  </section>
+  <dc-import name="HHM Footer" hint-size="100%,320px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;mobile&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      mobile: !!this.props.mobile,
+      team: [{ id: 'team-1', role: 'Dirección general' }, { id: 'team-2', role: 'Ingeniería eléctrica' }, { id: 'team-3', role: 'Ingeniería hidrosanitaria' }, { id: 'team-4', role: 'Residencia de obra' }]
+    };
+  }
+}
+</script>
+</body>
+</html>

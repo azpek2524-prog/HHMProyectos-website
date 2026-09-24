@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><script src="./image-slot.js"></script><style>*{box-sizing:border-box}a{color:inherit;text-decoration:none}a:hover{color:inherit}h1,h2,h3,h4,p{margin:0}@keyframes hhm-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}@keyframes hhm-marquee-r{from{transform:translateX(-50%)}to{transform:translateX(0)}}@keyframes hhm-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}</style></helmet>
+<div ref="{{ rootRef }}" style="font-family:Inter,system-ui,sans-serif;color:#101828;background:#fff;container-type:inline-size">
+  <dc-import name="HHM Nav" mobile="{{ mobile }}" theme="light" hint-size="100%,84px"></dc-import>
+  <section style="position:relative;height:clamp(560px,52cqw,720px);background:#030712;overflow:hidden">
+    <div style="position:absolute;inset:0"><image-slot id="home-hero-video" shape="rect" placeholder="Video de obra a pantalla completa (loop sin audio)"></image-slot></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,7,18,0) 30%,rgba(3,7,18,.85) 100%);pointer-events:none"></div>
+    <div style="position:absolute;left:0;right:0;bottom:0;padding:clamp(24px,4cqw,48px) clamp(20px,4cqw,32px);pointer-events:none">
+      <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:24px;color:#fff">
+        <h1 data-reveal="0" style="font-size:clamp(42px,7.2cqw,104px);font-weight:800;letter-spacing:-0.045em;line-height:.95;max-width:1100px;text-wrap:balance">Todo lo que corre por dentro de tu obra.</h1>
+        <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px">
+          <p data-reveal="150" style="font-size:clamp(16px,1.5cqw,19px);line-height:1.55;max-width:520px;color:#e5e7eb">Agua, drenaje, gas, energía y datos. Plomería y electricidad para arquitectos y constructoras, del plano a la entrega.</p>
+          <div data-reveal="300" style="display:flex;flex-wrap:wrap;gap:10px;pointer-events:auto"><a href="#" style="background:#fff;color:#101828;padding:16px 24px;font-weight:700;display:flex;gap:12px;white-space:nowrap;transition:background .25s" style-hover="background:#dbeafe">Cotizar proyecto <span>→</span></a><a href="#" style="border:1px solid rgba(255,255,255,.6);color:#fff;padding:16px 24px;font-weight:600;white-space:nowrap;transition:background .25s" style-hover="background:rgba(255,255,255,.1)">▶ Ver reel de obras</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section style="border-bottom:1px solid #e5e7eb;overflow:hidden;display:flex;align-items:center">
+    <div style="flex:1;min-width:0;overflow:hidden;padding:26px 0"><div style="display:flex;width:max-content;animation:hhm-marquee 40s linear infinite">
+      <div style="display:flex;gap:56px;padding-right:56px;align-items:center">
+        <image-slot id="logo-1" shape="rect" placeholder="Logo" style="width:140px;height:40px"></image-slot><image-slot id="logo-2" shape="rect" placeholder="Logo" style="width:140px;height:40px"></image-slot><image-slot id="logo-3" shape="rect" placeholder="Logo" style="width:140px;height:40px"></image-slot><image-slot id="logo-4" shape="rect" placeholder="Logo" style="width:140px;height:40px"></image-slot><image-slot id="logo-5" shape="rect" placeholder="Logo" style="width:140px;height:40px"></image-slot><image-slot id="logo-6" shape="rect" placeholder="Logo" style="width:140px;height:40px"></image-slot>
+      </div>
+      <div style="display:flex;gap:56px;padding-right:56px;align-items:center">
+        <image-slot id="logo-1" shape="rect" placeholder="Logo" style="width:140px;height:40px"></image-slot><image-slot id="logo-2" shape="rect" placeholder="Logo" style="width:140px;height:40px"></image-slot><image-slot id="logo-3" shape="rect" placeholder="Logo" style="width:140px;height:40px"></image-slot><image-slot id="logo-4" shape="rect" placeholder="Logo" style="width:140px;height:40px"></image-slot><image-slot id="logo-5" shape="rect" placeholder="Logo" style="width:140px;height:40px"></image-slot><image-slot id="logo-6" shape="rect" placeholder="Logo" style="width:140px;height:40px"></image-slot>
+      </div>
+    </div></div>
+  </section>
+  <section style="padding:clamp(48px,6cqw,88px) clamp(20px,4cqw,32px) 0">
+    <div ref="{{ statsRef }}" style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:clamp(24px,3cqw,40px)">
+      <sc-for list="{{ stats }}" as="st" hint-placeholder-count="4">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="height:2px;background:#e5e7eb;position:relative;overflow:hidden"><div style="position:absolute;inset:0 auto 0 0;width:{{ st.bar }};background:#162456"></div></div>
+          <p style="font-size:clamp(30px,4.4cqw,64px);font-weight:800;letter-spacing:-0.05em;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap;min-width:0">{{ st.val }}<span style="color:#1c398e;font-size:.55em;letter-spacing:-0.02em;margin-left:2px">{{ st.suf }}</span></p>
+          <p style="font-size:15px;line-height:1.45;color:#4a5565;max-width:220px">{{ st.label }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+  <section style="padding:clamp(56px,8cqw,120px) clamp(20px,4cqw,32px) clamp(40px,5cqw,64px)">
+    <div data-reveal="0" style="max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px 40px;margin-bottom:clamp(24px,3cqw,40px)">
+      <h2 style="font-size:clamp(30px,4cqw,52px);font-weight:800;letter-spacing:-0.04em;line-height:1">Dos especialidades.<br>Un solo responsable.</h2>
+      <p style="font-size:clamp(16px,1.5cqw,18px);line-height:1.55;max-width:440px;color:#4a5565">Diseño, cálculo, instalación y mantenimiento. Menos coordinación para tu despacho, menos sorpresas en obra.</p>
+    </div>
+    <sc-if value="{{ mobile }}">
+      <div data-reveal="120" style="display:flex;flex-direction:column;gap:0;border:1px solid #101828">
+        <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #101828">
+          <sc-for list="{{ services }}" as="s" hint-placeholder-count="2">
+            <button onClick="{{ s.hover }}" style="height:56px;border:0;background:{{ s.tabBg }};color:{{ s.tabFg }};font:700 16px Inter,system-ui,sans-serif;letter-spacing:-0.01em;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .3s,color .3s"><span style="font:600 11px ui-monospace,Menlo,monospace;opacity:.7">{{ s.n }}</span>{{ s.name }}</button>
+          </sc-for>
+        </div>
+        <div style="display:grid">
+          <sc-for list="{{ services }}" as="s" hint-placeholder-count="1">
+            <div style="grid-area:1/1;display:flex;flex-direction:column;opacity:{{ s.mOp }};transform:translateX({{ s.mX }});transition:opacity .45s ease,transform .45s cubic-bezier(.2,.8,.2,1);pointer-events:{{ s.mPe }};background:#fff">
+              <div style="position:relative;aspect-ratio:4/3;background:#030712;overflow:hidden"><image-slot id="{{ s.img }}" shape="rect" placeholder="{{ s.ph }}"></image-slot><div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,7,18,0) 45%,rgba(3,7,18,.85) 100%);pointer-events:none"></div><h3 style="position:absolute;left:20px;bottom:18px;color:#fff;font-size:40px;font-weight:800;letter-spacing:-0.045em;line-height:1;pointer-events:none">{{ s.name }}</h3></div>
+              <div style="padding:20px;display:flex;flex-direction:column;gap:18px">
+                <p style="font-size:16px;line-height:1.5;color:#4a5565">{{ s.lead }}</p>
+                <div style="display:flex;flex-direction:column;border-top:1px solid #e5e7eb"><sc-for list="{{ s.items }}" as="it"><span style="padding:12px 0;border-bottom:1px solid #e5e7eb;font-size:15px;font-weight:500;display:flex;justify-content:space-between">{{ it }}<span style="color:#99a1af">+</span></span></sc-for></div>
+                <a href="#" style="background:#162456;color:#fff;padding:16px 18px;font-weight:600;display:flex;justify-content:space-between">Ver {{ s.name }} <span>→</span></a>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+    <div data-reveal="120" onMouseEnter="{{ pause }}" onMouseLeave="{{ resume }}" style="max-width:1280px;margin:0 auto;display:flex;flex-direction:{{ svcDir }};gap:12px;height:{{ svcH }}">
+      <sc-for list="{{ services }}" as="s" hint-placeholder-count="2">
+        <div onMouseEnter="{{ s.hover }}" onClick="{{ s.hover }}" style="position:relative;flex:{{ s.flex }};min-width:0;min-height:{{ svcMinH }};overflow:hidden;background:#030712;color:#fff;transition:flex .6s cubic-bezier(.2,.8,.2,1);cursor:pointer">
+          <div style="position:absolute;inset:0;transform:scale({{ s.scale }});transition:transform 1.2s cubic-bezier(.2,.8,.2,1)"><image-slot id="{{ s.img }}" shape="rect" placeholder="{{ s.ph }}"></image-slot></div>
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,7,18,.15) 0%,rgba(3,7,18,.35) 40%,rgba(3,7,18,.92) 100%);pointer-events:none"></div>
+          {{ s.bar }}<div style="position:absolute;left:0;right:0;top:0;padding:clamp(18px,2.4cqw,28px);display:flex;justify-content:space-between;pointer-events:none"><span style="font:600 13px ui-monospace,Menlo,monospace;background:#fff;color:#030712;padding:5px 8px">{{ s.n }}</span><span style="font:600 12px ui-monospace,Menlo,monospace;color:#e5e7eb">{{ s.count }} SERVICIOS</span></div>
+          <div style="position:absolute;left:0;right:0;bottom:0;padding:clamp(20px,3cqw,36px);display:flex;flex-direction:column;gap:18px;pointer-events:none">
+            <h3 style="font-size:{{ s.fs }};font-weight:800;letter-spacing:-0.045em;line-height:.95;transition:font-size .6s cubic-bezier(.2,.8,.2,1)">{{ s.name }}</h3>
+            <sc-if value="{{ s.open }}" hint-placeholder-val="{{ true }}">
+              <p style="font-size:16px;line-height:1.5;color:#e5e7eb;max-width:460px">{{ s.lead }}</p>
+              <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0 24px;border-top:1px solid rgba(255,255,255,.3)"><sc-for list="{{ s.items }}" as="it"><span style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.18);font-size:15px;font-weight:500">{{ it }}</span></sc-for></div>
+              <a href="#" style="align-self:flex-start;pointer-events:auto;background:#fff;color:#030712;padding:13px 18px;font-weight:600;display:flex;gap:10px;margin-top:4px" style-hover="background:#dbeafe">Ver {{ s.name }} <span>→</span></a>
+            </sc-if>
+            <sc-if value="{{ s.closed }}"><span style="font-size:15px;font-weight:600;color:#e5e7eb">Ver servicios →</span></sc-if>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    </sc-if>
+  </section>
+  <section style="padding:clamp(40px,5cqw,72px) clamp(20px,4cqw,32px) clamp(56px,7cqw,104px)">
+    <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:32px">
+      <div data-reveal="0" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;border-top:1px solid #101828;padding-top:24px"><h2 style="font-size:clamp(30px,4cqw,52px);font-weight:800;letter-spacing:-0.04em;line-height:1">Obras recientes</h2><p style="font-size:16px;color:#4a5565;max-width:360px;line-height:1.5">Instalaciones entregadas para despachos y constructoras.</p></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(16px,2cqw,24px)">
+        <sc-for list="{{ projects }}" as="p" hint-placeholder-count="3">
+          <a href="#" data-reveal="{{ p.delay }}" onMouseEnter="{{ p.enter }}" onMouseLeave="{{ p.leave }}" style="display:flex;flex-direction:column;gap:14px">
+            <div style="aspect-ratio:4/5;position:relative;overflow:hidden;background:#f3f4f6"><div style="position:absolute;inset:0;transform:scale({{ p.scale }});transition:transform .8s cubic-bezier(.2,.8,.2,1)"><image-slot id="{{ p.id }}" shape="rect" placeholder="Foto o video vertical de obra"></image-slot></div><span style="position:absolute;top:12px;left:12px;background:#fff;color:#030712;font:600 11px ui-monospace,Menlo,monospace;padding:5px 8px;pointer-events:none">{{ p.tag }}</span><div style="position:absolute;left:0;right:0;bottom:0;background:#162456;color:#fff;padding:16px 18px;display:flex;justify-content:space-between;font-weight:600;transform:translateY({{ p.slide }});transition:transform .45s cubic-bezier(.2,.8,.2,1);pointer-events:none"><span>Ver obra</span><span>→</span></div></div>
+            <div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline"><h3 style="font-size:18px;font-weight:700;line-height:1.35;letter-spacing:-0.01em;text-decoration:{{ p.ul }};text-underline-offset:4px">{{ p.title }}</h3><span style="font-size:13px;color:#6a7282;white-space:nowrap">{{ p.scope }}</span></div>
+          </a>
+        </sc-for>
+      </div>
+      <a href="#" data-reveal="0" onMouseEnter="{{ pfEnter }}" onMouseLeave="{{ pfLeave }}" style="display:flex;justify-content:space-between;align-items:center;gap:16px;background:#030712;color:#fff;padding:clamp(22px,2.6cqw,32px) clamp(20px,3cqw,36px);transition:background .3s" style-hover="background:#162456"><span style="font-size:clamp(20px,2.2cqw,28px);font-weight:700;letter-spacing:-0.02em">Ver portafolio completo</span><span style="font-size:clamp(22px,2.4cqw,32px);transform:translateX({{ pfArrow }});transition:transform .35s cubic-bezier(.2,.8,.2,1)">→</span></a>
+    </div>
+  </section>
+  <section style="background:#162456;color:#fff;padding:clamp(48px,5.5cqw,80px) clamp(20px,4cqw,32px)">
+    <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(28px,3cqw,40px)">
+      <div data-reveal="0" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px 40px"><h2 style="font-size:clamp(30px,4cqw,52px);font-weight:800;letter-spacing:-0.04em;line-height:1">Lo que dicen<br>quienes construyen.</h2>
+        <div style="display:flex;align-items:center;gap:16px"><p style="font:600 12px ui-monospace,Menlo,monospace;color:#bedbff;font-variant-numeric:tabular-nums;white-space:nowrap">{{ tLabel }}</p><div style="display:flex;gap:8px"><button onClick="{{ tPrev }}" aria-label="Anterior" style="width:48px;height:48px;border:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;font-size:18px;cursor:pointer;transition:background .25s,color .25s" style-hover="background:#fff;color:#162456">←</button><button onClick="{{ tNext }}" aria-label="Siguiente" style="width:48px;height:48px;border:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;font-size:18px;cursor:pointer;transition:background .25s,color .25s" style-hover="background:#fff;color:#162456">→</button></div></div>
+      </div>
+      <div data-reveal="120" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));grid-template-rows:auto;grid-auto-rows:0;gap:0 16px;overflow:hidden;padding-top:8px;margin-top:-8px">
+        <sc-for list="{{ quotes }}" as="q" hint-placeholder-count="4">
+          <figure onMouseEnter="{{ q.enter }}" onMouseLeave="{{ q.leave }}" style="margin:0;min-width:0;display:flex;flex-direction:column;justify-content:space-between;gap:28px;padding:28px;border:1px solid rgba(255,255,255,.22);background:{{ q.bg }};color:{{ q.fg }};opacity:{{ q.op }};transform:translateY({{ q.y }});transition:background .35s,color .35s,opacity .35s ease {{ q.d }},transform .45s cubic-bezier(.2,.8,.2,1) {{ q.d }};cursor:default">
+            <div style="display:flex;flex-direction:column;gap:16px"><span style="font:600 11px ui-monospace,Menlo,monospace;opacity:.7">{{ q.tag }}</span><p style="font-size:18px;font-weight:600;letter-spacing:-0.015em;line-height:1.4;text-wrap:pretty">“{{ q.text }}”</p></div>
+            <figcaption style="display:flex;align-items:center;gap:12px"><image-slot id="{{ q.img }}" shape="circle" placeholder="Foto" style="width:44px;height:44px;flex:none"></image-slot><div><p style="font-weight:700;font-size:15px">{{ q.who }}</p><p style="font-size:13px;opacity:.75">{{ q.role }}</p></div></figcaption>
+          </figure>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+  <section onMouseEnter="{{ mqOn }}" onMouseLeave="{{ mqOff }}" style="overflow:hidden;padding:clamp(28px,3.5cqw,48px) 0;border-bottom:1px solid #e5e7eb;cursor:default">
+    <div style="display:flex;width:max-content;animation:hhm-marquee-r 50s linear infinite;animation-play-state:{{ mqState }}">
+      <sc-for list="{{ mqCopies }}" as="c" hint-placeholder-count="2">
+        <div style="display:flex;align-items:center;gap:clamp(24px,3cqw,48px);padding-right:clamp(24px,3cqw,48px)">
+          <sc-for list="{{ mqItems }}" as="m" hint-placeholder-count="8"><span style="font-size:clamp(40px,6.4cqw,92px);font-weight:800;letter-spacing:-0.045em;line-height:1;white-space:nowrap;color:{{ m.color }};-webkit-text-stroke:{{ m.stroke }}">{{ m.t }}</span><span style="width:clamp(10px,1.2cqw,16px);height:clamp(10px,1.2cqw,16px);background:#1c398e;flex:none"></span></sc-for>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+  <section style="padding:clamp(56px,7cqw,104px) clamp(20px,4cqw,32px)">
+    <div data-reveal="0" style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:1px;background:#101828;border:1px solid #101828">
+      <a href="#" onMouseMove="{{ ctaMove }}" onMouseEnter="{{ ctaEnter }}" onMouseLeave="{{ ctaLeave }}" style="background:radial-gradient(460px circle at {{ mx }}px {{ my }}px,rgba(190,219,255,.6),rgba(255,255,255,0) 60%),#fff;padding:clamp(28px,4cqw,56px);display:flex;flex-direction:column;gap:28px">
+        <p style="font:600 13px ui-monospace,Menlo,monospace;color:#6a7282">COTIZACIÓN · 4 PASOS · RESPUESTA EN 48 H</p>
+        <h2 style="font-size:clamp(34px,4.4cqw,60px);font-weight:800;letter-spacing:-0.045em;line-height:.98">Sube tus planos.<br>Te cotizamos.</h2>
+        <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px">
+          <sc-for list="{{ steps }}" as="sp" hint-placeholder-count="4">
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="height:3px;background:#e5e7eb;position:relative;overflow:hidden">{{ sp.fill }}</div>
+              <p style="font:600 12px ui-monospace,Menlo,monospace;color:{{ sp.nc }};transition:color .3s">{{ sp.n }}</p>
+              <p style="font-size:clamp(13px,1.2cqw,15px);font-weight:600;line-height:1.3;color:{{ sp.lc }};transition:color .3s">{{ sp.t }}</p>
+            </div>
+          </sc-for>
+        </div>
+        <span style="align-self:flex-start;background:{{ ctaBg }};color:#fff;padding:16px 24px;font-weight:600;display:flex;gap:12px;transition:background .3s"><span>Empezar cotización</span><span style="transform:translateX({{ ctaArrow }});transition:transform .35s cubic-bezier(.2,.8,.2,1)">→</span></span>
+      </a>
+      <div style="background:#fff;display:grid;grid-template-rows:1fr 1fr">
+        <sc-for list="{{ rows }}" as="r" hint-placeholder-count="2">
+          <a href="#" onMouseEnter="{{ r.enter }}" onMouseLeave="{{ r.leave }}" style="position:relative;overflow:hidden;padding:clamp(24px,3cqw,40px);display:flex;justify-content:space-between;align-items:center;gap:16px;border-bottom:{{ r.bb }};color:{{ r.fg }};transition:color .35s">
+            <div style="position:absolute;inset:0;background:#162456;transform:translateY({{ r.fill }});transition:transform .45s cubic-bezier(.2,.8,.2,1);pointer-events:none"></div>
+            <div style="position:relative"><p style="font-size:14px;opacity:.7;margin-bottom:6px">{{ r.k }}</p><p style="font-size:clamp(18px,2.2cqw,28px);font-weight:700;letter-spacing:-0.02em;word-break:break-all">{{ r.v }}</p></div>
+            <span style="position:relative;font-size:24px;transform:rotate({{ r.rot }});transition:transform .35s cubic-bezier(.2,.8,.2,1)">→</span>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+  <dc-import name="HHM Footer" hint-size="100%,320px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;mobile&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;animate&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Movimiento&quot;},&quot;autoRotate&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Servicios&quot;},&quot;rotateSec&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:5,&quot;min&quot;:3,&quot;max&quot;:10,&quot;step&quot;:1,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Servicios&quot;}}">
+class Component extends DCLogic {
+  state = { cw: 1280, tHov: -1, tOff: 0, tFade: false, svc: 0, paused: false, hp: -1, tick: 0, cp: 0, tq: 0, tqTick: 0, step: 0, stepTick: 0, mx: -999, my: -999, ctaH: false, row: -1, mq: false, pf: false };
+  rootRef = React.createRef();
+  statsRef = React.createRef();
+  rot() { return !this.props.mobile && (this.props.autoRotate ?? true); }
+  sec() { return this.props.rotateSec ?? 5; }
+  arm() { clearInterval(this.t); if (this.rot()) this.t = setInterval(() => { if (!this.state.paused) this.setState(s => ({ svc: (s.svc + 1) % 2, tick: s.tick + 1 })); }, this.sec() * 1000); }
+  armTq() { this.tqT = setInterval(() => this.setState(s => ({ tq: (s.tq + 1) % 3, tqTick: s.tqTick + 1 })), 7000); }
+  componentDidMount() {
+    this.arm();
+    this.stT = setInterval(() => this.setState(s => ({ step: (s.step + 1) % 4, stepTick: s.stepTick + 1 })), 1600);
+    this.rv = setTimeout(() => this.reveal(), 60);
+  }
+  watch(n = 0) {
+    const el = this.rootRef.current;
+    if (!el) { if (n < 40) this.wt = setTimeout(() => this.watch(n + 1), 50); return; }
+    this.setState({ cw: Math.round(el.getBoundingClientRect().width) });
+    if (window.ResizeObserver) { this.ro = new ResizeObserver(([e]) => { const w = Math.round(e.contentRect.width); if (Math.abs(w - this.state.cw) > 4) this.setState({ cw: w }); }); this.ro.observe(el); }
+  }
+  reveal() {
+    const root = this.rootRef.current; if (!root) return;
+    const still = (this.props.animate === false) || !window.IntersectionObserver || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+    if (still) { this.setState({ cp: 1 }); return; }
+    const els = root.querySelectorAll('[data-reveal]');
+    els.forEach(el => { const d = +el.getAttribute('data-reveal') || 0; el.style.opacity = '0'; el.style.transform = 'translateY(32px)'; el.style.transition = `opacity .9s cubic-bezier(.2,.8,.2,1) ${d}ms, transform .9s cubic-bezier(.2,.8,.2,1) ${d}ms`; });
+    const show = el => { if (el === this.statsRef.current) { if (!this.counted) { this.counted = true; this.count(); } } else { el.style.opacity = '1'; el.style.transform = 'none'; } };
+    this.io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; show(e.target); this.io.unobserve(e.target); }), { threshold: 0, rootMargin: '0px 0px -8% 0px' });
+    const vh = window.innerHeight || 800;
+    const all = [...els]; if (this.statsRef.current) all.push(this.statsRef.current);
+    requestAnimationFrame(() => all.forEach(el => { const r = el.getBoundingClientRect(); if (r.top < vh && r.bottom > 0) show(el); else this.io.observe(el); }));
+    this.failsafe = setTimeout(() => { all.forEach(show); this.io.disconnect(); }, 3000);
+  }
+  count() {
+    const t0 = performance.now();
+    const f = t => { const p = Math.min(1, (t - t0) / 1800); this.setState({ cp: 1 - Math.pow(1 - p, 3) }); if (p < 1) this.raf = requestAnimationFrame(f); };
+    this.raf = requestAnimationFrame(f);
+  }
+  componentDidUpdate(p) { if (p.autoRotate !== this.props.autoRotate || p.rotateSec !== this.props.rotateSec || p.mobile !== this.props.mobile) this.arm(); }
+  componentWillUnmount() { clearInterval(this.t); clearInterval(this.stT); clearTimeout(this.rv); clearTimeout(this.failsafe); clearTimeout(this.tf); clearTimeout(this.wt); this.ro && this.ro.disconnect(); cancelAnimationFrame(this.raf); this.io && this.io.disconnect(); }
+  shiftT(d, n) { if (this.state.tFade) return; this.setState({ tFade: true, tHov: -1 }); clearTimeout(this.tf); clearTimeout(this.wt); this.tf = setTimeout(() => this.setState(s => ({ tOff: (s.tOff + d + n) % n, tFade: false })), 280); }
+  bar(key, dur, extra) { return React.createElement('div', { key, style: Object.assign({ position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, background: '#fff', transformOrigin: 'left', animation: `hhm-progress ${dur}s linear forwards`, pointerEvents: 'none' }, extra) }); }
+  renderVals() {
+    const mobile = !!this.props.mobile;
+    const S = this.state;
+    const tN = 6;
+    const showBar = this.rot() && !S.paused;
+    const svc = [
+      { n: '01', name: 'Plomería', img: 'svc-plomeria', ph: 'Foto de instalación hidráulica', lead: 'Redes de agua, drenaje y gas diseñadas e instaladas conforme a norma, coordinadas con estructura.', items: ['Hidrosanitaria', 'Drenaje y pluviales', 'Redes de gas', 'Bombeo e hidroneumáticos', 'Agua caliente', 'Contra incendio'] },
+      { n: '02', name: 'Electricidad', img: 'svc-electricidad', ph: 'Foto de tablero o cableado', lead: 'De la acometida al último contacto: media y baja tensión, iluminación y sistemas especiales.', items: ['Acometidas y subestaciones', 'Tableros y distribución', 'Iluminación', 'Voz, datos y CCTV', 'Tierras y pararrayos', 'Plantas de emergencia'] }
+    ];
+    const stats = [
+      { v: 15, suf: '+', label: 'años instalando en obra' },
+      { v: 120, suf: '+', label: 'obras entregadas' },
+      { v: 85000, suf: ' m²', label: 'de instalaciones ejecutadas' },
+      { v: 90, suf: '%', label: 'de clientes que repiten con nosotros' }
+    ];
+    const quotes = [
+      { tag: 'ARQUITECTURA', text: 'Llegaron desde anteproyecto. Cuando empezó la obra, las instalaciones ya estaban resueltas.', who: 'Arq. Nombre Apellido', role: 'Despacho de arquitectura', img: 'testi-1' },
+      { tag: 'CONSTRUCTORA', text: 'Un solo contratista para plomería y electricidad nos ahorró semanas de coordinación.', who: 'Ing. Nombre Apellido', role: 'Constructora', img: 'testi-2' },
+      { tag: 'DESARROLLO', text: 'Entregaron memorias, planos as-built y pruebas completas. Cero pendientes en la entrega.', who: 'Nombre Apellido', role: 'Desarrollador inmobiliario', img: 'testi-3' },
+      { tag: 'INDUSTRIAL', text: 'La subestación quedó energizada en fecha. Coordinaron directo con la compañía eléctrica.', who: 'Ing. Nombre Apellido', role: 'Gerente de planta', img: 'testi-4' },
+      { tag: 'CORPORATIVO', text: 'Planta libre de 2,000 m² con iluminación y datos listos antes de la mudanza.', who: 'Nombre Apellido', role: 'Facility manager', img: 'testi-5' },
+      { tag: 'RESIDENCIAL', text: 'Limpios, puntuales y con reporte semanal. Así da gusto supervisar una obra.', who: 'Arq. Nombre Apellido', role: 'Supervisión de obra', img: 'testi-6' }
+    ];
+    const mqWords = ['Hidrosanitaria', 'Tableros', 'Drenaje pluvial', 'Iluminación', 'Redes de gas', 'Subestaciones', 'Contra incendio', 'Voz y datos'];
+    const stepNames = ['Tipo de proyecto', 'm²', 'Etapa', 'Planos'];
+    const rows = [{ k: 'Respuesta directa', v: 'WhatsApp' }, { k: 'Para enviar documentación', v: 'contacto@hhmproyectos.com' }];
+    return {
+      mobile, labelDisp: mobile ? 'none' : 'block', rootRef: this.rootRef, statsRef: this.statsRef,
+      pause: () => this.setState({ paused: true }), resume: () => { this.setState({ paused: false, tick: S.tick + 1 }); this.arm(); },
+      svcDir: mobile ? 'column' : 'row', svcH: mobile ? 'auto' : '600px', svcMinH: mobile ? '560px' : '0',
+      desktop: !mobile,
+      services: svc.map((s, i) => { const open = mobile || S.svc === i; const act = S.svc === i; return { ...s, tabBg: act ? '#162456' : '#fff', tabFg: act ? '#fff' : '#101828', mOp: act ? 1 : 0, mX: act ? '0px' : (i < S.svc ? '-24px' : '24px'), mPe: act ? 'auto' : 'none', count: String(s.items.length).padStart(2, '0'), open, closed: !open, flex: mobile ? '1' : (open ? '1.6' : '1'), scale: open ? 1 : 1.08, bar: (showBar && open) ? this.bar('b' + S.tick + '-' + S.svc, this.sec(), { bottom: 'auto', height: 3, zIndex: 2 }) : null, fs: mobile ? '44px' : (open ? 'clamp(38px,5.6cqw,80px)' : 'clamp(32px,4cqw,56px)'), hover: () => this.setState({ svc: i }) }; }),
+      stats: stats.map(s => ({ ...s, val: Math.round(s.v * S.cp).toLocaleString('es-MX'), bar: (S.cp * 100) + '%' })),
+      projects: [
+        { id: 'proj-1', tag: 'RESIDENCIAL', scope: 'Plomería + Electricidad', title: 'Edificio de departamentos, 12 niveles' },
+        { id: 'proj-2', tag: 'CORPORATIVO', scope: 'Electricidad', title: 'Oficinas corporativas, planta libre' },
+        { id: 'proj-4', tag: 'INDUSTRIAL', scope: 'Electricidad', title: 'Nave industrial con subestación' }
+      ].map((p, i) => { const h = S.hp === i; return { ...p, delay: String(i * 120), scale: h ? 1.06 : 1, ul: h ? 'underline' : 'none', slide: h ? '0%' : '101%', enter: () => this.setState({ hp: i }), leave: () => this.setState({ hp: -1 }) }; }),
+      pfArrow: S.pf ? '8px' : '0px', pfEnter: () => this.setState({ pf: true }), pfLeave: () => this.setState({ pf: false }),
+      tCols: tN,
+      tLabel: String(S.tOff + 1).padStart(2, '0') + ' / ' + String(quotes.length).padStart(2, '0'),
+      tPrev: () => this.shiftT(-1, quotes.length), tNext: () => this.shiftT(1, quotes.length),
+      quotes: Array.from({ length: tN }, (_, k) => { const i = (S.tOff + k) % quotes.length, q = quotes[i], h = S.tHov === k, dim = S.tHov !== -1 && !h; return { ...q, bg: h ? '#fff' : 'rgba(255,255,255,0)', fg: h ? '#101828' : '#fff', op: S.tFade ? 0 : (dim ? 0.5 : 1), y: S.tFade ? '12px' : (h ? '-6px' : '0px'), d: S.tFade ? '0ms' : (k * 70) + 'ms', enter: () => this.setState({ tHov: k }), leave: () => this.setState({ tHov: -1 }) }; }),
+      mqState: S.mq ? 'paused' : 'running', mqOn: () => this.setState({ mq: true }), mqOff: () => this.setState({ mq: false }),
+      mqCopies: [0, 1],
+      mqItems: mqWords.map((t, i) => ({ t, color: i % 2 ? 'transparent' : '#101828', stroke: i % 2 ? '1.5px #101828' : '0px transparent' })),
+      mx: S.mx, my: S.my,
+      ctaMove: e => { const r = e.currentTarget.getBoundingClientRect(); this.setState({ mx: Math.round(e.clientX - r.left), my: Math.round(e.clientY - r.top) }); },
+      ctaEnter: () => this.setState({ ctaH: true }), ctaLeave: () => this.setState({ ctaH: false, mx: -999, my: -999 }),
+      ctaBg: S.ctaH ? '#1c398e' : '#162456', ctaArrow: S.ctaH ? '8px' : '0px',
+      steps: stepNames.map((t, i) => { const on = i === S.step, done = i < S.step; return { t, n: '0' + (i + 1), nc: on || done ? '#162456' : '#99a1af', lc: on ? '#101828' : '#6a7282', fill: done ? React.createElement('div', { style: { position: 'absolute', inset: 0, background: '#162456' } }) : on ? this.bar('s' + S.stepTick, 1.6, { background: '#162456' }) : null }; }),
+      rows: rows.map((r, i) => { const h = S.row === i; return { ...r, bb: i === 0 ? '1px solid #101828' : '0', fg: h ? '#fff' : '#101828', fill: h ? '0%' : '101%', rot: h ? '-45deg' : '0deg', enter: () => this.setState({ row: i }), leave: () => this.setState({ row: -1 }) }; })
+    };
+  }
+}
+</script>
+</body>
+</html>
