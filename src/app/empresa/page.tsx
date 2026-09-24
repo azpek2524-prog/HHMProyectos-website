@@ -30,12 +30,12 @@ export default function Empresa() {
         <div className="mx-auto grid max-w-7xl gap-3 lg:grid-cols-3">
           <Reveal variant="clip" className="relative aspect-[16/10] overflow-hidden lg:col-span-2">
             <div className="absolute inset-0">
-              <MediaSlot label="Foto del equipo en obra" sizes="(min-width: 1024px) 66vw, 100vw" />
+              <MediaSlot label="Equipo instalando en Torre Invex" src="/obras/torre-invex-oficinas/20.jpg" sizes="(min-width: 1024px) 66vw, 100vw" />
             </div>
           </Reveal>
           <Reveal variant="clip" delay={150} className="relative aspect-[4/3] overflow-hidden lg:aspect-auto">
             <div className="absolute inset-0">
-              <MediaSlot label="Detalle: tubería o tablero" sizes="(min-width: 1024px) 33vw, 100vw" />
+              <MediaSlot label="Ductos y tuberías coordinados en losa" src="/obras/torre-invex-oficinas/13.jpg" sizes="(min-width: 1024px) 33vw, 100vw" />
             </div>
           </Reveal>
         </div>

@@ -4,9 +4,9 @@
  * Todo lo marcado como placeholder (nombres, cifras, testimonios, fichas de
  * obra) debe reemplazarse por información real.
  *
- * Fotos y videos: guarda el archivo en /public (p. ej. /public/obras/torre.jpg)
- * y escribe su ruta en el campo `image` correspondiente ("/obras/torre.jpg").
- * Mientras un campo `image` esté vacío se muestra un recuadro de placeholder.
+ * Fotos y videos: viven en /public/obras/<obra>/ (salen de Google Drive ›
+ * HHM-Proyectos). Para usar otra foto, cambia la ruta del campo `image`.
+ * Si un campo `image` queda vacío se muestra un recuadro de placeholder.
  */
 
 export type Category = {
@@ -15,6 +15,7 @@ export type Category = {
   name: string;
   lead: string;
   image?: string;
+  imageAlt?: string;
   items: [title: string, description: string][];
 };
 
@@ -23,6 +24,8 @@ export const categories: Category[] = [
     id: "plomeria",
     n: "01",
     name: "Plomería",
+    image: "/obras/residencia/10.jpg",
+    imageAlt: "Alberca interior de una residencia",
     lead: "Redes de agua, drenaje y gas diseñadas e instaladas conforme a norma, coordinadas con estructura y acabados.",
     items: [
       ["Instalación hidrosanitaria", "Agua fría y caliente, desde toma municipal hasta cada mueble."],
@@ -37,6 +40,8 @@ export const categories: Category[] = [
     id: "electricidad",
     n: "02",
     name: "Electricidad",
+    image: "/obras/agencia-kia/03.jpg",
+    imageAlt: "Plafón con iluminación lineal en agencia automotriz",
     lead: "Desde la acometida hasta el último contacto: media y baja tensión, iluminación y sistemas especiales.",
     items: [
       ["Acometidas y subestaciones", "Trámite, obra civil y montaje en media tensión."],
@@ -51,6 +56,8 @@ export const categories: Category[] = [
     id: "proyecto",
     n: "03",
     name: "Proyecto ejecutivo",
+    image: "/obras/torre-invex-oficinas/19.jpg",
+    imageAlt: "Drenaje y canalizaciones coordinados sobre losa reticular",
     lead: "Ingeniería lista para licencia y para obra, entregada en el formato de tu despacho.",
     items: [
       ["Memorias de cálculo", "Hidráulico, sanitario, gas y eléctrico."],
@@ -63,6 +70,8 @@ export const categories: Category[] = [
     id: "mantenimiento",
     n: "04",
     name: "Mantenimiento",
+    image: "/obras/almacen/03.jpg",
+    imageAlt: "Nave de almacenamiento con iluminación de altura",
     lead: "Pólizas preventivas y atención correctiva para edificios ya entregados.",
     items: [
       ["Preventivo programado", "Revisión periódica de equipos, tableros y redes."],
@@ -78,8 +87,8 @@ export const homeServices = [
     id: "plomeria",
     n: "01",
     name: "Plomería",
-    media: "Foto de instalación hidráulica",
-    image: undefined as string | undefined,
+    media: "Red contra incendio en plafón",
+    image: "/obras/torre-invex-oficinas/10.jpg" as string | undefined,
     lead: "Redes de agua, drenaje y gas diseñadas e instaladas conforme a norma, coordinadas con estructura.",
     items: ["Hidrosanitaria", "Drenaje y pluviales", "Redes de gas", "Bombeo e hidroneumáticos", "Agua caliente", "Contra incendio"],
   },
@@ -87,8 +96,8 @@ export const homeServices = [
     id: "electricidad",
     n: "02",
     name: "Electricidad",
-    media: "Foto de tablero o cableado",
-    image: undefined as string | undefined,
+    media: "Plafón con iluminación lineal",
+    image: "/obras/agencia-kia/02.jpg" as string | undefined,
     lead: "De la acometida al último contacto: media y baja tensión, iluminación y sistemas especiales.",
     items: ["Acometidas y subestaciones", "Tableros y distribución", "Iluminación", "Voz, datos y CCTV", "Tierras y pararrayos", "Plantas de emergencia"],
   },
@@ -142,135 +151,156 @@ export const clientLogos: { name: string; image?: string }[] = [
 
 /* ------------------------------ Obras ------------------------------ */
 
+export type Photo = { src: string; alt: string; w: number; h: number };
+/** Video: `src` en MP4 (H.264) y `webm` (VP9) como alternativa más ligera. */
+export type Clip = { src: string; webm?: string; poster: string; alt: string; w: number; h: number };
+
 export type Project = {
   slug: string;
-  type: "Residencial" | "Corporativo" | "Industrial" | "Comercial";
-  scope: string;
   title: string;
-  place: string;
-  year: string;
-  image?: string;
-  architect: string;
-  builder: string;
-  /** Etapa en la que HHM entró al proyecto. */
-  stage: string;
+  type: "Residencial" | "Corporativo" | "Industrial" | "Comercial";
+  /** Instalaciones a cargo de HHM (define el filtro del portafolio). */
+  scope: string;
   summary: string;
-  timeline: { week: string; title: string; text: string; media: string; image?: string }[];
-  quote: { text: string; who: string };
+  cover: Photo;
+  /* Datos opcionales de la ficha: solo se muestran si tienen valor. */
+  place?: string;
+  year?: string;
+  stage?: string;
+  architect?: string;
+  builder?: string;
+  gallery: { title: string; photos: Photo[] }[];
+  videos?: Clip[];
+  quote?: { text: string; who: string };
 };
 
-/* Placeholder: fichas de ejemplo. Reemplaza con las obras reales de HHM. */
+/*
+ * Obras reales (fotos y videos de Google Drive › HHM-Proyectos).
+ * TODO (HHM): confirmar el alcance (scope) de cada obra y, si se desea,
+ * agregar ubicación, año, etapa, arquitectura, constructora y testimonio.
+ */
 export const projects: Project[] = [
   {
-    slug: "edificio-departamentos-12-niveles",
+    slug: "torre-invex-oficinas",
+    title: "Torre Invex · Oficinas",
+    type: "Corporativo",
+    scope: "Plomería + Electricidad",
+    summary: "Oficinas corporativas con plafón abierto: tuberías, canalizaciones, red contra incendio e iluminación quedan a la vista, así que su trazo es parte del diseño.",
+    cover: { src: "/obras/torre-invex-oficinas/01.jpg", alt: "Área de trabajo con instalaciones aparentes", w: 1280, h: 892 },
+    gallery: [
+      {
+        title: "Terminado",
+        photos: [
+          { src: "/obras/torre-invex-oficinas/05.jpg", alt: "Plafón abierto: red contra incendio, canalizaciones e iluminación a la vista", w: 1280, h: 960 },
+          { src: "/obras/torre-invex-oficinas/01.jpg", alt: "Área de trabajo con instalaciones aparentes", w: 1280, h: 892 },
+          { src: "/obras/torre-invex-oficinas/03.jpg", alt: "Luminarias suspendidas sobre estaciones de trabajo", w: 1280, h: 960 },
+          { src: "/obras/torre-invex-oficinas/04.jpg", alt: "Iluminación en área abierta con vista a la ciudad", w: 1280, h: 960 },
+          { src: "/obras/torre-invex-oficinas/06.jpg", alt: "Lámparas colgantes y ducto en plafón negro", w: 1280, h: 960 },
+          { src: "/obras/torre-invex-oficinas/07.jpg", alt: "Recorrido de tuberías y luminarias a lo largo de la planta", w: 1280, h: 960 },
+        ],
+      },
+      {
+        title: "En obra",
+        photos: [
+          { src: "/obras/torre-invex-oficinas/10.jpg", alt: "Red contra incendio en plafón", w: 959, h: 1280 },
+          { src: "/obras/torre-invex-oficinas/19.jpg", alt: "Drenaje y canalizaciones sobre losa reticular", w: 1280, h: 960 },
+          { src: "/obras/torre-invex-oficinas/13.jpg", alt: "Ductos y tuberías coordinados en losa", w: 960, h: 1280 },
+          { src: "/obras/torre-invex-oficinas/14.jpg", alt: "Ductos y equipo en plafón, con red contra incendio", w: 1280, h: 960 },
+          { src: "/obras/torre-invex-oficinas/08.jpg", alt: "Tubería de PVC sobre losa reticular", w: 960, h: 1280 },
+          { src: "/obras/torre-invex-oficinas/17.jpg", alt: "Tubería junto a fachada de cristal", w: 960, h: 1280 },
+        ],
+      },
+    ],
+    videos: [
+      { src: "/obras/torre-invex-oficinas/video-01.mp4", webm: "/obras/torre-invex-oficinas/video-01.webm", poster: "/obras/torre-invex-oficinas/video-01.jpg", alt: "Recorrido en video: Torre Invex · Oficinas", w: 576, h: 1024 },
+      { src: "/obras/torre-invex-oficinas/video-02.mp4", webm: "/obras/torre-invex-oficinas/video-02.webm", poster: "/obras/torre-invex-oficinas/video-02.jpg", alt: "Recorrido en video: Torre Invex · Oficinas", w: 576, h: 1024 },
+      { src: "/obras/torre-invex-oficinas/video-03.mp4", webm: "/obras/torre-invex-oficinas/video-03.webm", poster: "/obras/torre-invex-oficinas/video-03.jpg", alt: "Recorrido en video: Torre Invex · Oficinas", w: 576, h: 1024 },
+      { src: "/obras/torre-invex-oficinas/video-04.mp4", webm: "/obras/torre-invex-oficinas/video-04.webm", poster: "/obras/torre-invex-oficinas/video-04.jpg", alt: "Recorrido en video: Torre Invex · Oficinas", w: 576, h: 1024 },
+    ],
+  },
+  {
+    slug: "agencia-kia",
+    title: "Agencia KIA",
+    type: "Comercial",
+    scope: "Electricidad",
+    summary: "Agencia automotriz con fachada de cristal y plafón de iluminación lineal en todo el piso de exhibición, de la obra en proceso a la apertura.",
+    cover: { src: "/obras/agencia-kia/04.jpg", alt: "Fachada de cristal iluminada de noche", w: 1280, h: 960 },
+    gallery: [
+      {
+        title: "Terminado",
+        photos: [
+          { src: "/obras/agencia-kia/04.jpg", alt: "Fachada de cristal iluminada de noche", w: 1280, h: 960 },
+          { src: "/obras/agencia-kia/02.jpg", alt: "Plafón con iluminación lineal en piso de exhibición", w: 1280, h: 960 },
+          { src: "/obras/agencia-kia/08.jpg", alt: "Fachada durante los últimos detalles de obra", w: 1024, h: 845 },
+          { src: "/obras/agencia-kia/11.jpg", alt: "Vista nocturna del conjunto", w: 1024, h: 768 },
+        ],
+      },
+      {
+        title: "En obra",
+        photos: [
+          { src: "/obras/agencia-kia/05.jpg", alt: "Plafón lineal con obra aún en proceso", w: 960, h: 1280 },
+          { src: "/obras/agencia-kia/07.jpg", alt: "Iluminación lineal y muros de madera en obra", w: 960, h: 1280 },
+          { src: "/obras/agencia-kia/10.jpg", alt: "Líneas de luz a lo largo del plafón", w: 960, h: 1280 },
+          { src: "/obras/agencia-kia/12.jpg", alt: "Plafón terminado con zona aún acordonada", w: 960, h: 1280 },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "residencia",
+    title: "Residencia",
     type: "Residencial",
     scope: "Plomería + Electricidad",
-    title: "Edificio de departamentos, 12 niveles",
-    place: "Ciudad",
-    year: "2025",
-    architect: "Despacho",
-    builder: "Constructora",
-    stage: "Proyecto ejecutivo",
-    summary: "Ductos hidrosanitarios y eléctricos coordinados en 12 niveles con losas postensadas, sin perforaciones posteriores y dentro del programa.",
-    timeline: [
-      { week: "SEM 01", title: "Revisión de planos", text: "Detectamos interferencias con estructura antes del colado de losas.", media: "Foto: revisión de planos" },
-      { week: "SEM 06", title: "Preparaciones en losa", text: "Camisas y ductos dejados en cada nivel según isométricos.", media: "Foto: ductos y preparaciones" },
-      { week: "SEM 18", title: "Subestación y tablero general", text: "Montaje, pruebas y liberación con la compañía suministradora.", media: "Video: montaje de subestación" },
-      { week: "SEM 30", title: "Entrega", text: "Pruebas de presión y carga, planos as-built y garantía por escrito.", media: "Foto: entrega final" },
+    summary: "Residencia con alberca interior, baños de mármol e iluminación arquitectónica en cada espacio: tiras LED empotradas, lámparas suspendidas y cine en casa.",
+    cover: { src: "/obras/residencia/10.jpg", alt: "Alberca interior", w: 1280, h: 960 },
+    gallery: [
+      {
+        title: "Agua y baños",
+        photos: [
+          { src: "/obras/residencia/10.jpg", alt: "Alberca interior", w: 1280, h: 960 },
+          { src: "/obras/residencia/09.jpg", alt: "Alberca vista desde el nivel superior", w: 960, h: 1280 },
+          { src: "/obras/residencia/22.jpg", alt: "Baño con espejo retroiluminado", w: 960, h: 1280 },
+          { src: "/obras/residencia/03.jpg", alt: "Medio baño con lavabo de mármol", w: 960, h: 1280 },
+          { src: "/obras/residencia/17.jpg", alt: "Baño con cancel de cristal y muros de mármol", w: 960, h: 1280 },
+        ],
+      },
+      {
+        title: "Iluminación",
+        photos: [
+          { src: "/obras/residencia/15.jpg", alt: "Escalera con pasamanos iluminado", w: 960, h: 1280 },
+          { src: "/obras/residencia/12.jpg", alt: "Lámpara suspendida en cubo de escalera", w: 1280, h: 960 },
+          { src: "/obras/residencia/07.jpg", alt: "Cajillo de luz indirecta en sala", w: 1280, h: 960 },
+          { src: "/obras/residencia/18.jpg", alt: "Líneas de luz empotradas en recámara", w: 960, h: 1280 },
+          { src: "/obras/residencia/14.jpg", alt: "Recámara con lámpara de anillos", w: 960, h: 1280 },
+          { src: "/obras/residencia/25.jpg", alt: "Lámparas colgantes de luz continua", w: 960, h: 1280 },
+          { src: "/obras/residencia/30.jpg", alt: "Cine en casa con iluminación perimetral", w: 1280, h: 960 },
+          { src: "/obras/residencia/29.jpg", alt: "Sala de cine y bar con luz indirecta", w: 960, h: 1280 },
+          { src: "/obras/residencia/01.jpg", alt: "Cocina con lámpara suspendida", w: 1280, h: 960 },
+        ],
+      },
     ],
-    quote: { text: "En obra no tuvimos que improvisar nada.", who: "Arq. Nombre Apellido · Despacho de arquitectura" },
   },
   {
-    slug: "oficinas-corporativas-planta-libre",
-    type: "Corporativo",
-    scope: "Electricidad",
-    title: "Oficinas corporativas, planta libre",
-    place: "Ciudad",
-    year: "2025",
-    architect: "Despacho",
-    builder: "Constructora",
-    stage: "Obra",
-    summary: "Iluminación, contactos en piso y cableado estructurado para una planta libre, listos antes de la mudanza del cliente.",
-    timeline: [
-      { week: "SEM 01", title: "Levantamiento", text: "Revisión de cargas existentes y capacidad del tablero del edificio.", media: "Foto: levantamiento en sitio" },
-      { week: "SEM 04", title: "Canalizaciones", text: "Charolas y ductos en plafón coordinados con aire acondicionado.", media: "Foto: charolas en plafón" },
-      { week: "SEM 09", title: "Voz, datos e iluminación", text: "Cableado estructurado certificado y control de escenas.", media: "Foto: rack y cableado" },
-      { week: "SEM 12", title: "Entrega", text: "Pruebas, etiquetado de circuitos y planos as-built.", media: "Foto: oficina terminada" },
-    ],
-    quote: { text: "Todo quedó funcionando antes de que llegara el primer escritorio.", who: "Nombre Apellido · Facility manager" },
-  },
-  {
-    slug: "casa-habitacion-sistema-pluvial",
-    type: "Residencial",
-    scope: "Plomería",
-    title: "Casa habitación con sistema pluvial",
-    place: "Ciudad",
-    year: "2024",
-    architect: "Despacho",
-    builder: "Constructora",
-    stage: "Anteproyecto",
-    summary: "Red hidrosanitaria completa con captación y reúso de agua pluvial integrada al diseño arquitectónico.",
-    timeline: [
-      { week: "SEM 01", title: "Anteproyecto", text: "Cálculo de captación pluvial y ubicación de cisternas.", media: "Foto: planos de anteproyecto" },
-      { week: "SEM 05", title: "Redes enterradas", text: "Drenajes, registros y cisterna pluvial antes de firmes.", media: "Foto: redes enterradas" },
-      { week: "SEM 14", title: "Entrega", text: "Pruebas de presión, filtros y manual de operación.", media: "Foto: casa terminada" },
-    ],
-    quote: { text: "El sistema pluvial quedó integrado sin cambiar el diseño.", who: "Arq. Nombre Apellido · Despacho de arquitectura" },
-  },
-  {
-    slug: "nave-industrial-subestacion",
+    slug: "almacen",
+    title: "Almacén",
     type: "Industrial",
     scope: "Electricidad",
-    title: "Nave industrial con subestación",
-    place: "Ciudad",
-    year: "2024",
-    architect: "Despacho",
-    builder: "Constructora",
-    stage: "Proyecto ejecutivo",
-    summary: "Subestación en media tensión, tableros de fuerza e iluminación de nave, energizados en la fecha comprometida.",
-    timeline: [
-      { week: "SEM 01", title: "Proyecto y trámite", text: "Proyecto eléctrico y gestión con la compañía suministradora.", media: "Foto: proyecto eléctrico" },
-      { week: "SEM 08", title: "Subestación", text: "Obra civil, montaje de transformador y celdas.", media: "Video: montaje de subestación" },
-      { week: "SEM 16", title: "Energización", text: "Pruebas, liberación y puesta en servicio.", media: "Foto: tablero energizado" },
+    summary: "Nave de almacenamiento con iluminación de altura a todo lo largo, lista para operar con racks.",
+    cover: { src: "/obras/almacen/02.jpg", alt: "Nave con racks e iluminación de altura", w: 960, h: 1280 },
+    gallery: [
+      {
+        title: "Terminado",
+        photos: [
+          { src: "/obras/almacen/02.jpg", alt: "Nave con racks e iluminación de altura", w: 960, h: 1280 },
+          { src: "/obras/almacen/01.jpg", alt: "Iluminación a lo largo de la nave", w: 960, h: 1280 },
+          { src: "/obras/almacen/03.jpg", alt: "Nave lista para operación", w: 960, h: 1280 },
+        ],
+      },
     ],
-    quote: { text: "La subestación quedó energizada en fecha.", who: "Ing. Nombre Apellido · Gerente de planta" },
-  },
-  {
-    slug: "restaurante-cocina-gas",
-    type: "Comercial",
-    scope: "Plomería + Electricidad",
-    title: "Restaurante, cocina y gas",
-    place: "Ciudad",
-    year: "2024",
-    architect: "Despacho",
-    builder: "Constructora",
-    stage: "Obra",
-    summary: "Red de gas, trampas de grasa y alimentación eléctrica de equipos de cocina industrial.",
-    timeline: [
-      { week: "SEM 01", title: "Coordinación de equipos", text: "Cargas y consumos de cada equipo de cocina.", media: "Foto: layout de cocina" },
-      { week: "SEM 04", title: "Gas y drenajes", text: "Red de gas con pruebas de hermeticidad y trampas de grasa.", media: "Foto: red de gas" },
-      { week: "SEM 08", title: "Apertura", text: "Pruebas finales y dictámenes para apertura.", media: "Foto: restaurante terminado" },
+    videos: [
+      { src: "/obras/almacen/video-01.mp4", webm: "/obras/almacen/video-01.webm", poster: "/obras/almacen/video-01.jpg", alt: "Recorrido en video: Almacén", w: 576, h: 1024 },
     ],
-    quote: { text: "Abrimos en fecha y con todos los dictámenes.", who: "Nombre Apellido · Propietario" },
-  },
-  {
-    slug: "local-comercial-plaza",
-    type: "Comercial",
-    scope: "Plomería + Electricidad",
-    title: "Local comercial en plaza",
-    place: "Ciudad",
-    year: "2023",
-    architect: "Despacho",
-    builder: "Constructora",
-    stage: "Obra",
-    summary: "Adecuación de instalaciones para local en plaza comercial, dentro de los lineamientos del centro comercial.",
-    timeline: [
-      { week: "SEM 01", title: "Lineamientos", text: "Revisión de reglamento de plaza y puntos de conexión.", media: "Foto: local en obra negra" },
-      { week: "SEM 03", title: "Instalaciones", text: "Alimentación, iluminación y sanitarios del local.", media: "Foto: instalaciones en proceso" },
-      { week: "SEM 06", title: "Entrega", text: "Liberación con administración de la plaza.", media: "Foto: local terminado" },
-    ],
-    quote: { text: "Pasamos la revisión de la plaza a la primera.", who: "Nombre Apellido · Arrendatario" },
-  },
+  }
 ];
 
 export function getProject(slug: string) {

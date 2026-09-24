@@ -23,6 +23,16 @@
   --animate-marquee-reverse: marquee-reverse 50s linear infinite;
   --animate-progress: progress var(--progress-duration, 5s) linear forwards;
   --animate-enter: enter 0.55s var(--ease-smooth) both;
+  --animate-fade: fade 0.3s ease-out both;
+
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
   /* Entrada de títulos arriba del pliegue: solo CSS, no espera a JavaScript */
   --animate-rise: rise 0.9s var(--ease-smooth) both;
 

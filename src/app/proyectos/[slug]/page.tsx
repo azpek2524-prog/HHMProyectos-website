@@ -5,6 +5,7 @@ import Reveal from "@/components/motion/Reveal";
 import Parallax from "@/components/motion/Parallax";
 import MediaSlot from "@/components/ui/MediaSlot";
 import ArrowLink from "@/components/ui/ArrowLink";
+import ProjectGallery from "@/components/project/ProjectGallery";
 import { getProject, projects } from "@/lib/data";
 
 export const dynamicParams = false;
@@ -24,11 +25,9 @@ export async function generateMetadata({
   return {
     title: project.title,
     description: project.summary,
+    openGraph: { images: [{ url: project.cover.src, width: project.cover.w, height: project.cover.h }] },
   };
 }
-
-/* Alterna proporciones para dar ritmo a la cronología. */
-const ratios = ["aspect-[16/10]", "aspect-[4/5] md:aspect-[16/9]", "aspect-[16/10]"];
 
 export default async function ProjectDetail({
   params,
@@ -42,14 +41,21 @@ export default async function ProjectDetail({
   const index = projects.indexOf(project);
   const prev = projects[(index - 1 + projects.length) % projects.length];
   const next = projects[(index + 1) % projects.length];
+  const photos = project.gallery.reduce((n, g) => n + g.photos.length, 0);
+  const videos = project.videos?.length ?? 0;
 
-  const facts = [
-    ["Alcance", project.scope],
-    ["Arquitectura", project.architect],
-    ["Constructora", project.builder],
-    ["Ubicación", project.place],
-    ["Entramos en", project.stage],
+  // Solo se muestran los datos que existen.
+  const allFacts: [string, string | undefined][] = [
+      ["Tipo de obra", project.type],
+      ["Alcance", project.scope],
+      ["Ubicación", project.place],
+      ["Año", project.year],
+      ["Entramos en", project.stage],
+      ["Arquitectura", project.architect],
+      ["Constructora", project.builder],
+      ["Material", `${photos} fotos${videos ? ` · ${videos} videos` : ""}`],
   ];
+  const facts = allFacts.filter((f): f is [string, string] => Boolean(f[1]));
 
   return (
     <>
@@ -57,18 +63,19 @@ export default async function ProjectDetail({
       <section className="relative h-[clamp(420px,46vw,640px)] overflow-hidden bg-night">
         <Parallax speed={0.2}>
           <MediaSlot
-            label="Foto o video principal a pantalla completa"
-            src={project.image}
-            alt={project.title}
+            label="Foto principal de la obra"
+            src={project.cover.src}
+            alt={project.cover.alt}
             priority
             labelAt="top"
           />
         </Parallax>
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(3,7,18,0)_40%,rgba(3,7,18,.8))]" />
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(3,7,18,.1)_30%,rgba(3,7,18,.85))]" />
         <div className="absolute inset-x-0 bottom-0 px-5 py-6 text-white md:px-8 md:py-12">
           <div className="mx-auto flex max-w-7xl flex-col gap-3.5">
             <p className="animate-rise font-mono text-xs font-semibold uppercase tracking-[0.06em]">
-              Obra {String(index + 1).padStart(2, "0")} · {project.type} · {project.year}
+              Obra {String(index + 1).padStart(2, "0")} · {project.type}
+              {project.year ? ` · ${project.year}` : ""}
             </p>
             <h1 className="max-w-[1000px] animate-rise text-[clamp(34px,5.6vw,80px)] font-extrabold leading-[0.95] tracking-[-0.045em] text-balance [animation-delay:120ms]">
               {project.title}
@@ -77,7 +84,7 @@ export default async function ProjectDetail({
         </div>
       </section>
 
-      {/* ============ FICHA FIJA + CRONOLOGÍA ============ */}
+      {/* ============ FICHA FIJA + GALERÍA ============ */}
       <section className="px-5 py-10 md:px-8 md:py-[72px]">
         <div className="mx-auto grid max-w-7xl items-start gap-10 lg:grid-cols-3 lg:gap-16">
           <aside className="lg:sticky lg:top-[108px]">
@@ -102,48 +109,26 @@ export default async function ProjectDetail({
             </Reveal>
           </aside>
 
-          <ol className="flex min-w-0 flex-col gap-10 lg:col-span-2">
-            {project.timeline.map((step, i) => (
-              <li key={step.week} className="flex flex-col gap-3.5">
-                <Reveal
-                  variant="clip"
-                  className={`relative overflow-hidden bg-gray-100 ${ratios[i % ratios.length]}`}
-                >
-                  <div className="absolute inset-0">
-                    <MediaSlot
-                      label={step.media}
-                      src={step.image}
-                      tone="light"
-                      sizes="(min-width: 1024px) 66vw, 100vw"
-                    />
-                  </div>
-                </Reveal>
-                <Reveal delay={150} className="flex flex-wrap items-baseline gap-x-5 gap-y-1">
-                  <span className="w-[72px] font-mono text-xs font-semibold text-navy-600">
-                    {step.week}
-                  </span>
-                  <p className="min-w-[220px] flex-1 text-base leading-[1.55] text-gray-700">
-                    <b className="text-ink">{step.title}.</b> {step.text}
-                  </p>
-                </Reveal>
-              </li>
-            ))}
-          </ol>
+          <div className="min-w-0 lg:col-span-2">
+            <ProjectGallery project={project} />
+          </div>
         </div>
       </section>
 
-      {/* ============ TESTIMONIO ============ */}
-      <section className="bg-navy px-5 py-12 text-white md:px-8 md:py-24">
-        <Reveal as="figure" className="mx-auto flex max-w-7xl flex-col gap-7">
-          <blockquote className="max-w-[1000px] text-[clamp(24px,3.2vw,42px)] font-semibold leading-[1.18] tracking-[-0.03em] text-balance">
-            “{project.quote.text}”
-          </blockquote>
-          <figcaption className="text-navy-200">{project.quote.who}</figcaption>
-        </Reveal>
-      </section>
+      {/* ============ TESTIMONIO (solo si existe) ============ */}
+      {project.quote && (
+        <section className="bg-navy px-5 py-12 text-white md:px-8 md:py-24">
+          <Reveal as="figure" className="mx-auto flex max-w-7xl flex-col gap-7">
+            <blockquote className="max-w-[1000px] text-[clamp(24px,3.2vw,42px)] font-semibold leading-[1.18] tracking-[-0.03em] text-balance">
+              “{project.quote.text}”
+            </blockquote>
+            <figcaption className="text-navy-200">{project.quote.who}</figcaption>
+          </Reveal>
+        </section>
+      )}
 
       {/* ============ ANTERIOR / SIGUIENTE ============ */}
-      <nav aria-label="Otras obras" className="grid md:grid-cols-2">
+      <nav aria-label="Otras obras" className="grid border-t border-gray-200 md:grid-cols-2">
         {[
           { p: prev, label: "← Anterior", align: "" },
           { p: next, label: "Siguiente →", align: "md:text-right md:items-end" },

@@ -121,7 +121,7 @@ export default function PortfolioBrowser() {
                   <div className="flex items-center gap-5">
                     <div className="relative aspect-[4/3] w-[120px] shrink-0 overflow-hidden">
                       <div className="absolute inset-0 transition-transform duration-700 ease-smooth group-hover:scale-110">
-                        <MediaSlot label="Foto" src={p.image} alt={p.title} sizes="120px" />
+                        <MediaSlot label="Foto" src={p.cover.src} alt={p.cover.alt} sizes="120px" />
                       </div>
                     </div>
                     <h2 className="text-[clamp(18px,2vw,26px)] font-bold leading-tight tracking-[-0.02em] transition-transform duration-300 ease-smooth group-hover:translate-x-1">
@@ -132,7 +132,7 @@ export default function PortfolioBrowser() {
                     <span>{p.type}</span>
                     <span>{p.scope}</span>
                     <span className="font-mono">
-                      {p.year}{" "}
+                      {p.year ?? `${p.gallery.reduce((n, g) => n + g.photos.length, 0)} fotos`}{" "}
                       <span
                         aria-hidden="true"
                         className="inline-block transition-transform duration-300 ease-smooth group-hover:-translate-y-0.5 group-hover:translate-x-0.5"

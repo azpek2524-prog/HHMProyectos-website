@@ -14,11 +14,7 @@ import QuoteCta from "@/components/home/QuoteCta";
 import { clientLogos, projects, specialties } from "@/lib/data";
 
 /* Obras destacadas en la Home (por slug). */
-const featured = [
-  "edificio-departamentos-12-niveles",
-  "oficinas-corporativas-planta-libre",
-  "nave-industrial-subestacion",
-]
+const featured = ["torre-invex-oficinas", "agencia-kia", "residencia"]
   .map((slug) => projects.find((p) => p.slug === slug))
   .filter((p) => p !== undefined);
 
@@ -30,7 +26,7 @@ export default function Home() {
         <Parallax speed={0.22} scale={1.18}>
           <HeroMedia />
         </Parallax>
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(3,7,18,0)_30%,rgba(3,7,18,.85)_100%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(3,7,18,.2)_0%,rgba(3,7,18,.35)_35%,rgba(3,7,18,.92)_100%)]" />
         <div className="absolute inset-x-0 bottom-0 px-5 py-8 md:px-8 md:py-12">
           <div className="mx-auto flex max-w-7xl flex-col gap-6 text-white">
             <h1 className="max-w-[1100px] animate-rise text-[clamp(42px,7.2vw,104px)] font-extrabold leading-[0.95] tracking-[-0.045em] text-balance">

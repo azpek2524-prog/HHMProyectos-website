@@ -84,6 +84,7 @@ export default function ServicesExplorer() {
               <MediaSlot
                 label={`Foto de ${cur.name} en obra`}
                 src={cur.image}
+                alt={cur.imageAlt}
                 sizes="(min-width: 1024px) 50vw, 100vw"
               />
             </div>
