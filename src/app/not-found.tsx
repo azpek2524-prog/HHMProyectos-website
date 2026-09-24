@@ -12,7 +12,7 @@ export default function NotFound() {
         </h1>
         <div className="flex animate-rise flex-wrap gap-3 [animation-delay:160ms]">
           <ArrowLink href="/">Volver al inicio</ArrowLink>
-          <ArrowLink href="/proyectos" variant="ink">
+          <ArrowLink href="/obras" variant="ink">
             Ver obras
           </ArrowLink>
         </div>

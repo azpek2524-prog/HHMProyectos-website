@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
 import Parallax from "@/components/motion/Parallax";
@@ -10,7 +11,38 @@ import StatsCounter from "@/components/home/StatsCounter";
 import ServicePanels from "@/components/home/ServicePanels";
 import TestimonialCarousel from "@/components/home/TestimonialCarousel";
 import QuoteCta from "@/components/home/QuoteCta";
-import { clientLogos, projects, specialties } from "@/lib/data";
+import JsonLd from "@/components/seo/JsonLd";
+import { categories, clientLogos, projects, specialties, stats, testimonials } from "@/lib/data";
+import { site } from "@/lib/site";
+
+// Título, descripción y vista previa vienen del layout.
+export const metadata: Metadata = { alternates: { canonical: "/" } };
+
+/* Ficha del negocio para buscadores (schema.org). */
+const business = {
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  "@id": `${site.url}/#empresa`,
+  name: site.name,
+  url: site.url,
+  logo: `${site.url}/apple-icon.png`,
+  image: `${site.url}${site.media.heroPoster ?? "/opengraph-image.jpg"}`,
+  description:
+    "Plomería y electricidad para arquitectos y constructoras: diseño, cálculo, instalación y mantenimiento, del plano a la entrega.",
+  email: site.email,
+  telephone: site.phoneE164,
+  ...(site.address && { address: site.address }),
+  areaServed: { "@type": "Country", name: "México" },
+  knowsAbout: specialties,
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Servicios",
+    itemListElement: categories.map((c) => ({
+      "@type": "Offer",
+      itemOffered: { "@type": "Service", name: c.title, url: `${site.url}/servicios/${c.id}` },
+    })),
+  },
+};
 
 /* Obras destacadas en la Home (por slug). */
 const featured = ["torre-invex-oficinas", "agencia-kia", "residencia"]
@@ -20,6 +52,8 @@ const featured = ["torre-invex-oficinas", "agencia-kia", "residencia"]
 export default function Home() {
   return (
     <>
+      <JsonLd data={business} />
+
       {/* ============ HERO · parallax + entrada escalonada ============ */}
       <section className="relative h-[clamp(560px,52vw,720px)] overflow-hidden bg-night">
         <Parallax speed={0.22} scale={1.18}>
@@ -37,10 +71,10 @@ export default function Home() {
                 para arquitectos y constructoras, del plano a la entrega.
               </p>
               <div className="flex animate-rise flex-wrap gap-2.5 [animation-delay:300ms]">
-                <ArrowLink href="/contacto" variant="white">
+                <ArrowLink href="/cotizar" variant="white">
                   Cotizar proyecto
                 </ArrowLink>
-                <ArrowLink href="/proyectos" variant="outline">
+                <ArrowLink href="/obras" variant="outline">
                   Ver obras
                 </ArrowLink>
               </div>
@@ -76,12 +110,14 @@ export default function Home() {
         </Marquee>
       </section>
 
-      {/* ============ CIFRAS · contadores ============ */}
-      <section className="px-5 pt-12 md:px-8 md:pt-[88px]">
-        <Reveal>
-          <StatsCounter />
-        </Reveal>
-      </section>
+      {/* ============ CIFRAS · contadores (solo con cifras reales) ============ */}
+      {stats.length > 0 && (
+        <section className="px-5 pt-12 md:px-8 md:pt-[88px]">
+          <Reveal>
+            <StatsCounter />
+          </Reveal>
+        </section>
+      )}
 
       {/* ============ SERVICIOS · paneles que se expanden ============ */}
       <section className="px-5 pb-10 pt-14 md:px-8 md:pb-16 md:pt-[120px]">
@@ -121,11 +157,11 @@ export default function Home() {
           </div>
           <Reveal>
             <Link
-              href="/proyectos"
+              href="/obras"
               className="group flex items-center justify-between gap-4 bg-night px-5 py-[22px] text-white transition-colors duration-300 hover:bg-navy md:px-9 md:py-8"
             >
               <span className="text-[clamp(20px,2.2vw,28px)] font-bold tracking-[-0.02em]">
-                Ver portafolio completo
+                Ver todas las obras
               </span>
               <span
                 aria-hidden="true"
@@ -138,10 +174,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============ TESTIMONIOS · carrusel ============ */}
-      <section className="bg-navy px-5 py-12 text-white md:px-8 md:py-20">
-        <TestimonialCarousel />
-      </section>
+      {/* ============ TESTIMONIOS · carrusel (solo con reseñas reales) ============ */}
+      {testimonials.length > 0 && (
+        <section className="bg-navy px-5 py-12 text-white md:px-8 md:py-20">
+          <TestimonialCarousel />
+        </section>
+      )}
 
       {/* ============ ESPECIALIDADES · marquee tipográfico ============ */}
       <section className="border-b border-gray-200 py-7 md:py-12">

@@ -2,14 +2,16 @@ import type { Metadata } from "next";
 import Reveal from "@/components/motion/Reveal";
 import ArrowLink from "@/components/ui/ArrowLink";
 import PortfolioBrowser from "@/components/portfolio/PortfolioBrowser";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Portafolio",
+export const metadata: Metadata = pageMetadata({
+  title: "Obras",
   description:
     "Obras de plomería y electricidad entregadas para despachos de arquitectura y constructoras: residencial, corporativo, industrial y comercial.",
-};
+  path: "/obras",
+});
 
-export default function Proyectos() {
+export default function Obras() {
   return (
     <>
       <PortfolioBrowser />
@@ -18,7 +20,7 @@ export default function Proyectos() {
           <h2 className="max-w-[700px] text-[clamp(26px,3.4vw,44px)] font-extrabold leading-[1.05] tracking-[-0.04em]">
             Tu proyecto puede ser el siguiente.
           </h2>
-          <ArrowLink href="/contacto" variant="white">
+          <ArrowLink href="/cotizar" variant="white">
             Cotizar proyecto
           </ArrowLink>
         </Reveal>

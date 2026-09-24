@@ -45,7 +45,7 @@ export default function ProjectCard({
 
   return (
     <Link
-      href={`/proyectos/${project.slug}`}
+      href={`/obras/${project.slug}`}
       onPointerEnter={start}
       onPointerLeave={stop}
       className="group flex flex-col gap-3.5 outline-none"

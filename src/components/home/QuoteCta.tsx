@@ -43,7 +43,7 @@ export default function QuoteCta() {
     <div className="mx-auto grid max-w-7xl gap-px border border-ink bg-ink lg:grid-cols-2">
       <Link
         ref={cardRef}
-        href="/contacto"
+        href="/cotizar"
         onMouseMove={(e) => {
           const r = e.currentTarget.getBoundingClientRect();
           setGlow(Math.round(e.clientX - r.left), Math.round(e.clientY - r.top));

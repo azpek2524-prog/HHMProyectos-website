@@ -3,12 +3,14 @@ import PageHeader from "@/components/ui/PageHeader";
 import Reveal from "@/components/motion/Reveal";
 import ServicesExplorer from "@/components/services/ServicesExplorer";
 import { stages } from "@/lib/data";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Servicios",
   description:
     "Plomería, electricidad, proyecto ejecutivo y mantenimiento para construcción: diseño, cálculo, instalación y pólizas.",
-};
+  path: "/servicios",
+});
 
 export default function Servicios() {
   return (

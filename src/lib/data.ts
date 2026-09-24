@@ -10,9 +10,12 @@
  */
 
 export type Category = {
+  /** También es la URL: /servicios/<id>. */
   id: string;
   n: string;
   name: string;
+  /** Título de su página (H1 y buscadores). */
+  title: string;
   lead: string;
   image?: string;
   imageAlt?: string;
@@ -24,6 +27,7 @@ export const categories: Category[] = [
     id: "plomeria",
     n: "01",
     name: "Plomería",
+    title: "Instalaciones de plomería para construcción",
     image: "/obras/residencia/10.jpg",
     imageAlt: "Alberca interior de una residencia",
     lead: "Redes de agua, drenaje y gas diseñadas e instaladas conforme a norma, coordinadas con estructura y acabados.",
@@ -40,6 +44,7 @@ export const categories: Category[] = [
     id: "electricidad",
     n: "02",
     name: "Electricidad",
+    title: "Instalaciones eléctricas para construcción",
     image: "/obras/agencia-kia/03.jpg",
     imageAlt: "Plafón con iluminación lineal en agencia automotriz",
     lead: "Desde la acometida hasta el último contacto: media y baja tensión, iluminación y sistemas especiales.",
@@ -53,9 +58,10 @@ export const categories: Category[] = [
     ],
   },
   {
-    id: "proyecto",
+    id: "proyecto-ejecutivo",
     n: "03",
     name: "Proyecto ejecutivo",
+    title: "Proyecto ejecutivo de instalaciones",
     image: "/obras/torre-invex-oficinas/19.jpg",
     imageAlt: "Drenaje y canalizaciones coordinados sobre losa reticular",
     lead: "Ingeniería lista para licencia y para obra, entregada en el formato de tu despacho.",
@@ -70,6 +76,7 @@ export const categories: Category[] = [
     id: "mantenimiento",
     n: "04",
     name: "Mantenimiento",
+    title: "Mantenimiento de instalaciones hidráulicas y eléctricas",
     image: "/obras/almacen/03.jpg",
     imageAlt: "Nave de almacenamiento con iluminación de altura",
     lead: "Pólizas preventivas y atención correctiva para edificios ya entregados.",
@@ -110,23 +117,24 @@ export const stages = [
   { name: "Operación", text: "As-built, garantía y pólizas de mantenimiento." },
 ];
 
-/* Placeholder: ajusta a las cifras reales de HHM. */
-export const stats = [
-  { value: 15, suffix: "+", label: "años instalando en obra" },
-  { value: 120, suffix: "+", label: "obras entregadas" },
-  { value: 85000, suffix: " m²", label: "de instalaciones ejecutadas" },
-  { value: 90, suffix: "%", label: "de clientes que repiten con nosotros" },
-];
+/*
+ * Cifras de la Home. Mientras la lista esté vacía la sección no se muestra:
+ * es mejor no enseñar números que enseñar números sin respaldo.
+ * TODO (HHM): agregar solo cifras verificables. Formato:
+ *   { value: 120, suffix: "+", label: "obras entregadas" },
+ *   { value: 85000, suffix: " m²", label: "de instalaciones ejecutadas" },
+ */
+export type Stat = { value: number; suffix: string; label: string };
+export const stats: Stat[] = [];
 
-/* Placeholder: reemplazar con reseñas reales (y foto en `image`). */
-export const testimonials = [
-  { tag: "Arquitectura", text: "Llegaron desde anteproyecto. Cuando empezó la obra, las instalaciones ya estaban resueltas.", who: "Arq. Nombre Apellido", role: "Despacho de arquitectura", image: undefined as string | undefined },
-  { tag: "Constructora", text: "Un solo contratista para plomería y electricidad nos ahorró semanas de coordinación.", who: "Ing. Nombre Apellido", role: "Constructora", image: undefined as string | undefined },
-  { tag: "Desarrollo", text: "Entregaron memorias, planos as-built y pruebas completas. Cero pendientes en la entrega.", who: "Nombre Apellido", role: "Desarrollador inmobiliario", image: undefined as string | undefined },
-  { tag: "Industrial", text: "La subestación quedó energizada en fecha. Coordinaron directo con la compañía eléctrica.", who: "Ing. Nombre Apellido", role: "Gerente de planta", image: undefined as string | undefined },
-  { tag: "Corporativo", text: "Planta libre de 2,000 m² con iluminación y datos listos antes de la mudanza.", who: "Nombre Apellido", role: "Facility manager", image: undefined as string | undefined },
-  { tag: "Residencial", text: "Limpios, puntuales y con reporte semanal. Así da gusto supervisar una obra.", who: "Arq. Nombre Apellido", role: "Supervisión de obra", image: undefined as string | undefined },
-];
+/*
+ * Testimonios de la Home. Vacío = la sección no se muestra.
+ * TODO (HHM): reseñas reales con nombre y cargo (con permiso del cliente).
+ * Formato:
+ *   { tag: "Arquitectura", text: "…", who: "Arq. Nombre Apellido", role: "Despacho", image: "/testimonios/nombre.jpg" },
+ */
+export type Testimonial = { tag: string; text: string; who: string; role: string; image?: string };
+export const testimonials: Testimonial[] = [];
 
 export const specialties = [
   "Hidrosanitaria",
@@ -315,6 +323,18 @@ export function getProject(slug: string) {
   return projects.find((p) => p.slug === slug);
 }
 
+export function getCategory(id: string) {
+  return categories.find((c) => c.id === id);
+}
+
+/** Servicios que cubre una obra, a partir de su alcance ("Plomería + Electricidad"). */
+export function projectCategories(project: Project): Category[] {
+  return project.scope
+    .split("+")
+    .map((name) => categories.find((c) => c.name === name.trim()))
+    .filter((c): c is Category => c !== undefined);
+}
+
 /* ------------------------------ Empresa ------------------------------ */
 
 export const principles = [
@@ -323,13 +343,12 @@ export const principles = [
   { n: "03", title: "Todo por escrito.", text: "Memorias de cálculo, pruebas documentadas, planos as-built y garantía en cada entrega." },
 ];
 
-/* Placeholder: nombres y retratos del equipo. */
-export const team: { name: string; role: string; image?: string }[] = [
-  { name: "Nombre Apellido", role: "Dirección" },
-  { name: "Nombre Apellido", role: "Eléctrica" },
-  { name: "Nombre Apellido", role: "Hidrosanitaria" },
-  { name: "Nombre Apellido", role: "Obra" },
-];
+/*
+ * Equipo en /empresa. Vacío = la sección no se muestra.
+ * TODO (HHM): nombres, puestos y retratos reales. Formato:
+ *   { name: "Nombre Apellido", role: "Dirección", image: "/equipo/nombre.jpg" },
+ */
+export const team: { name: string; role: string; image?: string }[] = [];
 
 /* ---------------------------- Cotización ---------------------------- */
 

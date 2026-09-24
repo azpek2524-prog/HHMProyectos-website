@@ -4,12 +4,14 @@ import PageHeader from "@/components/ui/PageHeader";
 import MediaSlot from "@/components/ui/MediaSlot";
 import ArrowLink from "@/components/ui/ArrowLink";
 import { principles, team } from "@/lib/data";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Empresa",
   description:
     "HHM Proyectos diseña e instala plomería y electricidad para arquitectos y constructoras. Entramos temprano, un solo responsable y todo por escrito.",
-};
+  path: "/empresa",
+});
 
 export default function Empresa() {
   return (
@@ -66,31 +68,33 @@ export default function Empresa() {
         </div>
       </section>
 
-      {/* Equipo: retratos en blanco y negro que toman color al pasar el cursor */}
-      <section className="bg-night px-5 py-14 text-white md:px-8 md:py-[104px]">
-        <div className="mx-auto flex max-w-7xl flex-col gap-8">
-          <Reveal as="h2" className="text-[clamp(30px,4vw,52px)] font-extrabold leading-none tracking-[-0.04em]">
-            Las personas detrás.
-          </Reveal>
-          <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-            {team.map((t, i) => (
-              <Reveal key={t.role} delay={i * 100}>
-                <div className="group flex flex-col gap-3">
-                  <div className="relative aspect-[3/4] overflow-hidden">
-                    <div className="absolute inset-0 grayscale transition-[filter,scale] duration-700 ease-smooth group-hover:scale-[1.04] group-hover:grayscale-0">
-                      <MediaSlot label="Retrato" src={t.image} alt={`${t.name}, ${t.role}`} sizes="(min-width: 1024px) 25vw, 50vw" />
+      {/* Equipo: retratos en blanco y negro que toman color al pasar el cursor (solo con datos reales) */}
+      {team.length > 0 && (
+        <section className="bg-night px-5 py-14 text-white md:px-8 md:py-[104px]">
+          <div className="mx-auto flex max-w-7xl flex-col gap-8">
+            <Reveal as="h2" className="text-[clamp(30px,4vw,52px)] font-extrabold leading-none tracking-[-0.04em]">
+              Las personas detrás.
+            </Reveal>
+            <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+              {team.map((t, i) => (
+                <Reveal key={t.role} delay={i * 100}>
+                  <div className="group flex flex-col gap-3">
+                    <div className="relative aspect-[3/4] overflow-hidden">
+                      <div className="absolute inset-0 grayscale transition-[filter,scale] duration-700 ease-smooth group-hover:scale-[1.04] group-hover:grayscale-0">
+                        <MediaSlot label="Retrato" src={t.image} alt={`${t.name}, ${t.role}`} sizes="(min-width: 1024px) 25vw, 50vw" />
+                      </div>
+                    </div>
+                    <div className="flex flex-wrap justify-between gap-x-3 text-[15px]">
+                      <span className="font-semibold">{t.name}</span>
+                      <span className="text-gray-400">{t.role}</span>
                     </div>
                   </div>
-                  <div className="flex flex-wrap justify-between gap-x-3 text-[15px]">
-                    <span className="font-semibold">{t.name}</span>
-                    <span className="text-gray-400">{t.role}</span>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
+                </Reveal>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* CTA */}
       <section className="px-5 py-14 md:px-8 md:py-[104px]">
@@ -98,7 +102,7 @@ export default function Empresa() {
           <h2 className="max-w-[760px] text-[clamp(30px,4.4vw,60px)] font-extrabold leading-none tracking-[-0.045em]">
             ¿Arrancas un proyecto? Llámanos desde el anteproyecto.
           </h2>
-          <ArrowLink href="/contacto">Cotizar proyecto</ArrowLink>
+          <ArrowLink href="/cotizar">Cotizar proyecto</ArrowLink>
         </Reveal>
       </section>
     </>

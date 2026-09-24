@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import MediaSlot from "@/components/ui/MediaSlot";
 import ProjectCard from "@/components/ui/ProjectCard";
@@ -9,19 +9,47 @@ import { projects, type Project } from "@/lib/data";
 const scopes = ["Todo", "Plomería", "Electricidad", "Ambos"] as const;
 type Scope = (typeof scopes)[number];
 
+/** Valor del filtro en la URL: /obras?instalacion=electricidad */
+const scopeParam: Record<Scope, string | null> = {
+  Todo: null,
+  Plomería: "plomeria",
+  Electricidad: "electricidad",
+  Ambos: "ambos",
+};
+
 const matches = (p: Project, s: Scope) =>
   s === "Todo" || (s === "Ambos" ? p.scope.includes("+") : p.scope.includes(s));
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
 /**
- * Filtro por instalación + vista Galería / Lista.
+ * Filtro por instalación + vista Galería / Lista. El filtro vive en la URL
+ * para poder enlazarlo (p. ej. desde la página de cada servicio).
  * Al cambiar filtro o vista, las obras vuelven a entrar escalonadas
  * (60 ms entre cada una, con tope) para que el cambio se lea sin marear.
  */
 export default function PortfolioBrowser() {
   const [scope, setScope] = useState<Scope>("Todo");
   const [view, setView] = useState<"grid" | "list">("grid");
+
+  // El HTML estático muestra todas las obras; al cargar se aplica el filtro de la URL.
+  useEffect(() => {
+    const id = requestAnimationFrame(() => {
+      const param = new URLSearchParams(window.location.search).get("instalacion");
+      const match = scopes.find((s) => scopeParam[s] === param);
+      if (match) setScope(match);
+    });
+    return () => cancelAnimationFrame(id);
+  }, []);
+
+  const pickScope = (s: Scope) => {
+    setScope(s);
+    const url = new URL(window.location.href);
+    const param = scopeParam[s];
+    if (param) url.searchParams.set("instalacion", param);
+    else url.searchParams.delete("instalacion");
+    window.history.replaceState(null, "", url);
+  };
   const list = projects.filter((p) => matches(p, scope));
   const stagger = (i: number) => ({ animationDelay: `${Math.min(i, 6) * 60}ms` });
 
@@ -49,7 +77,7 @@ export default function PortfolioBrowser() {
                     key={s}
                     type="button"
                     aria-pressed={on}
-                    onClick={() => setScope(s)}
+                    onClick={() => pickScope(s)}
                     className={`-mr-px border-r border-ink px-3.5 py-2.5 text-sm font-semibold transition-colors duration-300 last:mr-0 last:border-r-0 ${
                       on ? "bg-ink text-white" : "bg-white text-ink hover:bg-gray-100"
                     }`}
@@ -114,7 +142,7 @@ export default function PortfolioBrowser() {
               {list.map((p, i) => (
                 <Link
                   key={p.slug}
-                  href={`/proyectos/${p.slug}`}
+                  href={`/obras/${p.slug}`}
                   style={stagger(i)}
                   className="group grid animate-enter items-center gap-x-8 gap-y-4 border-b border-gray-300 py-5 transition-colors duration-300 hover:bg-gray-50 md:grid-cols-2"
                 >

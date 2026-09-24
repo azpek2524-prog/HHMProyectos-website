@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { LogoSprite } from "@/components/brand/Logo";
+import { site } from "@/lib/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -13,7 +14,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://hhmproyectos.com"),
+  metadataBase: new URL(site.url),
   title: {
     default: "HHM Proyectos | Plomería y Electricidad para Construcción",
     template: "%s | HHM Proyectos",
@@ -35,6 +36,8 @@ export const metadata: Metadata = {
       "Todo lo que corre por dentro de tu obra: agua, drenaje, gas, energía y datos.",
     type: "website",
     locale: "es_MX",
+    siteName: site.name,
+    url: "/",
   },
 };
 

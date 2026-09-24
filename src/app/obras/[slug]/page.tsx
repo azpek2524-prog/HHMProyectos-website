@@ -4,9 +4,12 @@ import { notFound } from "next/navigation";
 import Reveal from "@/components/motion/Reveal";
 import Parallax from "@/components/motion/Parallax";
 import MediaSlot from "@/components/ui/MediaSlot";
+import type { ReactNode } from "react";
 import ArrowLink from "@/components/ui/ArrowLink";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import ProjectGallery from "@/components/project/ProjectGallery";
-import { getProject, projects } from "@/lib/data";
+import { getProject, projectCategories, projects } from "@/lib/data";
+import { pageMetadata } from "@/lib/seo";
 
 export const dynamicParams = false;
 
@@ -22,11 +25,12 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) return {};
-  return {
+  return pageMetadata({
     title: project.title,
     description: project.summary,
-    openGraph: { images: [{ url: project.cover.src, width: project.cover.w, height: project.cover.h }] },
-  };
+    path: `/obras/${project.slug}`,
+    images: [{ url: project.cover.src, width: project.cover.w, height: project.cover.h, alt: project.cover.alt }],
+  });
 }
 
 export default async function ProjectDetail({
@@ -43,11 +47,24 @@ export default async function ProjectDetail({
   const next = projects[(index + 1) % projects.length];
   const photos = project.gallery.reduce((n, g) => n + g.photos.length, 0);
   const videos = project.videos?.length ?? 0;
+  const services = projectCategories(project);
+
+  // El alcance enlaza a la página de cada servicio.
+  const scope: ReactNode = services.length
+    ? services.map((c, i) => (
+        <span key={c.id}>
+          {i > 0 && " + "}
+          <Link href={`/servicios/${c.id}`} className="underline decoration-gray-300 underline-offset-4 transition-colors hover:text-navy hover:decoration-navy">
+            {c.name}
+          </Link>
+        </span>
+      ))
+    : project.scope;
 
   // Solo se muestran los datos que existen.
-  const allFacts: [string, string | undefined][] = [
+  const allFacts: [string, ReactNode | undefined][] = [
       ["Tipo de obra", project.type],
-      ["Alcance", project.scope],
+      ["Alcance", scope],
       ["Ubicación", project.place],
       ["Año", project.year],
       ["Entramos en", project.stage],
@@ -55,7 +72,7 @@ export default async function ProjectDetail({
       ["Constructora", project.builder],
       ["Material", `${photos} fotos${videos ? ` · ${videos} videos` : ""}`],
   ];
-  const facts = allFacts.filter((f): f is [string, string] => Boolean(f[1]));
+  const facts = allFacts.filter((f): f is [string, ReactNode] => Boolean(f[1]));
 
   return (
     <>
@@ -73,6 +90,15 @@ export default async function ProjectDetail({
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(3,7,18,.1)_30%,rgba(3,7,18,.85))]" />
         <div className="absolute inset-x-0 bottom-0 px-5 py-6 text-white md:px-8 md:py-12">
           <div className="mx-auto flex max-w-7xl flex-col gap-3.5">
+            <Breadcrumbs
+              tone="dark"
+              className="animate-rise"
+              items={[
+                { name: "Inicio", href: "/" },
+                { name: "Obras", href: "/obras" },
+                { name: project.title, href: `/obras/${project.slug}` },
+              ]}
+            />
             <p className="animate-rise font-mono text-xs font-semibold uppercase tracking-[0.06em]">
               Obra {String(index + 1).padStart(2, "0")} · {project.type}
               {project.year ? ` · ${project.year}` : ""}
@@ -103,7 +129,10 @@ export default async function ProjectDetail({
               <p className="py-6 text-[17px] leading-[1.65] text-gray-700 text-pretty">
                 {project.summary}
               </p>
-              <ArrowLink href="/contacto" className="w-full justify-between">
+              <ArrowLink
+                href={services.length ? `/cotizar?alcance=${services.map((c) => c.id).join(",")}` : "/cotizar"}
+                className="w-full justify-between"
+              >
                 Cotizar algo similar
               </ArrowLink>
             </Reveal>
@@ -135,7 +164,7 @@ export default async function ProjectDetail({
         ].map(({ p, label, align }, i) => (
           <Link
             key={label}
-            href={`/proyectos/${p.slug}`}
+            href={`/obras/${p.slug}`}
             className={`group flex flex-col gap-1.5 border-gray-200 px-5 py-7 transition-colors duration-300 hover:bg-gray-50 md:px-8 md:py-12 ${align} ${
               i === 0 ? "border-b md:border-b-0 md:border-r" : ""
             }`}
