@@ -19,8 +19,8 @@
   /* Curva de movimiento única para todo el sitio (salida suave) */
   --ease-smooth: cubic-bezier(0.2, 0.8, 0.2, 1);
 
+  /* La duración y el sentido los define <Marquee> según el ancho medido */
   --animate-marquee: marquee 40s linear infinite;
-  --animate-marquee-reverse: marquee-reverse 50s linear infinite;
   --animate-progress: progress var(--progress-duration, 5s) linear forwards;
   --animate-enter: enter 0.55s var(--ease-smooth) both;
   --animate-fade: fade 0.3s ease-out both;
@@ -49,18 +49,10 @@
 
   @keyframes marquee {
     from {
-      transform: translateX(0);
+      transform: translate3d(0, 0, 0);
     }
     to {
-      transform: translateX(-50%);
-    }
-  }
-  @keyframes marquee-reverse {
-    from {
-      transform: translateX(-50%);
-    }
-    to {
-      transform: translateX(0);
+      transform: translate3d(calc(-1 * var(--marquee-distance, 50%)), 0, 0);
     }
   }
   @keyframes progress {

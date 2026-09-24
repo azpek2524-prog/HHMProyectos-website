@@ -1,6 +1,5 @@
 import { Fragment } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import Reveal from "@/components/motion/Reveal";
 import Parallax from "@/components/motion/Parallax";
 import Marquee from "@/components/motion/Marquee";
@@ -50,28 +49,29 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============ LOGOS · marquee lento, pausa al pasar el cursor ============ */}
-      <section className="flex items-center border-b border-gray-200">
-        <p className="hidden shrink-0 self-stretch border-r border-gray-200 px-8 font-mono text-xs font-semibold uppercase tracking-[0.08em] text-gray-500 md:flex md:items-center">
-          Confían en HHM
-        </p>
-        <Marquee className="min-w-0 flex-1 py-[26px]" groupClassName="gap-14 pr-14">
+      {/* ============ CLIENTES · cinta continua de borde a borde ============ */}
+      <section aria-label="Clientes" className="border-b border-gray-200">
+        <Marquee speed={45} className="py-7 md:py-9" groupClassName="gap-20 pr-20 md:gap-32 md:pr-32">
           {clientLogos.map((logo) => (
-            <div key={logo.name} className="relative h-10 w-[140px]">
-              {logo.image ? (
-                <Image
-                  src={logo.image}
-                  alt={logo.name}
-                  fill
-                  sizes="140px"
-                  className="object-contain opacity-60 grayscale transition duration-500 hover:opacity-100 hover:grayscale-0"
-                />
-              ) : (
-                <div className="flex h-full items-center justify-center border border-dashed border-gray-300 bg-gray-50 font-mono text-[10px] uppercase tracking-wider text-gray-400">
-                  Logo
-                </div>
-              )}
-            </div>
+            <span
+              key={logo.name}
+              role="img"
+              aria-label={logo.name}
+              title={logo.name}
+              className="block shrink-0 bg-current text-gray-500 transition-colors duration-500 hover:text-ink"
+              style={{
+                height: logo.height,
+                width: Math.round(logo.height * logo.ratio),
+                maskImage: `url(${logo.src})`,
+                WebkitMaskImage: `url(${logo.src})`,
+                maskSize: "contain",
+                WebkitMaskSize: "contain",
+                maskRepeat: "no-repeat",
+                WebkitMaskRepeat: "no-repeat",
+                maskPosition: "center",
+                WebkitMaskPosition: "center",
+              }}
+            />
           ))}
         </Marquee>
       </section>
@@ -145,7 +145,7 @@ export default function Home() {
 
       {/* ============ ESPECIALIDADES · marquee tipográfico ============ */}
       <section className="border-b border-gray-200 py-7 md:py-12">
-        <Marquee reverse groupClassName="gap-6 pr-6 md:gap-12 md:pr-12">
+        <Marquee reverse speed={90} groupClassName="gap-6 pr-6 md:gap-12 md:pr-12">
           {specialties.map((word, i) => (
             <Fragment key={word}>
               <span

@@ -140,13 +140,21 @@ export const specialties = [
 ];
 
 /* Placeholder: logos de clientes (ruta en /public o vacío). */
-export const clientLogos: { name: string; image?: string }[] = [
-  { name: "Cliente 1" },
-  { name: "Cliente 2" },
-  { name: "Cliente 3" },
-  { name: "Cliente 4" },
-  { name: "Cliente 5" },
-  { name: "Cliente 6" },
+export type ClientLogo = {
+  name: string;
+  /** SVG monocromo en /public/clientes (se pinta con el color del texto). */
+  src: string;
+  /** Ancho ÷ alto del SVG. */
+  ratio: number;
+  /** Alto en px: se ajusta por logo para que todos tengan el mismo peso visual. */
+  height: number;
+};
+
+export const clientLogos: ClientLogo[] = [
+  { name: "KIA", src: "/clientes/kia.svg", ratio: 4.24, height: 21 },
+  { name: "Zeekr", src: "/clientes/zeekr.svg", ratio: 1, height: 40 },
+  { name: "LCA Arquitectos", src: "/clientes/lca.svg", ratio: 1.995, height: 54 },
+  // TODO: agregar Invex cuando esté el archivo de su logo (de preferencia SVG).
 ];
 
 /* ------------------------------ Obras ------------------------------ */
