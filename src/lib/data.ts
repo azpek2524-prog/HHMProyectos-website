@@ -344,7 +344,7 @@ export const principles = [
 ];
 
 /*
- * Equipo en /empresa. Vacío = la sección no se muestra.
+ * Equipo en /quienes-somos. Vacío = la sección no se muestra.
  * TODO (HHM): nombres, puestos y retratos reales. Formato:
  *   { name: "Nombre Apellido", role: "Dirección", image: "/equipo/nombre.jpg" },
  */

@@ -15,7 +15,7 @@ const navLinks: NavLink[] = [
     children: categories.map((c) => ({ href: `/servicios/${c.id}`, label: c.name })),
   },
   { href: "/obras", label: "Obras" },
-  { href: "/empresa", label: "Empresa" },
+  { href: "/quienes-somos", label: "Quiénes somos" },
 ];
 
 export default function Navbar() {

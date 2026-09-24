@@ -7,17 +7,17 @@ import { principles, team } from "@/lib/data";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Empresa",
+  title: "Quiénes somos",
   description:
     "HHM Proyectos diseña e instala plomería y electricidad para arquitectos y constructoras. Entramos temprano, un solo responsable y todo por escrito.",
-  path: "/empresa",
+  path: "/quienes-somos",
 });
 
-export default function Empresa() {
+export default function QuienesSomos() {
   return (
     <>
       <PageHeader
-        eyebrow="Empresa"
+        eyebrow="Quiénes somos"
         title={
           <>
             No se ven cuando la obra está terminada.{" "}
