@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Sora } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -11,12 +11,6 @@ const inter = Inter({
   display: "swap",
 });
 
-const sora = Sora({
-  subsets: ["latin"],
-  variable: "--font-sora",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL("https://hhmproyectos.com"),
   title: {
@@ -24,15 +18,15 @@ export const metadata: Metadata = {
     template: "%s | HHM Proyectos",
   },
   description:
-    "Diseño, cálculo e instalación de plomería y electricidad para arquitectos y constructoras. Cumplimos tiempos, normativas y estándares de calidad. Solicita tu cotización.",
+    "Plomería y electricidad para arquitectos y constructoras: diseño, cálculo, instalación y mantenimiento, del plano a la entrega.",
   keywords: [
     "plomería",
     "electricidad",
-    "instalaciones",
+    "instalaciones hidrosanitarias",
+    "instalaciones eléctricas",
     "arquitectos",
     "constructoras",
-    "obra",
-    "construcción",
+    "proyecto ejecutivo",
   ],
   icons: {
     icon: "/logo.jpeg",
@@ -40,11 +34,18 @@ export const metadata: Metadata = {
   openGraph: {
     title: "HHM Proyectos | Plomería y Electricidad para Construcción",
     description:
-      "El aliado en instalaciones de plomería y electricidad para arquitectos y constructoras.",
+      "Todo lo que corre por dentro de tu obra: agua, drenaje, gas, energía y datos.",
     type: "website",
     locale: "es_MX",
   },
 };
+
+/*
+ * Se ejecuta antes del primer pintado: activa las animaciones de aparición
+ * solo si hay JavaScript y el usuario no pidió "reducir movimiento".
+ * Sin este atributo todo el contenido se muestra de inmediato.
+ */
+const motionScript = `(function(){try{if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver' in window){document.documentElement.setAttribute('data-motion','')}}catch(e){}})()`;
 
 export default function RootLayout({
   children,
@@ -52,9 +53,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
+    <html lang="es" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: motionScript }} />
+      </head>
       <body
-        className={`${inter.variable} ${sora.variable} font-sans antialiased min-h-screen flex flex-col bg-white text-slate-900`}
+        className={`${inter.variable} flex min-h-screen flex-col bg-white font-sans text-ink antialiased`}
       >
         <Navbar />
         <main className="flex-grow">{children}</main>

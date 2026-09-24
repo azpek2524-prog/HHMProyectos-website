@@ -1,79 +1,153 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------
-   Sistema de diseño HHM Proyectos
-   Estética: "construcción premium" — base navy/slate + acento ámbar.
-   Tipografía: Sora (títulos) + Inter (texto).
+   HHM Proyectos · Sistema de diseño "editorial" (mockups dirección B)
+   Inter, blanco/negro + azul marino, esquinas rectas, tipografía grande.
    ------------------------------------------------------------------ */
 @theme {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-sora), var(--font-inter), ui-sans-serif, system-ui,
-    sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   /* Marca */
-  --color-brand-50: #eef4ff;
-  --color-brand-100: #dbe6fe;
-  --color-brand-500: #3b6fd4;
-  --color-brand-700: #1e3a8a;
-  --color-brand-900: #0f1f4b;
-  --color-brand-950: #0a1330;
+  --color-navy: #162456;
+  --color-navy-600: #1c398e;
+  --color-navy-200: #bedbff;
+  --color-navy-100: #dbeafe;
+  --color-ink: #101828;
+  --color-night: #030712;
 
-  /* Acento (energía / electricidad) */
-  --color-accent-400: #fbbf24;
-  --color-accent-500: #f59e0b;
-  --color-accent-600: #d97706;
-}
+  /* Curva de movimiento única para todo el sitio (salida suave) */
+  --ease-smooth: cubic-bezier(0.2, 0.8, 0.2, 1);
 
-:root {
-  --background: #ffffff;
-  --foreground: #0f172a; /* slate-900 */
-}
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 50s linear infinite;
+  --animate-progress: progress var(--progress-duration, 5s) linear forwards;
+  --animate-enter: enter 0.55s var(--ease-smooth) both;
+  /* Entrada de títulos arriba del pliegue: solo CSS, no espera a JavaScript */
+  --animate-rise: rise 0.9s var(--ease-smooth) both;
 
-html {
-  scroll-behavior: smooth;
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(32px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes marquee-reverse {
+    from {
+      transform: translateX(-50%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  @keyframes progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+  @keyframes enter {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: var(--color-ink);
+  background: #fff;
   -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: var(--color-accent-400);
-  color: var(--color-brand-950);
+  background: var(--color-navy);
+  color: #fff;
 }
 
-/* Retícula tipo "blueprint" para fondos oscuros */
-.bg-blueprint {
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 48px 48px;
-}
+/* ------------------------------------------------------------------
+   Movimiento
+   Reglas:
+   1. Todo se oculta para animar SOLO si <html data-motion> existe. Ese
+      atributo lo pone un script inline antes del primer pintado y solo
+      cuando el usuario no pidió "reducir movimiento". Sin JS → todo visible.
+   2. Aparición única (no se repite al volver a hacer scroll).
+   3. Un solo tipo de curva y duraciones cortas para evitar fatiga.
+   ------------------------------------------------------------------ */
 
-/* Animación de aparición al hacer scroll (usada por <Reveal>) */
-.reveal {
+/* Fade-in + slide-up */
+html[data-motion] [data-reveal] {
   opacity: 0;
-  transform: translateY(24px);
+  transform: translate3d(0, 32px, 0);
   transition:
-    opacity 0.6s ease-out,
-    transform 0.6s ease-out;
-  will-change: opacity, transform;
+    opacity 0.9s var(--ease-smooth),
+    transform 0.9s var(--ease-smooth);
+  transition-delay: var(--reveal-delay, 0ms);
 }
 
-.reveal.is-visible {
+/* Descubrimiento de imagen (cortina de abajo hacia arriba) */
+html[data-motion] [data-reveal="clip"] {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 1.1s var(--ease-smooth);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+html[data-motion] [data-reveal="clip"] > * {
+  transform: scale(1.12);
+  transition: transform 1.4s var(--ease-smooth);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+html[data-motion] [data-reveal][data-shown] {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0 0 0 0);
+}
+html[data-motion] [data-reveal="clip"][data-shown] > * {
+  transform: none;
+}
+
+/* Marquees: se pausan al pasar el cursor */
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Texto contorneado para el marquee de especialidades */
+@utility text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-ink);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
+  .marquee-track {
+    animation: none !important;
   }
 }

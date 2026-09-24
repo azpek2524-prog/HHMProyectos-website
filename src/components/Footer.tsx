@@ -1,113 +1,84 @@
 import Link from "next/link";
+import Image from "next/image";
 import { site, whatsappUrl } from "@/lib/site";
 
-export default function Footer() {
-  const year = new Date().getFullYear();
+const siteLinks = [
+  { href: "/empresa", label: "Empresa" },
+  { href: "/servicios", label: "Servicios" },
+  { href: "/proyectos", label: "Portafolio" },
+  { href: "/contacto", label: "Contacto" },
+];
 
+const linkClass = "w-fit transition-colors duration-300 hover:text-white";
+
+export default function Footer() {
   return (
-    <footer className="mt-auto bg-brand-950 text-slate-300">
-      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-        <div className="grid gap-10 md:grid-cols-4">
-          {/* Marca */}
-          <div className="md:col-span-1">
-            <span className="font-display text-lg font-bold text-white">
-              HHM Proyectos
-            </span>
-            <p className="mt-3 text-sm leading-relaxed text-slate-400">
-              Especialistas en plomería y electricidad para arquitectos y
-              constructoras. Diseño, cálculo e instalación con estándares de
-              calidad.
+    <footer className="mt-auto bg-ink text-gray-300">
+      <div className="mx-auto max-w-7xl px-5 pb-7 pt-12 md:px-8 md:pt-[72px]">
+        <div className="grid gap-10 border-b border-gray-800 pb-10 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="flex flex-col gap-4">
+            <div className="relative h-[72px] w-[72px] overflow-hidden bg-white">
+              <Image
+                src="/logo.jpeg"
+                alt="HHM Proyectos"
+                fill
+                sizes="72px"
+                className="scale-[1.4] object-cover"
+              />
+            </div>
+            <p className="max-w-[260px] text-sm leading-relaxed">
+              Especialistas en plomería y electricidad para el sector
+              construcción.
             </p>
           </div>
 
-          {/* Servicios */}
-          <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">
-              Servicios
-            </h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/servicios" className="transition hover:text-accent-400">
-                  Plomería
-                </Link>
-              </li>
-              <li>
-                <Link href="/servicios" className="transition hover:text-accent-400">
-                  Electricidad
-                </Link>
-              </li>
-              <li>
-                <Link href="/servicios" className="transition hover:text-accent-400">
-                  Diseño y cálculo
-                </Link>
-              </li>
-              <li>
-                <Link href="/proyectos" className="transition hover:text-accent-400">
-                  Portafolio de obras
-                </Link>
-              </li>
-            </ul>
+          <div className="flex flex-col gap-3 text-sm">
+            <h2 className="mb-1 text-[13px] font-semibold uppercase tracking-[0.08em] text-white">
+              Sitio
+            </h2>
+            {siteLinks.map((l) => (
+              <Link key={l.href} href={l.href} className={linkClass}>
+                {l.label}
+              </Link>
+            ))}
           </div>
 
-          {/* Navegación */}
-          <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">
-              Empresa
-            </h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/" className="transition hover:text-accent-400">
-                  Inicio
-                </Link>
-              </li>
-              <li>
-                <Link href="/proyectos" className="transition hover:text-accent-400">
-                  Proyectos
-                </Link>
-              </li>
-              <li>
-                <Link href="/contacto" className="transition hover:text-accent-400">
-                  Contacto
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Contacto */}
-          <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">
+          <div className="flex flex-col gap-3 text-sm">
+            <h2 className="mb-1 text-[13px] font-semibold uppercase tracking-[0.08em] text-white">
               Contacto
-            </h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <a
-                  href={whatsappUrl()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="transition hover:text-accent-400"
-                >
-                  WhatsApp
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`mailto:${site.email}`}
-                  className="transition hover:text-accent-400"
-                >
-                  {site.email}
-                </a>
-              </li>
-              <li className="text-slate-400">{site.phoneDisplay}</li>
-              <li className="text-slate-400">{site.city}</li>
-            </ul>
+            </h2>
+            <a
+              href={whatsappUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={linkClass}
+            >
+              WhatsApp · {site.phoneDisplay}
+            </a>
+            <a href={`mailto:${site.email}`} className={linkClass}>
+              {site.email}
+            </a>
+            <Link
+              href="/contacto"
+              className="group mt-2 flex w-fit items-center gap-2 bg-white px-4 py-2.5 font-bold text-navy transition-colors duration-300 hover:bg-navy-100"
+            >
+              Solicitar cotización
+              <span
+                aria-hidden="true"
+                className="transition-transform duration-300 ease-smooth group-hover:translate-x-1"
+              >
+                →
+              </span>
+            </Link>
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-sm text-slate-400 sm:flex-row">
+        <div className="flex flex-wrap justify-between gap-3 pt-6 text-[13px] text-gray-400">
           <p>
-            &copy; {year} {site.name}. Todos los derechos reservados.
+            © {new Date().getFullYear()} {site.name}. Todos los derechos
+            reservados.
           </p>
-          <p>Plomería y electricidad para el sector construcción.</p>
+          <p>Plomería · Electricidad · Proyecto ejecutivo</p>
         </div>
       </div>
     </footer>

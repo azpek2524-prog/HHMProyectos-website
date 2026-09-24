@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Mockups de diseño (runtime de la herramienta de diseño, no es código del sitio).
+    "mockups/**",
   ]),
 ]);
 

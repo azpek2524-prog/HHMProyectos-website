@@ -1,8 +1,12 @@
+import type { Metadata } from "next";
+import QuoteWizard from "@/components/contact/QuoteWizard";
+
+export const metadata: Metadata = {
+  title: "Cotización",
+  description:
+    "Cuéntanos tu proyecto en 5 pasos y sube tus planos. Te respondemos con alcance y propuesta.",
+};
+
 export default function Contacto() {
-  return (
-    <div className="min-h-screen p-8 max-w-7xl mx-auto">
-      <h1 className="text-4xl font-bold text-blue-950 mb-6">Contacto</h1>
-      <p className="text-gray-600 text-lg">Página en construcción. Aquí incluiremos el formulario de contacto y enlaces a redes sociales.</p>
-    </div>
-  );
+  return <QuoteWizard />;
 }
