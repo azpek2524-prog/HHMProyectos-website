@@ -163,16 +163,19 @@ export type ClientLogo = {
 /*
  * Logos de marcas y clientes que HHM autorizó mostrar (entrevista, sep. 2026).
  * Nissan, Toyota, Chevrolet y KIA: Simple Icons. Geely: paquete
- * car-brand-logos (MIT).
- * TODO: agregar Chirey, Solanum, Fertilità e Invex cuando estén sus archivos
- * (de preferencia SVG).
+ * car-brand-logos (MIT). Chirey, Fertilità y Solanum: vectorizados de las
+ * imágenes que envió HHM (de Solanum solo la palabra; conviene pedirles el
+ * archivo oficial). TODO: agregar Invex cuando esté su logo.
  */
 export const clientLogos: ClientLogo[] = [
   { name: "Nissan", src: "/clientes/nissan.svg", ratio: 1.194, height: 46 },
   { name: "KIA", src: "/clientes/kia.svg", ratio: 4.24, height: 21 },
+  { name: "Solanum", src: "/clientes/solanum.svg", ratio: 4.907, height: 22 },
   { name: "Toyota", src: "/clientes/toyota.svg", ratio: 1.468, height: 34 },
   { name: "LCA Arquitectos", src: "/clientes/lca.svg", ratio: 1.995, height: 54 },
   { name: "Chevrolet", src: "/clientes/chevrolet.svg", ratio: 3.057, height: 24 },
+  { name: "Fertilità", src: "/clientes/fertilita.svg", ratio: 1.911, height: 64 },
+  { name: "Chirey", src: "/clientes/chirey.svg", ratio: 2.775, height: 34 },
   { name: "Zeekr", src: "/clientes/zeekr.svg", ratio: 1, height: 40 },
   { name: "Geely", src: "/clientes/geely.svg", ratio: 3.384, height: 21 },
 ];
