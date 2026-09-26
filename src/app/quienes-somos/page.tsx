@@ -77,6 +77,12 @@ export default function QuienesSomos() {
               recomendación de arquitectos, y muchos de sus clientes nos vuelven a
               llamar para sus propios proyectos.
             </p>
+            <p>
+              Cuando otro contratista eléctrico no pudo con un parque industrial,
+              con naves, talleres y dormitorios para una línea de tráileres,
+              entramos con todo el equipo y sacamos la obra adelante. Al terminar,
+              el cliente nos encargó su siguiente parque.
+            </p>
           </Reveal>
         </div>
         {stats.length > 0 && (

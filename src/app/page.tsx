@@ -12,11 +12,16 @@ import ServicePanels from "@/components/home/ServicePanels";
 import TestimonialCarousel from "@/components/home/TestimonialCarousel";
 import QuoteCta from "@/components/home/QuoteCta";
 import JsonLd from "@/components/seo/JsonLd";
-import { categories, clientLogos, projects, specialties, stats, testimonials } from "@/lib/data";
+import Faq from "@/components/Faq";
+import { categories, clientLogos, projects, specialties, stats } from "@/lib/data";
+import { getTestimonials } from "@/lib/testimonials";
 import { site } from "@/lib/site";
 
 // Título, descripción y vista previa vienen del layout.
 export const metadata: Metadata = { alternates: { canonical: "/" } };
+
+// La página se regenera cada 10 minutos para tomar testimonios nuevos de Notion.
+export const revalidate = 600;
 
 /* Ficha del negocio para buscadores (schema.org). */
 const business = {
@@ -49,7 +54,9 @@ const featured = ["torre-invex-oficinas", "agencia-kia", "residencia"]
   .map((slug) => projects.find((p) => p.slug === slug))
   .filter((p) => p !== undefined);
 
-export default function Home() {
+export default async function Home() {
+  const testimonials = await getTestimonials();
+
   return (
     <>
       <JsonLd data={business} />
@@ -177,32 +184,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============ CASO REAL · capacidad para cumplir ============ */}
-      <section className="bg-navy px-5 py-14 text-white md:px-8 md:py-24">
-        <Reveal as="figure" className="mx-auto flex max-w-7xl flex-col gap-7">
-          <p className="font-mono text-xs font-semibold uppercase tracking-[0.06em] text-navy-200">
-            Caso real · Parque industrial
-          </p>
-          <blockquote className="max-w-[1050px] text-[clamp(24px,3.2vw,42px)] font-semibold leading-[1.18] tracking-[-0.03em] text-balance">
-            Otro contratista eléctrico no pudo con un parque industrial: naves,
-            talleres y dormitorios para una línea de tráileres. Entramos con
-            todo el equipo y sacamos la obra adelante.
-          </blockquote>
-          <figcaption className="flex flex-wrap items-center justify-between gap-6">
-            <span className="max-w-[560px] text-lg leading-[1.5] text-navy-200">
-              Al terminar, el cliente nos encargó su siguiente parque.
-            </span>
-            <ArrowLink href="/cotizar" variant="white">
-              Cotizar mi proyecto
-            </ArrowLink>
-          </figcaption>
-        </Reveal>
-      </section>
-
-      {/* ============ TESTIMONIOS · carrusel (solo con reseñas reales) ============ */}
+      {/* ============ TESTIMONIOS · desde Notion (solo si hay publicados) ============ */}
       {testimonials.length > 0 && (
         <section className="bg-navy px-5 py-12 text-white md:px-8 md:py-20">
-          <TestimonialCarousel />
+          <TestimonialCarousel testimonials={testimonials} />
         </section>
       )}
 
@@ -222,6 +207,11 @@ export default function Home() {
             </Fragment>
           ))}
         </Marquee>
+      </section>
+
+      {/* ============ PREGUNTAS FRECUENTES · resuelven dudas antes de cotizar ============ */}
+      <section className="px-5 pt-14 md:px-8 md:pt-[104px]">
+        <Faq structuredData />
       </section>
 
       {/* ============ CTA DE COTIZACIÓN ============ */}

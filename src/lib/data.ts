@@ -372,6 +372,55 @@ export const credentials = [
  */
 export const team: { name: string; role: string; image?: string }[] = [];
 
+/* ------------------------ Preguntas frecuentes ------------------------ */
+
+/*
+ * Respuestas basadas en la entrevista con HHM (sep. 2026). Aparecen en el
+ * inicio (antes del CTA de cotización) y en /cotizar.
+ */
+export const faqs: { q: string; a: string }[] = [
+  {
+    q: "¿En qué zona trabajan?",
+    a: "En Monterrey y su área metropolitana. También hemos hecho proyectos en otras ciudades, como Saltillo y Mazatlán; si tu obra está fuera, platícanos y lo revisamos.",
+  },
+  {
+    q: "¿Cuánto tardan en cotizar?",
+    a: "Depende de la complejidad del proyecto: de unos días a algunas semanas. Antes de cotizar visitamos la obra para proponerte un alcance basado en lo que realmente hay.",
+  },
+  {
+    q: "¿Qué necesito para pedir una cotización?",
+    a: "Si tienes planos (PDF, DWG o RVT), súbelos en el cotizador o mándalos por WhatsApp. Si todavía no los tienes, cuéntanos el tipo de proyecto, los metros cuadrados aproximados y la etapa en la que está.",
+  },
+  {
+    q: "¿Hacen electricidad y plomería en la misma obra?",
+    a: "Sí. Las dos instalaciones las lleva el mismo equipo de ingenieros y cuadrillas propias, y también hacemos el proyecto ejecutivo: memorias de cálculo, planos, coordinación BIM y planos as-built.",
+  },
+  {
+    q: "¿Trabajan con arquitectos y constructoras?",
+    a: "Sí. La mayoría de nuestros proyectos llegan a través de despachos de arquitectura. Coordinamos con el arquitecto y con el residente de obra durante toda la ejecución.",
+  },
+  {
+    q: "¿Cómo me mantienen informado durante la obra?",
+    a: "Con reportes de avance, fotos y visitas o citas en obra. Siempre sabes cómo va tu proyecto y quién es el responsable.",
+  },
+  {
+    q: "¿Cómo se paga? ¿Facturan?",
+    a: "Trabajamos con anticipo y estimaciones conforme avanza la obra. Sí facturamos.",
+  },
+  {
+    q: "¿Dan garantía?",
+    a: "Sí, nuestros trabajos tienen garantía. El plazo depende del tipo de instalación y te lo detallamos en la propuesta.",
+  },
+  {
+    q: "¿Atienden urgencias y mantenimiento?",
+    a: "Sí, para las instalaciones que hicimos nosotros: revisiones preventivas, urgencias y adecuaciones. Nuestro enfoque principal son los proyectos nuevos.",
+  },
+  {
+    q: "¿Hacen instalaciones contra incendio?",
+    a: "No. Nos especializamos en instalaciones eléctricas, hidrosanitarias y de gas.",
+  },
+];
+
 /* ---------------------------- Cotización ---------------------------- */
 
 export const quoteSteps = [
