@@ -4,7 +4,7 @@ import PageHeader from "@/components/ui/PageHeader";
 import MediaSlot from "@/components/ui/MediaSlot";
 import ArrowLink from "@/components/ui/ArrowLink";
 import StatsCounter from "@/components/home/StatsCounter";
-import { clientBrands, credentials, principles, stats, team } from "@/lib/data";
+import { credentials, principles, stats, team } from "@/lib/data";
 import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
@@ -111,7 +111,7 @@ export default function QuienesSomos() {
         </div>
       </section>
 
-      {/* Respaldo: certificaciones y marcas */}
+      {/* Respaldo: certificaciones */}
       <section className="bg-night px-5 py-14 text-white md:px-8 md:py-[104px]">
         <div className="mx-auto flex max-w-7xl flex-col gap-12">
           <Reveal as="h2" className="max-w-[760px] text-[clamp(30px,4vw,52px)] font-extrabold leading-none tracking-[-0.04em]">
@@ -128,14 +128,6 @@ export default function QuienesSomos() {
               </Reveal>
             ))}
           </div>
-          <Reveal className="flex flex-col gap-4 border-t border-gray-700 pt-8">
-            <p className="font-mono text-xs font-semibold uppercase tracking-[0.06em] text-navy-200">
-              Han confiado en nosotros
-            </p>
-            <p className="max-w-[1000px] text-[clamp(22px,2.6vw,34px)] font-semibold leading-[1.25] tracking-[-0.02em] text-balance">
-              {clientBrands.join(" · ")}
-            </p>
-          </Reveal>
         </div>
       </section>
 

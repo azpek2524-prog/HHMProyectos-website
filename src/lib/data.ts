@@ -160,11 +160,21 @@ export type ClientLogo = {
   height: number;
 };
 
+/*
+ * Logos de marcas y clientes que HHM autorizó mostrar (entrevista, sep. 2026).
+ * Nissan, Toyota, Chevrolet y KIA: Simple Icons. Geely: paquete
+ * car-brand-logos (MIT).
+ * TODO: agregar Chirey, Solanum, Fertilità e Invex cuando estén sus archivos
+ * (de preferencia SVG).
+ */
 export const clientLogos: ClientLogo[] = [
+  { name: "Nissan", src: "/clientes/nissan.svg", ratio: 1.194, height: 46 },
   { name: "KIA", src: "/clientes/kia.svg", ratio: 4.24, height: 21 },
-  { name: "Zeekr", src: "/clientes/zeekr.svg", ratio: 1, height: 40 },
+  { name: "Toyota", src: "/clientes/toyota.svg", ratio: 1.468, height: 34 },
   { name: "LCA Arquitectos", src: "/clientes/lca.svg", ratio: 1.995, height: 54 },
-  // TODO: agregar Invex cuando esté el archivo de su logo (de preferencia SVG).
+  { name: "Chevrolet", src: "/clientes/chevrolet.svg", ratio: 3.057, height: 24 },
+  { name: "Zeekr", src: "/clientes/zeekr.svg", ratio: 1, height: 40 },
+  { name: "Geely", src: "/clientes/geely.svg", ratio: 3.384, height: 21 },
 ];
 
 /* ------------------------------ Obras ------------------------------ */
@@ -351,9 +361,6 @@ export const credentials = [
   { title: "Procedimientos LOTO", text: "Bloqueo y etiquetado de energía para trabajar sin riesgos." },
   { title: "Facturación", text: "Cobro por anticipo y estimaciones, con factura." },
 ];
-
-/* Marcas y clientes que HHM autorizó nombrar (entrevista, sep. 2026). */
-export const clientBrands = ["Nissan", "Chevrolet", "Toyota", "KIA", "Geely", "Chirey", "Zeekr", "Solanum", "Fertilitá", "LCA Arquitectos"];
 
 /*
  * Equipo en /quienes-somos. Vacío = la sección no se muestra.
