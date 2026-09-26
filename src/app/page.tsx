@@ -203,15 +203,13 @@ export default function Home() {
         </Marquee>
       </section>
 
-      {/* ============ PREGUNTAS FRECUENTES · resuelven dudas antes de cotizar ============ */}
-      <section className="px-5 pt-14 md:px-8 md:pt-[104px]">
-        <Faq structuredData />
-      </section>
-
-      {/* ============ CTA DE COTIZACIÓN ============ */}
+      {/* ============ COTIZACIÓN + PREGUNTAS FRECUENTES · lado a lado ============ */}
       <section className="px-5 py-14 md:px-8 md:py-[104px]">
-        <Reveal>
+        <Reveal className="mx-auto grid max-w-7xl overflow-hidden border border-ink lg:grid-cols-[5fr_7fr]">
           <QuoteCta />
+          <div className="bg-gray-50 p-7 md:p-12">
+            <Faq structuredData />
+          </div>
         </Reveal>
       </section>
     </>

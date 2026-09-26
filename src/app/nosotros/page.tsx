@@ -9,17 +9,17 @@ import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Quiénes somos",
+  title: "Nosotros",
   description:
     "HHM Proyectos nació del oficio: 15 años, más de 280 obras y un equipo propio de 40 personas en electricidad y plomería. No jugamos con el patrimonio de nuestros clientes.",
-  path: "/quienes-somos",
+  path: "/nosotros",
 });
 
-export default function QuienesSomos() {
+export default function Nosotros() {
   return (
     <>
       <PageHeader
-        eyebrow="Quiénes somos"
+        eyebrow="Nosotros"
         title={
           <>
             No jugamos con el patrimonio{" "}

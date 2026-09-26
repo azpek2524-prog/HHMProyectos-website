@@ -1,10 +1,10 @@
 import JsonLd from "@/components/seo/JsonLd";
-import Reveal from "@/components/motion/Reveal";
 import { faqs } from "@/lib/data";
 
 /**
- * Preguntas frecuentes en acordeón. Usa <details>: funciona sin JavaScript
- * y las respuestas quedan en el HTML (buscadores y asistentes de IA las leen).
+ * Preguntas frecuentes: título arriba y acordeón debajo (el contenedor define
+ * el ancho y el fondo). Usa <details>: funciona sin JavaScript y las
+ * respuestas quedan en el HTML (buscadores y asistentes de IA las leen).
  * `structuredData` agrega el FAQPage de schema.org; úsalo en una sola página.
  */
 export default function Faq({
@@ -15,7 +15,7 @@ export default function Faq({
   structuredData?: boolean;
 }) {
   return (
-    <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-3 lg:gap-16">
+    <div className="flex flex-col gap-6 md:gap-8">
       {structuredData && (
         <JsonLd
           data={{
@@ -29,25 +29,25 @@ export default function Faq({
           }}
         />
       )}
-      <Reveal as="h2" className="text-[clamp(30px,4vw,52px)] font-extrabold leading-none tracking-[-0.04em]">
+      <h2 className="text-[clamp(28px,3.2vw,44px)] font-extrabold leading-none tracking-[-0.04em]">
         {title}
-      </Reveal>
-      <Reveal delay={120} className="border-t border-ink lg:col-span-2">
+      </h2>
+      <div className="border-t border-ink">
         {faqs.map((f) => (
           <details key={f.q} className="group border-b border-gray-300">
-            <summary className="flex cursor-pointer list-none items-center gap-5 py-[22px] text-left [&::-webkit-details-marker]:hidden">
-              <span className="flex-1 text-[clamp(17px,1.7vw,21px)] font-bold tracking-[-0.015em] transition-transform duration-300 ease-smooth group-hover:translate-x-1">
+            <summary className="flex cursor-pointer list-none items-center gap-5 py-5 text-left [&::-webkit-details-marker]:hidden">
+              <span className="flex-1 text-[clamp(16px,1.4vw,18px)] font-bold tracking-[-0.01em] transition-colors duration-300 group-hover:text-navy group-open:text-navy">
                 {f.q}
               </span>
-              <span aria-hidden="true" className="relative h-6 w-6 shrink-0">
-                <span className="absolute left-1/2 top-1/2 h-0.5 w-4 -translate-x-1/2 -translate-y-1/2 bg-ink" />
-                <span className="absolute left-1/2 top-1/2 h-4 w-0.5 -translate-x-1/2 -translate-y-1/2 bg-ink transition-transform duration-300 ease-smooth group-open:rotate-90" />
+              <span aria-hidden="true" className="relative h-5 w-5 shrink-0">
+                <span className="absolute left-1/2 top-1/2 h-0.5 w-3.5 -translate-x-1/2 -translate-y-1/2 bg-current" />
+                <span className="absolute left-1/2 top-1/2 h-3.5 w-0.5 -translate-x-1/2 -translate-y-1/2 bg-current transition-transform duration-300 ease-smooth group-open:rotate-90" />
               </span>
             </summary>
-            <p className="max-w-[640px] pb-6 pr-11 text-base leading-relaxed text-gray-600">{f.a}</p>
+            <p className="pb-5 pr-10 text-[15px] leading-relaxed text-gray-600">{f.a}</p>
           </details>
         ))}
-      </Reveal>
+      </div>
     </div>
   );
 }

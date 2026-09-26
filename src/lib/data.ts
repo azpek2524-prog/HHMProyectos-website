@@ -364,7 +364,7 @@ export const principles = [
   { n: "03", title: "Un solo equipo.", text: "Electricidad y plomería con ingenieros y cuadrillas propias. Un responsable para tu arquitecto y tu residente, sin pendientes entre oficios." },
 ];
 
-/* Respaldo en /quienes-somos (entrevista con HHM, sep. 2026). */
+/* Respaldo en /nosotros (entrevista con HHM, sep. 2026). */
 export const credentials = [
   { title: "Unidad de verificación (UVIE)", text: "Las instalaciones eléctricas se verifican con una unidad acreditada." },
   { title: "Constancias DC-3", text: "Personal capacitado y con constancias de competencias laborales." },
@@ -373,7 +373,7 @@ export const credentials = [
 ];
 
 /*
- * Equipo en /quienes-somos. Vacío = la sección no se muestra.
+ * Equipo en /nosotros. Vacío = la sección no se muestra.
  * TODO (HHM): nombres, puestos y retratos reales. Formato:
  *   { name: "Nombre Apellido", role: "Dirección", image: "/equipo/nombre.jpg" },
  */
