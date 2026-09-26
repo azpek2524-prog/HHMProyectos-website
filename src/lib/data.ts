@@ -381,7 +381,7 @@ export const team: { name: string; role: string; image?: string }[] = [];
 export const faqs: { q: string; a: string }[] = [
   {
     q: "¿En qué zona trabajan?",
-    a: "En Monterrey y su área metropolitana. También hemos hecho proyectos en otras ciudades, como Saltillo y Mazatlán; si tu obra está fuera, platícanos y lo revisamos.",
+    a: "Nuestra base es el área metropolitana de Monterrey, pero también tomamos proyectos en el resto del país: cuéntanos dónde está tu obra y lo revisamos al cotizar. Ya hemos trabajado en ciudades como Saltillo y Mazatlán.",
   },
   {
     q: "¿Cuánto tardan en cotizar?",
@@ -409,7 +409,7 @@ export const faqs: { q: string; a: string }[] = [
   },
   {
     q: "¿Dan garantía?",
-    a: "Sí, nuestros trabajos tienen garantía. El plazo depende del tipo de instalación y te lo detallamos en la propuesta.",
+    a: "Sí. El plazo depende de la obra; por lo general es de 3 meses y te lo confirmamos al cotizar.",
   },
   {
     q: "¿Atienden urgencias y mantenimiento?",

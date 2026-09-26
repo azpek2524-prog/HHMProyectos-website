@@ -16,7 +16,7 @@ export const site = {
   phoneE164: "+528123999979",
   email: "hhmproyectos@gmail.com",
   city: "Monterrey",
-  /** TODO (HHM): confirmar; en la entrevista dijeron "toda el área metropolitana". */
+  /** Zona principal (confirmada por HHM); también toman proyectos en el resto del país. */
   serviceArea: "Monterrey y su área metropolitana",
   /*
    * Datos del responsable para el aviso de privacidad y los datos

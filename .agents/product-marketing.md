@@ -1,13 +1,13 @@
 # Product Marketing Context
 
-**Document version:** v1
+**Document version:** v2
 **Last updated:** 2026-09-26
 
 > Fuente: entrevista de discovery con HHM (Notion › Idea Bank › "ENTREVISTA", 2026-09-26).
 > Lo marcado como **[supuesto]** no salió de la entrevista y hay que confirmarlo.
 
 ## Product Overview
-**One-liner:** Contratista de electricidad y plomería para obras residenciales, comerciales e industriales en Monterrey y su área metropolitana **[supuesto: la entrevista dice "toda el área metropolitana"; la lada 81 apunta a Monterrey]**.
+**One-liner:** Contratista de electricidad y plomería para obras residenciales, comerciales e industriales. Base en el área metropolitana de Monterrey; también toma proyectos en el resto del país, que evalúa al cotizar.
 **What it does:** Diseña, calcula e instala las instalaciones eléctricas (desde acometida en media tensión hasta iluminación) e hidrosanitarias y de gas de un proyecto, y les da seguimiento hasta la entrega. Trabaja sobre todo en proyecto nuevo; el mantenimiento es secundario y se ofrece a clientes de proyecto.
 **Product category:** Instalaciones eléctricas y de plomería para construcción (contratista MEP / "instalaciones").
 **Product type:** Servicio B2B (contratista especializado).
@@ -58,7 +58,7 @@ HHM dice que "no hay competencia" (todo llega por recomendación). Aun así, el 
 - Electricidad y plomería con el mismo equipo, más proyecto ejecutivo (memorias, planos, BIM, as-built).
 - Seguimiento constante: reportes de avance, fotos, visitas y citas en obra.
 - Cumplimiento: trabajan con unidad de verificación (UVIE); personal con constancias DC-3 y procedimientos LOTO.
-**How we do it differently:** Acercamiento para entender el proyecto → visita a obra → cotización según complejidad → ejecución con supervisión constante → entrega con documentación y garantía.
+**How we do it differently:** Acercamiento para entender el proyecto → visita a obra → cotización según complejidad → ejecución con supervisión constante → entrega con documentación y garantía (depende de la obra; por lo general 3 meses).
 **Why that's better:** Menos riesgo, menos coordinación para el arquitecto, obra terminada en tiempo y forma.
 **Why customers choose us:** Recomendación de arquitectos; los clientes de LCA los vuelven a contratar directamente para sus proyectos particulares.
 
@@ -117,11 +117,10 @@ HHM dice que "no hay competencia" (todo llega por recomendación). Aun así, el 
 **Current metrics:** Sin analítica todavía; hoy 100 % recomendación.
 
 ## Pendientes de confirmar
-- Ciudad base y zona de cobertura exacta (¿Monterrey y su área metropolitana?).
-- Duración y forma de la garantía ("usualmente arriba de 3 meses").
 - Permiso para nombrar Grupo Senda, Bisquets Obregón y Torre Baluarte en el sitio.
 - Fotos originales, lista de obras con datos y capturas de mensajes de clientes (en proceso).
 
 ## Changelog
 *Newest first. One line per revision: what changed and why.*
+- v2 (2026-09-26) — Zona confirmada (base en el área metropolitana de Monterrey, abiertos a proyectos nacionales) y garantía (depende de la obra; por lo general 3 meses).
 - v1 (2026-09-26) — Initial context, a partir de la entrevista de discovery con HHM.
