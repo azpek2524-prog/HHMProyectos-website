@@ -130,10 +130,17 @@ export const stats: Stat[] = [
 ];
 
 /*
- * Testimonios de la Home. Vacío = la sección no se muestra.
- * TODO (HHM): reseñas reales con nombre y cargo (con permiso del cliente).
+ * Testimonios de la Home, en el orden en que deben aparecer.
+ * Vacío = la sección no se muestra. Solo testimonios reales, con permiso del
+ * cliente para publicar su nombre. Sin foto se muestran sus iniciales.
  * Formato:
- *   { tag: "Arquitectura", text: "…", who: "Arq. Nombre Apellido", role: "Despacho", image: "/testimonios/nombre.jpg" },
+ *   {
+ *     tag: "Arquitectura",            // tipo de obra o de cliente
+ *     text: "…",                      // con las palabras del cliente, 1 a 3 frases
+ *     who: "Arq. Nombre Apellido",
+ *     role: "Director · Despacho",    // cargo y empresa
+ *     image: "/testimonios/nombre.jpg", // opcional
+ *   },
  */
 export type Testimonial = { tag: string; text: string; who: string; role: string; image?: string };
 export const testimonials: Testimonial[] = [];
@@ -375,49 +382,42 @@ export const team: { name: string; role: string; image?: string }[] = [];
 /* ------------------------ Preguntas frecuentes ------------------------ */
 
 /*
- * Respuestas basadas en la entrevista con HHM (sep. 2026). Aparecen en el
- * inicio (antes del CTA de cotización) y en /cotizar.
+ * Dudas comunes de quienes contratan instalaciones eléctricas y de plomería,
+ * respondidas con la información de la entrevista con HHM (sep. 2026).
+ * Aparecen en el inicio (antes del CTA de cotización) y en /cotizar.
  */
 export const faqs: { q: string; a: string }[] = [
+  {
+    q: "¿Qué servicios ofrecen?",
+    a: "Instalaciones eléctricas (acometidas y subestaciones, tableros, iluminación, tierras físicas, plantas de emergencia y canalizaciones para voz y datos), de plomería (hidrosanitaria, drenaje, gas, bombeo y calentamiento de agua) y el proyecto ejecutivo de ambas. No hacemos instalaciones contra incendio.",
+  },
+  {
+    q: "¿Qué tipo de proyectos realizan?",
+    a: "Agencias automotrices, autolavados, residencias, oficinas, comercios, naves y parques industriales. Trabajamos con despachos de arquitectura, constructoras, desarrolladores, marcas y particulares.",
+  },
   {
     q: "¿En qué zona trabajan?",
     a: "Nuestra base es el área metropolitana de Monterrey, pero también tomamos proyectos en el resto del país: cuéntanos dónde está tu obra y lo revisamos al cotizar. Ya hemos trabajado en ciudades como Saltillo y Mazatlán.",
   },
   {
-    q: "¿Cuánto tardan en cotizar?",
-    a: "Depende de la complejidad del proyecto: de unos días a algunas semanas. Antes de cotizar visitamos la obra para proponerte un alcance basado en lo que realmente hay.",
+    q: "¿Cómo es el proceso para cotizar y cuánto tardan?",
+    a: "Nos compartes tu proyecto (con planos si los tienes), visitamos la obra y te enviamos la propuesta. Según la complejidad, la cotización toma de unos días a algunas semanas. Ya en obra, te mandamos reportes de avance y fotos.",
   },
   {
-    q: "¿Qué necesito para pedir una cotización?",
-    a: "Si tienes planos (PDF, DWG o RVT), súbelos en el cotizador o mándalos por WhatsApp. Si todavía no los tienes, cuéntanos el tipo de proyecto, los metros cuadrados aproximados y la etapa en la que está.",
-  },
-  {
-    q: "¿Hacen electricidad y plomería en la misma obra?",
-    a: "Sí. Las dos instalaciones las lleva el mismo equipo de ingenieros y cuadrillas propias, y también hacemos el proyecto ejecutivo: memorias de cálculo, planos, coordinación BIM y planos as-built.",
-  },
-  {
-    q: "¿Trabajan con arquitectos y constructoras?",
-    a: "Sí. La mayoría de nuestros proyectos llegan a través de despachos de arquitectura. Coordinamos con el arquitecto y con el residente de obra durante toda la ejecución.",
-  },
-  {
-    q: "¿Cómo me mantienen informado durante la obra?",
-    a: "Con reportes de avance, fotos y visitas o citas en obra. Siempre sabes cómo va tu proyecto y quién es el responsable.",
-  },
-  {
-    q: "¿Cómo se paga? ¿Facturan?",
-    a: "Trabajamos con anticipo y estimaciones conforme avanza la obra. Sí facturamos.",
-  },
-  {
-    q: "¿Dan garantía?",
+    q: "¿Ofrecen garantía en los trabajos realizados?",
     a: "Sí. El plazo depende de la obra; por lo general es de 3 meses y te lo confirmamos al cotizar.",
   },
   {
-    q: "¿Atienden urgencias y mantenimiento?",
-    a: "Sí, para las instalaciones que hicimos nosotros: revisiones preventivas, urgencias y adecuaciones. Nuestro enfoque principal son los proyectos nuevos.",
+    q: "¿Sus instalaciones cumplen con la normativa?",
+    a: "Sí. Las instalaciones eléctricas se verifican con una unidad de verificación (UVIE), y nuestro personal cuenta con constancias DC-3 y trabaja con procedimientos de seguridad LOTO.",
   },
   {
-    q: "¿Hacen instalaciones contra incendio?",
-    a: "No. Nos especializamos en instalaciones eléctricas, hidrosanitarias y de gas.",
+    q: "¿Atienden urgencias o fuera del horario habitual?",
+    a: "Sí, a los clientes con los que tenemos o tuvimos un proyecto. No damos servicio de emergencia para instalaciones hechas por terceros.",
+  },
+  {
+    q: "¿Cómo se paga? ¿Facturan?",
+    a: "Con anticipo y estimaciones conforme avanza la obra. Sí facturamos.",
   },
 ];
 

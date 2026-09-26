@@ -13,15 +13,11 @@ import TestimonialCarousel from "@/components/home/TestimonialCarousel";
 import QuoteCta from "@/components/home/QuoteCta";
 import JsonLd from "@/components/seo/JsonLd";
 import Faq from "@/components/Faq";
-import { categories, clientLogos, projects, specialties, stats } from "@/lib/data";
-import { getTestimonials } from "@/lib/testimonials";
+import { categories, clientLogos, projects, specialties, stats, testimonials } from "@/lib/data";
 import { site } from "@/lib/site";
 
 // Título, descripción y vista previa vienen del layout.
 export const metadata: Metadata = { alternates: { canonical: "/" } };
-
-// La página se regenera cada 10 minutos para tomar testimonios nuevos de Notion.
-export const revalidate = 600;
 
 /* Ficha del negocio para buscadores (schema.org). */
 const business = {
@@ -54,9 +50,7 @@ const featured = ["torre-invex-oficinas", "agencia-kia", "residencia"]
   .map((slug) => projects.find((p) => p.slug === slug))
   .filter((p) => p !== undefined);
 
-export default async function Home() {
-  const testimonials = await getTestimonials();
-
+export default function Home() {
   return (
     <>
       <JsonLd data={business} />
@@ -184,7 +178,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ============ TESTIMONIOS · desde Notion (solo si hay publicados) ============ */}
+      {/* ============ TESTIMONIOS · src/lib/data.ts (solo si hay) ============ */}
       {testimonials.length > 0 && (
         <section className="bg-navy px-5 py-12 text-white md:px-8 md:py-20">
           <TestimonialCarousel testimonials={testimonials} />

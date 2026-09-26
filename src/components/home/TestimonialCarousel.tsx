@@ -21,7 +21,7 @@ const initials = (name: string) =>
  * Carrusel de testimonios. La cuadrícula muestra solo la primera fila (tantas
  * tarjetas como quepan); las flechas o un deslizamiento rotan el orden.
  * Sin avance automático: el usuario controla el ritmo (menos fatiga visual).
- * Los testimonios llegan de Notion (ver src/lib/testimonials.ts).
+ * Los testimonios se editan en src/lib/data.ts.
  */
 export default function TestimonialCarousel({ testimonials }: { testimonials: Testimonial[] }) {
   const n = testimonials.length;
