@@ -8,7 +8,7 @@ import { site } from "@/lib/site";
  * imagen incluida.
  */
 const defaultImages = [
-  { url: "/opengraph-image.jpg", width: 1200, height: 630, alt: `${site.name} · Plomería y electricidad para arquitectos y constructoras` },
+  { url: "/opengraph-image.jpg", width: 1200, height: 630, alt: `${site.name} · Electricidad y plomería que cuidan tu patrimonio` },
 ];
 
 /**

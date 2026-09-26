@@ -153,7 +153,7 @@ export async function sendLeadEmails(lead: Lead, files: File[]): Promise<void> {
   if (!lead.correo) return;
   try {
     const greeting = lead.nombre ? `Hola ${oneLine(lead.nombre)},` : "Hola,";
-    const intro = `Recibimos tu solicitud de cotización${files.length ? " y tus planos" : ""}. Te contactamos en menos de ${site.responseTime} con alcance y propuesta.`;
+    const intro = `Recibimos tu solicitud de cotización${files.length ? " y tus planos" : ""}. Vamos a revisar tu proyecto y te contactamos para agendar una visita a la obra y darte alcance y propuesta.`;
     await transport.sendMail({
       from: { name: site.name, address: sender },
       to: lead.correo,

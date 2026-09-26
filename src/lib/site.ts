@@ -15,7 +15,9 @@ export const site = {
   /** Para enlaces tel: y datos estructurados. */
   phoneE164: "+528123999979",
   email: "hhmproyectos@gmail.com",
-  city: "México",
+  city: "Monterrey",
+  /** TODO (HHM): confirmar; en la entrevista dijeron "toda el área metropolitana". */
+  serviceArea: "Monterrey y su área metropolitana",
   /*
    * Datos del responsable para el aviso de privacidad y los datos
    * estructurados. TODO (HHM): razón social y domicilio fiscal reales;
@@ -25,8 +27,6 @@ export const site = {
   address: undefined as string | undefined,
   whatsappMessage:
     "Hola HHM Proyectos, me gustaría solicitar información sobre sus servicios de plomería y electricidad.",
-  /** Tiempo de respuesta que se promete en la cotización. */
-  responseTime: "48 h",
   media: {
     // Video de obra para el hero de la Home (loop sin audio), p. ej. "/video/obra.mp4".
     // Mientras esté vacío se muestra un placeholder.

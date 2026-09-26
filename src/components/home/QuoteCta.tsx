@@ -60,7 +60,7 @@ export default function QuoteCta() {
         }
       >
         <p className="font-mono text-[13px] font-semibold uppercase text-gray-500">
-          Cotización · {quoteSteps.length} pasos · Respuesta en {site.responseTime}
+          Cotización en {quoteSteps.length} pasos · Visitamos tu obra
         </p>
         <h2 className="text-[clamp(34px,4.4vw,60px)] font-extrabold leading-[0.98] tracking-[-0.045em]">
           Sube tus planos.

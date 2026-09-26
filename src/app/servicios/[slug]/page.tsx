@@ -64,7 +64,7 @@ export default async function ServiceDetail({
           description: cat.lead,
           url: `${site.url}/servicios/${cat.id}`,
           provider: { "@type": "HomeAndConstructionBusiness", name: site.name, url: site.url },
-          areaServed: { "@type": "Country", name: "México" },
+          areaServed: site.serviceArea,
           hasOfferCatalog: {
             "@type": "OfferCatalog",
             name: cat.name,

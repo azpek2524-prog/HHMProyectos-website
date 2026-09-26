@@ -28,11 +28,11 @@ const business = {
   logo: `${site.url}/apple-icon.png`,
   image: `${site.url}${site.media.heroPoster ?? "/opengraph-image.jpg"}`,
   description:
-    "Plomería y electricidad para arquitectos y constructoras: diseño, cálculo, instalación y mantenimiento, del plano a la entrega.",
+    "Contratista de electricidad y plomería: 15 años y más de 280 obras para agencias automotrices, residencias, comercios e industria.",
   email: site.email,
   telephone: site.phoneE164,
   ...(site.address && { address: site.address }),
-  areaServed: { "@type": "Country", name: "México" },
+  areaServed: site.serviceArea,
   knowsAbout: specialties,
   hasOfferCatalog: {
     "@type": "OfferCatalog",
@@ -63,16 +63,17 @@ export default function Home() {
         <div className="absolute inset-x-0 bottom-0 px-5 py-8 md:px-8 md:py-12">
           <div className="mx-auto flex max-w-7xl flex-col gap-6 text-white">
             <h1 className="max-w-[1100px] animate-rise text-[clamp(42px,7.2vw,104px)] font-extrabold leading-[0.95] tracking-[-0.045em] text-balance">
-              Todo lo que corre por dentro de tu obra.
+              Electricidad y plomería que cuidan tu patrimonio.
             </h1>
             <div className="flex flex-wrap items-end justify-between gap-5">
-              <p className="max-w-[520px] animate-rise text-[clamp(16px,1.5vw,19px)] leading-[1.55] text-gray-200 [animation-delay:150ms]">
-                Agua, drenaje, gas, energía y datos. Plomería y electricidad
-                para arquitectos y constructoras, del plano a la entrega.
+              <p className="max-w-[540px] animate-rise text-[clamp(16px,1.5vw,19px)] leading-[1.55] text-gray-200 [animation-delay:150ms]">
+                15 años y más de 280 obras para agencias automotrices,
+                residencias, comercios e industria. Equipo propio en{" "}
+                {site.serviceArea}, del cálculo a la entrega.
               </p>
               <div className="flex animate-rise flex-wrap gap-2.5 [animation-delay:300ms]">
                 <ArrowLink href="/cotizar" variant="white">
-                  Cotizar proyecto
+                  Cotizar mi proyecto
                 </ArrowLink>
                 <ArrowLink href="/obras" variant="outline">
                   Ver obras
@@ -128,8 +129,9 @@ export default function Home() {
             Un solo responsable.
           </h2>
           <p className="max-w-[440px] text-[clamp(16px,1.5vw,18px)] leading-[1.55] text-gray-600">
-            Diseño, cálculo, instalación y mantenimiento. Menos coordinación
-            para tu despacho, menos sorpresas en obra.
+            El mismo equipo de ingenieros y cuadrillas para las dos
+            instalaciones, coordinado con tu arquitecto y tu residente. Menos
+            pendientes entre oficios, menos sorpresas en obra.
           </p>
         </Reveal>
         <Reveal delay={120}>
@@ -144,8 +146,9 @@ export default function Home() {
             <h2 className="text-[clamp(30px,4vw,52px)] font-extrabold leading-none tracking-[-0.04em]">
               Obras recientes
             </h2>
-            <p className="max-w-[360px] text-base leading-normal text-gray-600">
-              Instalaciones entregadas para despachos y constructoras.
+            <p className="max-w-[380px] text-base leading-normal text-gray-600">
+              Agencias, residencias, oficinas e industria, en Monterrey y en
+              proyectos fuera del estado.
             </p>
           </Reveal>
           <div className="grid gap-4 md:grid-cols-3 md:gap-6">
@@ -172,6 +175,28 @@ export default function Home() {
             </Link>
           </Reveal>
         </div>
+      </section>
+
+      {/* ============ CASO REAL · capacidad para cumplir ============ */}
+      <section className="bg-navy px-5 py-14 text-white md:px-8 md:py-24">
+        <Reveal as="figure" className="mx-auto flex max-w-7xl flex-col gap-7">
+          <p className="font-mono text-xs font-semibold uppercase tracking-[0.06em] text-navy-200">
+            Caso real · Parque industrial
+          </p>
+          <blockquote className="max-w-[1050px] text-[clamp(24px,3.2vw,42px)] font-semibold leading-[1.18] tracking-[-0.03em] text-balance">
+            Otro contratista eléctrico no pudo con un parque industrial: naves,
+            talleres y dormitorios para una línea de tráileres. Entramos con
+            todo el equipo y sacamos la obra adelante.
+          </blockquote>
+          <figcaption className="flex flex-wrap items-center justify-between gap-6">
+            <span className="max-w-[560px] text-lg leading-[1.5] text-navy-200">
+              Al terminar, el cliente nos encargó su siguiente parque.
+            </span>
+            <ArrowLink href="/cotizar" variant="white">
+              Cotizar mi proyecto
+            </ArrowLink>
+          </figcaption>
+        </Reveal>
       </section>
 
       {/* ============ TESTIMONIOS · carrusel (solo con reseñas reales) ============ */}

@@ -37,7 +37,6 @@ export const categories: Category[] = [
       ["Redes de gas", "LP y natural, estacionario o medidor, con pruebas de hermeticidad."],
       ["Bombeo e hidroneumáticos", "Cisternas, tinacos, equipos de presión constante."],
       ["Calentamiento de agua", "Calentadores, boilers y sistemas solares."],
-      ["Protección contra incendio", "Red de hidrantes, rociadores y gabinetes."],
     ],
   },
   {
@@ -47,12 +46,12 @@ export const categories: Category[] = [
     title: "Instalaciones eléctricas para construcción",
     image: "/obras/agencia-kia/03.jpg",
     imageAlt: "Plafón con iluminación lineal en agencia automotriz",
-    lead: "Desde la acometida hasta el último contacto: media y baja tensión, iluminación y sistemas especiales.",
+    lead: "Desde la acometida en media tensión hasta el último contacto, con verificación de unidad UVIE.",
     items: [
       ["Acometidas y subestaciones", "Trámite, obra civil y montaje en media tensión."],
       ["Tableros y distribución", "Tableros generales, derivados y balanceo de cargas."],
       ["Iluminación", "Interior, exterior, fachadas y control de escenas."],
-      ["Voz, datos y CCTV", "Cableado estructurado, racks y videovigilancia."],
+      ["Canalizaciones para voz, datos y CCTV", "Tubería y charolas listas para el cableado de telecomunicaciones y videovigilancia."],
       ["Tierras físicas y pararrayos", "Sistemas de puesta a tierra y protección atmosférica."],
       ["Plantas de emergencia", "Transferencias automáticas y respaldo UPS."],
     ],
@@ -64,7 +63,7 @@ export const categories: Category[] = [
     title: "Proyecto ejecutivo de instalaciones",
     image: "/obras/torre-invex-oficinas/19.jpg",
     imageAlt: "Drenaje y canalizaciones coordinados sobre losa reticular",
-    lead: "Ingeniería lista para licencia y para obra, entregada en el formato de tu despacho.",
+    lead: "Diseñamos las instalaciones sobre el proyecto de tu despacho: cálculo, planos y modelo BIM, listos para licencia y obra.",
     items: [
       ["Memorias de cálculo", "Hidráulico, sanitario, gas y eléctrico."],
       ["Planos e isométricos", "Plantas, cortes, isométricos y unifilares."],
@@ -79,10 +78,10 @@ export const categories: Category[] = [
     title: "Mantenimiento de instalaciones hidráulicas y eléctricas",
     image: "/obras/almacen/03.jpg",
     imageAlt: "Nave de almacenamiento con iluminación de altura",
-    lead: "Pólizas preventivas y atención correctiva para edificios ya entregados.",
+    lead: "Para las obras que instalamos: revisiones preventivas, atención de urgencias y adecuaciones cuando tu proyecto crece.",
     items: [
       ["Preventivo programado", "Revisión periódica de equipos, tableros y redes."],
-      ["Correctivo y urgencias", "Detección de fugas, fallas y cortos."],
+      ["Correctivo y urgencias", "Detección de fugas, fallas y cortos en instalaciones hechas por HHM."],
       ["Adecuaciones", "Ampliaciones de carga y remodelaciones."],
     ],
   },
@@ -94,10 +93,10 @@ export const homeServices = [
     id: "plomeria",
     n: "01",
     name: "Plomería",
-    media: "Red contra incendio en plafón",
-    image: "/obras/torre-invex-oficinas/10.jpg" as string | undefined,
-    lead: "Redes de agua, drenaje y gas diseñadas e instaladas conforme a norma, coordinadas con estructura.",
-    items: ["Hidrosanitaria", "Drenaje y pluviales", "Redes de gas", "Bombeo e hidroneumáticos", "Agua caliente", "Contra incendio"],
+    media: "Tubería de PVC sobre losa reticular",
+    image: "/obras/torre-invex-oficinas/08.jpg" as string | undefined,
+    lead: "Agua, drenaje y gas diseñados e instalados conforme a norma, coordinados con estructura y acabados.",
+    items: ["Hidrosanitaria", "Drenaje y pluviales", "Redes de gas", "Bombeo e hidroneumáticos", "Agua caliente"],
   },
   {
     id: "electricidad",
@@ -105,8 +104,8 @@ export const homeServices = [
     name: "Electricidad",
     media: "Plafón con iluminación lineal",
     image: "/obras/agencia-kia/02.jpg" as string | undefined,
-    lead: "De la acometida al último contacto: media y baja tensión, iluminación y sistemas especiales.",
-    items: ["Acometidas y subestaciones", "Tableros y distribución", "Iluminación", "Voz, datos y CCTV", "Tierras y pararrayos", "Plantas de emergencia"],
+    lead: "De la acometida en media tensión al último contacto, con verificación de unidad UVIE.",
+    items: ["Acometidas y subestaciones", "Tableros y distribución", "Iluminación", "Canalizaciones de voz y datos", "Tierras y pararrayos", "Plantas de emergencia"],
   },
 ];
 
@@ -118,14 +117,17 @@ export const stages = [
 ];
 
 /*
- * Cifras de la Home. Mientras la lista esté vacía la sección no se muestra:
- * es mejor no enseñar números que enseñar números sin respaldo.
- * TODO (HHM): agregar solo cifras verificables. Formato:
- *   { value: 120, suffix: "+", label: "obras entregadas" },
- *   { value: 85000, suffix: " m²", label: "de instalaciones ejecutadas" },
+ * Cifras de la Home (entrevista con HHM, sep. 2026; salen de sus registros).
+ * Vacío = la sección no se muestra. "Obras en paralelo" cambia con el tiempo:
+ * actualízala cuando cambie.
  */
 export type Stat = { value: number; suffix: string; label: string };
-export const stats: Stat[] = [];
+export const stats: Stat[] = [
+  { value: 15, suffix: "", label: "años en obra" },
+  { value: 280, suffix: "+", label: "obras entregadas" },
+  { value: 40, suffix: "", label: "personas en equipo propio" },
+  { value: 20, suffix: "", label: "obras en paralelo hoy" },
+];
 
 /*
  * Testimonios de la Home. Vacío = la sección no se muestra.
@@ -143,8 +145,8 @@ export const specialties = [
   "Iluminación",
   "Redes de gas",
   "Subestaciones",
-  "Contra incendio",
-  "Voz y datos",
+  "Bombeo",
+  "Tierras físicas",
 ];
 
 /* Placeholder: logos de clientes (ruta en /public o vacío). */
@@ -201,7 +203,7 @@ export const projects: Project[] = [
     title: "Torre Invex · Oficinas",
     type: "Corporativo",
     scope: "Plomería + Electricidad",
-    summary: "Oficinas corporativas con plafón abierto: tuberías, canalizaciones, red contra incendio e iluminación quedan a la vista, así que su trazo es parte del diseño.",
+    summary: "Oficinas corporativas con plafón abierto: tuberías, canalizaciones e iluminación quedan a la vista, así que su trazo es parte del diseño.",
     cover: { src: "/obras/torre-invex-oficinas/01.jpg", alt: "Área de trabajo con instalaciones aparentes", w: 1280, h: 892 },
     gallery: [
       {
@@ -218,7 +220,6 @@ export const projects: Project[] = [
       {
         title: "En obra",
         photos: [
-          { src: "/obras/torre-invex-oficinas/10.jpg", alt: "Red contra incendio en plafón", w: 959, h: 1280 },
           { src: "/obras/torre-invex-oficinas/19.jpg", alt: "Drenaje y canalizaciones sobre losa reticular", w: 1280, h: 960 },
           { src: "/obras/torre-invex-oficinas/13.jpg", alt: "Ductos y tuberías coordinados en losa", w: 960, h: 1280 },
           { src: "/obras/torre-invex-oficinas/14.jpg", alt: "Ductos y equipo en plafón, con red contra incendio", w: 1280, h: 960 },
@@ -338,10 +339,21 @@ export function projectCategories(project: Project): Category[] {
 /* ------------------------------ Empresa ------------------------------ */
 
 export const principles = [
-  { n: "01", title: "Entramos temprano.", text: "Revisar el arquitectónico antes de que se cuele la primera losa evita perforaciones, cambios y sobrecostos." },
-  { n: "02", title: "Un solo responsable.", text: "Plomería y electricidad en el mismo contrato. Un interlocutor para tu residente y tu programa de obra." },
-  { n: "03", title: "Todo por escrito.", text: "Memorias de cálculo, pruebas documentadas, planos as-built y garantía en cada entrega." },
+  { n: "01", title: "Tu patrimonio primero.", text: "No hacemos nada que ponga en riesgo la instalación o tu inversión, aunque nos lo pidan. Trabajamos con unidad de verificación (UVIE) y personal con constancias DC-3 y procedimientos LOTO." },
+  { n: "02", title: "Seguimiento constante.", text: "Visitamos la obra antes de cotizar y, durante la ejecución, te enviamos reportes de avance y fotos y nos vemos en obra. Siempre sabes cómo va tu proyecto." },
+  { n: "03", title: "Un solo equipo.", text: "Electricidad y plomería con ingenieros y cuadrillas propias. Un responsable para tu arquitecto y tu residente, sin pendientes entre oficios." },
 ];
+
+/* Respaldo en /quienes-somos (entrevista con HHM, sep. 2026). */
+export const credentials = [
+  { title: "Unidad de verificación (UVIE)", text: "Las instalaciones eléctricas se verifican con una unidad acreditada." },
+  { title: "Constancias DC-3", text: "Personal capacitado y con constancias de competencias laborales." },
+  { title: "Procedimientos LOTO", text: "Bloqueo y etiquetado de energía para trabajar sin riesgos." },
+  { title: "Facturación", text: "Cobro por anticipo y estimaciones, con factura." },
+];
+
+/* Marcas y clientes que HHM autorizó nombrar (entrevista, sep. 2026). */
+export const clientBrands = ["Nissan", "Chevrolet", "Toyota", "KIA", "Geely", "Chirey", "Zeekr", "Solanum", "Fertilitá", "LCA Arquitectos"];
 
 /*
  * Equipo en /quienes-somos. Vacío = la sección no se muestra.

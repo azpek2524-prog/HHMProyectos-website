@@ -3,13 +3,15 @@ import Reveal from "@/components/motion/Reveal";
 import PageHeader from "@/components/ui/PageHeader";
 import MediaSlot from "@/components/ui/MediaSlot";
 import ArrowLink from "@/components/ui/ArrowLink";
-import { principles, team } from "@/lib/data";
+import StatsCounter from "@/components/home/StatsCounter";
+import { clientBrands, credentials, principles, stats, team } from "@/lib/data";
 import { pageMetadata } from "@/lib/seo";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: "Quiénes somos",
   description:
-    "HHM Proyectos diseña e instala plomería y electricidad para arquitectos y constructoras. Entramos temprano, un solo responsable y todo por escrito.",
+    "HHM Proyectos nació del oficio: 15 años, más de 280 obras y un equipo propio de 40 personas en electricidad y plomería. No jugamos con el patrimonio de nuestros clientes.",
   path: "/quienes-somos",
 });
 
@@ -20,11 +22,11 @@ export default function QuienesSomos() {
         eyebrow="Quiénes somos"
         title={
           <>
-            No se ven cuando la obra está terminada.{" "}
-            <span className="text-gray-400">Por eso tienen que quedar bien.</span>
+            No jugamos con el patrimonio{" "}
+            <span className="text-gray-400">de nuestros clientes.</span>
           </>
         }
-        lead="HHM Proyectos diseña e instala plomería y electricidad para arquitectos y constructoras. Tuberías, cableado y tableros que nadie vuelve a ver — y que tienen que funcionar por décadas."
+        lead={`Somos un contratista de electricidad y plomería con 15 años en obra, más de 280 proyectos entregados y un equipo propio de 40 personas en ${site.serviceArea}.`}
       />
 
       {/* Imágenes: se descubren como cortina al entrar en pantalla */}
@@ -41,6 +43,47 @@ export default function QuienesSomos() {
             </div>
           </Reveal>
         </div>
+      </section>
+
+      {/* Historia */}
+      <section className="px-5 pt-14 md:px-8 md:pt-[120px]">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-3 lg:gap-16">
+          <Reveal className="flex flex-col gap-4">
+            <p className="font-mono text-[13px] font-semibold uppercase tracking-[0.06em] text-gray-500">
+              Nuestra historia
+            </p>
+            <h2 className="text-[clamp(30px,4vw,52px)] font-extrabold leading-none tracking-[-0.04em]">
+              Nacimos del oficio.
+            </h2>
+          </Reveal>
+          <Reveal delay={120} className="flex flex-col gap-5 text-[clamp(17px,1.5vw,19px)] leading-[1.65] text-gray-700 text-pretty lg:col-span-2">
+            <p>
+              Héctor Hugo Martínez, la H, H y M de HHM, empezó a trabajar en
+              instalaciones a los 17 años, junto a su padre. En obra vio lo mismo
+              una y otra vez: clientes que no recibían un trato correcto ni
+              respuestas claras, y trabajos que no estaban a la altura de lo que
+              pagaban.
+            </p>
+            <p>
+              Fundó HHM con una idea simple: nadie debería arriesgar su
+              patrimonio por una instalación mal hecha. Por eso no aceptamos
+              atajos que pongan en riesgo la instalación, aunque nos lo pidan.
+            </p>
+            <p>
+              Hoy somos 40 personas, entre ingenieros y cuadrillas propias.
+              Trabajamos en agencias automotrices, autolavados, residencias,
+              oficinas y parques industriales, en Monterrey y en proyectos en
+              Saltillo y Mazatlán. Casi todos nuestros clientes llegan por
+              recomendación de arquitectos, y muchos de sus clientes nos vuelven a
+              llamar para sus propios proyectos.
+            </p>
+          </Reveal>
+        </div>
+        {stats.length > 0 && (
+          <Reveal className="mt-14 md:mt-20">
+            <StatsCounter />
+          </Reveal>
+        )}
       </section>
 
       {/* Principios */}
@@ -65,6 +108,34 @@ export default function QuienesSomos() {
             </Reveal>
           ))}
           <div className="border-t border-ink" />
+        </div>
+      </section>
+
+      {/* Respaldo: certificaciones y marcas */}
+      <section className="bg-night px-5 py-14 text-white md:px-8 md:py-[104px]">
+        <div className="mx-auto flex max-w-7xl flex-col gap-12">
+          <Reveal as="h2" className="max-w-[760px] text-[clamp(30px,4vw,52px)] font-extrabold leading-none tracking-[-0.04em]">
+            Respaldo para trabajar sin riesgos.
+          </Reveal>
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+            {credentials.map((c, i) => (
+              <Reveal key={c.title} delay={i * 100} className="flex flex-col gap-3 border-t border-gray-700 pt-5">
+                <span className="font-mono text-xs font-semibold uppercase text-navy-200">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="text-xl font-bold tracking-[-0.02em]">{c.title}</h3>
+                <p className="leading-[1.55] text-gray-300">{c.text}</p>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal className="flex flex-col gap-4 border-t border-gray-700 pt-8">
+            <p className="font-mono text-xs font-semibold uppercase tracking-[0.06em] text-navy-200">
+              Han confiado en nosotros
+            </p>
+            <p className="max-w-[1000px] text-[clamp(22px,2.6vw,34px)] font-semibold leading-[1.25] tracking-[-0.02em] text-balance">
+              {clientBrands.join(" · ")}
+            </p>
+          </Reveal>
         </div>
       </section>
 
@@ -100,9 +171,9 @@ export default function QuienesSomos() {
       <section className="px-5 py-14 md:px-8 md:py-[104px]">
         <Reveal className="mx-auto flex max-w-7xl flex-wrap items-end justify-between gap-6">
           <h2 className="max-w-[760px] text-[clamp(30px,4.4vw,60px)] font-extrabold leading-none tracking-[-0.045em]">
-            ¿Arrancas un proyecto? Llámanos desde el anteproyecto.
+            ¿Tienes un proyecto en puerta? Platiquemos desde el anteproyecto.
           </h2>
-          <ArrowLink href="/cotizar">Cotizar proyecto</ArrowLink>
+          <ArrowLink href="/cotizar">Cotizar mi proyecto</ArrowLink>
         </Reveal>
       </section>
     </>
