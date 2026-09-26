@@ -8,9 +8,11 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import Link from "next/link";
 import { useFormStatus } from "react-dom";
 import { submitQuote, type QuoteState } from "@/app/actions";
-import { quoteSteps } from "@/lib/data";
+import { categories, quoteSteps } from "@/lib/data";
+import { UPLOAD, formatBytes, isAllowedFile } from "@/lib/quote";
 import { site, whatsappUrl } from "@/lib/site";
 
 type Answers = {
@@ -24,6 +26,19 @@ const EMPTY: Answers = { tipo: null, alcance: [], m2: null, etapa: null };
 const KEYS = "ABCDEF";
 const LAST = quoteSteps.length - 1;
 const INITIAL: QuoteState = { status: "idle", message: "" };
+const fileKey = (f: File) => `${f.name}-${f.size}-${f.lastModified}`;
+
+/**
+ * El <input type="file"> es el que viaja en el formulario: se le asignan
+ * todos los archivos aceptados (elegidos por clic o arrastrando, en varias
+ * tandas) y nunca una selección rechazada.
+ */
+function syncFileInput(input: HTMLInputElement | null, files: File[]) {
+  if (!input) return;
+  const dt = new DataTransfer();
+  files.forEach((f) => dt.items.add(f));
+  input.files = dt.files;
+}
 
 /** Reinicia todo el asistente (incluido el estado del envío) al pedir una nueva solicitud. */
 export default function QuoteWizard() {
@@ -34,11 +49,13 @@ export default function QuoteWizard() {
 function Wizard({ onReset }: { onReset: () => void }) {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Answers>(EMPTY);
-  const [files, setFiles] = useState<string[]>([]);
-  const [contact, setContact] = useState({ nombre: "", empresa: "", correo: "", whatsapp: "" });
+  const [files, setFiles] = useState<File[]>([]);
+  const [fileError, setFileError] = useState<string | null>(null);
+  const [contact, setContact] = useState({ nombre: "", empresa: "", correo: "", whatsapp: "", enlace: "" });
   const [dragging, setDragging] = useState(false);
   const [state, formAction] = useActionState(submitQuote, INITIAL);
   const advanceTimer = useRef<number | undefined>(undefined);
+  const fileInput = useRef<HTMLInputElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const firstRender = useRef(true);
 
@@ -101,10 +118,43 @@ function Wizard({ onReset }: { onReset: () => void }) {
     headingRef.current?.focus({ preventScroll: true });
   }, [step, done]);
 
+  // Desde un servicio u obra (/cotizar?alcance=plomeria,electricidad) las
+  // instalaciones llegan ya marcadas.
+  useEffect(() => {
+    const id = requestAnimationFrame(() => {
+      const ids = (new URLSearchParams(window.location.search).get("alcance") ?? "").split(",");
+      const names = categories.filter((c) => ids.includes(c.id)).map((c) => c.name);
+      if (!names.length) return;
+      setAnswers((a) => ({ ...a, alcance: [...new Set([...a.alcance, ...names])] }));
+    });
+    return () => cancelAnimationFrame(id);
+  }, []);
+
+  // Se vuelve a sincronizar al volver al paso de planos (el input se monta de nuevo).
+  useEffect(() => syncFileInput(fileInput.current, files), [files, step]);
+
   const addFiles = (list: FileList | null) => {
-    if (!list) return;
-    const names = Array.from(list, (f) => f.name);
-    setFiles((prev) => [...prev, ...names.filter((n) => !prev.includes(n))]);
+    if (!list?.length) return;
+    const incoming = Array.from(list);
+    const rejected = incoming.filter((f) => !isAllowedFile(f.name));
+    const next = [...files];
+    for (const f of incoming) {
+      if (isAllowedFile(f.name) && !next.some((x) => fileKey(x) === fileKey(f))) next.push(f);
+    }
+    const total = next.reduce((n, f) => n + f.size, 0);
+    if (next.length > UPLOAD.maxFiles || total > UPLOAD.maxTotalBytes) {
+      syncFileInput(fileInput.current, files);
+      setFileError(
+        `Máximo ${UPLOAD.maxFiles} archivos y ${formatBytes(UPLOAD.maxTotalBytes)} en total. Para planos más pesados pega abajo un enlace de Drive o WeTransfer.`,
+      );
+      return;
+    }
+    setFileError(
+      rejected.length
+        ? `No aceptamos ${rejected.map((f) => f.name).join(", ")}. Sube PDF, DWG, DXF, RVT o imágenes.`
+        : null,
+    );
+    setFiles(next);
   };
 
   const show = (v: string | string[] | null) =>
@@ -209,27 +259,41 @@ function Wizard({ onReset }: { onReset: () => void }) {
             }`}
           >
             <input
+              ref={fileInput}
               type="file"
+              name="planos"
               multiple
-              accept=".pdf,.dwg,.rvt,image/*"
+              accept={UPLOAD.accept}
               className="sr-only"
               onChange={(e) => addFiles(e.target.files)}
             />
             <span className="text-[clamp(18px,1.8vw,22px)] font-bold">
               {dragging ? "Suelta tus archivos aquí" : "+ Subir planos"}
             </span>
-            <span className="text-sm text-gray-500">PDF, DWG, RVT o imágenes · arrástralos o haz clic</span>
+            <span className="text-sm text-gray-500">
+              PDF, DWG, DXF, RVT o imágenes · hasta {formatBytes(UPLOAD.maxTotalBytes)} · arrástralos o haz clic
+            </span>
           </label>
+
+          {fileError && (
+            <p role="alert" className="animate-enter text-sm font-medium text-red-700">
+              {fileError}
+            </p>
+          )}
 
           {files.length > 0 && (
             <ul className="flex flex-wrap gap-2">
               {files.map((f) => (
-                <li key={f} className="flex animate-enter items-center gap-2 bg-ink py-1.5 pl-2.5 pr-1.5 text-[13px] text-white">
-                  {f}
+                <li key={fileKey(f)} className="flex animate-enter items-center gap-2 bg-ink py-1.5 pl-2.5 pr-1.5 text-[13px] text-white">
+                  {f.name}
+                  <span className="text-gray-400">{formatBytes(f.size)}</span>
                   <button
                     type="button"
-                    onClick={() => setFiles((prev) => prev.filter((x) => x !== f))}
-                    aria-label={`Quitar ${f}`}
+                    onClick={() => {
+                      setFileError(null);
+                      setFiles((prev) => prev.filter((x) => fileKey(x) !== fileKey(f)));
+                    }}
+                    aria-label={`Quitar ${f.name}`}
                     className="px-1 text-gray-400 transition-colors hover:text-white"
                   >
                     ×
@@ -244,7 +308,21 @@ function Wizard({ onReset }: { onReset: () => void }) {
             <Field label="Despacho o constructora" name="empresa" value={contact.empresa} onChange={(v) => setContact((c) => ({ ...c, empresa: v }))} autoComplete="organization" />
             <Field label="Correo" name="correo" type="email" value={contact.correo} onChange={(v) => setContact((c) => ({ ...c, correo: v }))} autoComplete="email" />
             <Field label="WhatsApp" name="whatsapp" type="tel" value={contact.whatsapp} onChange={(v) => setContact((c) => ({ ...c, whatsapp: v }))} autoComplete="tel" />
+            <div className="sm:col-span-2">
+              <Field label="Enlace a planos pesados (Drive, WeTransfer…) · opcional" name="enlace" type="url" value={contact.enlace} onChange={(v) => setContact((c) => ({ ...c, enlace: v }))} autoComplete="off" />
+            </div>
           </div>
+
+          {/* Antispam: las personas no ven este campo; los bots lo llenan. */}
+          <input type="text" name="sitio_web" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
+
+          <p className="text-[13px] leading-relaxed text-gray-500">
+            Al enviar aceptas nuestro{" "}
+            <Link href="/aviso-de-privacidad" className="underline underline-offset-2 hover:text-ink">
+              aviso de privacidad
+            </Link>
+            . Usamos tus datos solo para responder esta solicitud.
+          </p>
         </div>
       )}
 
@@ -311,7 +389,6 @@ function Wizard({ onReset }: { onReset: () => void }) {
               <input type="hidden" name="alcance" value={answers.alcance.join(", ")} />
               <input type="hidden" name="m2" value={answers.m2 ?? ""} />
               <input type="hidden" name="etapa" value={answers.etapa ?? ""} />
-              <input type="hidden" name="archivos" value={files.join(", ")} />
               {body}
             </form>
           ) : (

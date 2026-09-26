@@ -128,9 +128,12 @@ export default function ServicesExplorer() {
                 </div>
               );
             })}
-            <ArrowLink href="/contacto" className="mt-7">
-              Cotizar {cur.name}
-            </ArrowLink>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <ArrowLink href={`/servicios/${cur.id}`}>Ver {cur.name.toLowerCase()} en detalle</ArrowLink>
+              <ArrowLink href={`/cotizar?alcance=${cur.id}`} variant="ink">
+                Cotizar
+              </ArrowLink>
+            </div>
           </div>
         </div>
       </section>

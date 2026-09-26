@@ -3,20 +3,22 @@ import PageHeader from "@/components/ui/PageHeader";
 import Reveal from "@/components/motion/Reveal";
 import ServicesExplorer from "@/components/services/ServicesExplorer";
 import { stages } from "@/lib/data";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Servicios",
   description:
-    "Plomería, electricidad, proyecto ejecutivo y mantenimiento para construcción: diseño, cálculo, instalación y pólizas.",
-};
+    "Electricidad, plomería y proyecto ejecutivo para construcción: diseño, cálculo e instalación con verificación UVIE y seguimiento en obra.",
+  path: "/servicios",
+});
 
 export default function Servicios() {
   return (
     <>
       <PageHeader
         eyebrow="Servicios"
-        title="Si va dentro de la obra, lo instalamos."
-        lead="Plomería y electricidad completas para construcción: diseño, cálculo, instalación y mantenimiento."
+        title="Electricidad y plomería, del cálculo a la entrega."
+        lead="Diseñamos e instalamos las redes eléctricas, hidrosanitarias y de gas de tu proyecto, con verificación UVIE y seguimiento en obra hasta la entrega."
       />
 
       <ServicesExplorer />

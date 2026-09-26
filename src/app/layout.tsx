@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { LogoSprite } from "@/components/brand/Logo";
+import { site } from "@/lib/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -13,14 +14,16 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://hhmproyectos.com"),
+  metadataBase: new URL(site.url),
   title: {
-    default: "HHM Proyectos | Plomería y Electricidad para Construcción",
+    default: "HHM Proyectos | Electricidad y plomería para construcción en Monterrey",
     template: "%s | HHM Proyectos",
   },
   description:
-    "Plomería y electricidad para arquitectos y constructoras: diseño, cálculo, instalación y mantenimiento, del plano a la entrega.",
+    "Contratista de electricidad y plomería en Monterrey: 15 años y más de 280 obras para agencias automotrices, residencias, comercios e industria. Del cálculo a la entrega, con equipo propio.",
   keywords: [
+    "contratista eléctrico Monterrey",
+    "instalaciones eléctricas Monterrey",
     "plomería",
     "electricidad",
     "instalaciones hidrosanitarias",
@@ -30,11 +33,13 @@ export const metadata: Metadata = {
     "proyecto ejecutivo",
   ],
   openGraph: {
-    title: "HHM Proyectos | Plomería y Electricidad para Construcción",
+    title: "HHM Proyectos | Electricidad y plomería para construcción en Monterrey",
     description:
-      "Todo lo que corre por dentro de tu obra: agua, drenaje, gas, energía y datos.",
+      "Electricidad y plomería que cuidan tu patrimonio. 15 años y más de 280 obras.",
     type: "website",
     locale: "es_MX",
+    siteName: site.name,
+    url: "/",
   },
 };
 

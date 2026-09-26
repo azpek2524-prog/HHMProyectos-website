@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
 import Parallax from "@/components/motion/Parallax";
@@ -10,7 +11,39 @@ import StatsCounter from "@/components/home/StatsCounter";
 import ServicePanels from "@/components/home/ServicePanels";
 import TestimonialCarousel from "@/components/home/TestimonialCarousel";
 import QuoteCta from "@/components/home/QuoteCta";
-import { clientLogos, projects, specialties } from "@/lib/data";
+import JsonLd from "@/components/seo/JsonLd";
+import Faq from "@/components/Faq";
+import { categories, clientLogos, projects, specialties, stats, testimonials } from "@/lib/data";
+import { site } from "@/lib/site";
+
+// Título, descripción y vista previa vienen del layout.
+export const metadata: Metadata = { alternates: { canonical: "/" } };
+
+/* Ficha del negocio para buscadores (schema.org). */
+const business = {
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  "@id": `${site.url}/#empresa`,
+  name: site.name,
+  url: site.url,
+  logo: `${site.url}/apple-icon.png`,
+  image: `${site.url}${site.media.heroPoster ?? "/opengraph-image.jpg"}`,
+  description:
+    "Contratista de electricidad y plomería: 15 años y más de 280 obras para agencias automotrices, residencias, comercios e industria.",
+  email: site.email,
+  telephone: site.phoneE164,
+  ...(site.address && { address: site.address }),
+  areaServed: site.serviceArea,
+  knowsAbout: specialties,
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Servicios",
+    itemListElement: categories.map((c) => ({
+      "@type": "Offer",
+      itemOffered: { "@type": "Service", name: c.title, url: `${site.url}/servicios/${c.id}` },
+    })),
+  },
+};
 
 /* Obras destacadas en la Home (por slug). */
 const featured = ["torre-invex-oficinas", "agencia-kia", "residencia"]
@@ -20,6 +53,8 @@ const featured = ["torre-invex-oficinas", "agencia-kia", "residencia"]
 export default function Home() {
   return (
     <>
+      <JsonLd data={business} />
+
       {/* ============ HERO · parallax + entrada escalonada ============ */}
       <section className="relative h-[clamp(560px,52vw,720px)] overflow-hidden bg-night">
         <Parallax speed={0.22} scale={1.18}>
@@ -29,18 +64,19 @@ export default function Home() {
         <div className="absolute inset-x-0 bottom-0 px-5 py-8 md:px-8 md:py-12">
           <div className="mx-auto flex max-w-7xl flex-col gap-6 text-white">
             <h1 className="max-w-[1100px] animate-rise text-[clamp(42px,7.2vw,104px)] font-extrabold leading-[0.95] tracking-[-0.045em] text-balance">
-              Todo lo que corre por dentro de tu obra.
+              Electricidad y plomería que cuidan tu patrimonio.
             </h1>
             <div className="flex flex-wrap items-end justify-between gap-5">
-              <p className="max-w-[520px] animate-rise text-[clamp(16px,1.5vw,19px)] leading-[1.55] text-gray-200 [animation-delay:150ms]">
-                Agua, drenaje, gas, energía y datos. Plomería y electricidad
-                para arquitectos y constructoras, del plano a la entrega.
+              <p className="max-w-[540px] animate-rise text-[clamp(16px,1.5vw,19px)] leading-[1.55] text-gray-200 [animation-delay:150ms]">
+                15 años y más de 280 obras para agencias automotrices,
+                residencias, comercios e industria. Equipo propio en{" "}
+                {site.serviceArea}, del cálculo a la entrega.
               </p>
               <div className="flex animate-rise flex-wrap gap-2.5 [animation-delay:300ms]">
-                <ArrowLink href="/contacto" variant="white">
-                  Cotizar proyecto
+                <ArrowLink href="/cotizar" variant="white">
+                  Cotizar mi proyecto
                 </ArrowLink>
-                <ArrowLink href="/proyectos" variant="outline">
+                <ArrowLink href="/obras" variant="outline">
                   Ver obras
                 </ArrowLink>
               </div>
@@ -76,12 +112,14 @@ export default function Home() {
         </Marquee>
       </section>
 
-      {/* ============ CIFRAS · contadores ============ */}
-      <section className="px-5 pt-12 md:px-8 md:pt-[88px]">
-        <Reveal>
-          <StatsCounter />
-        </Reveal>
-      </section>
+      {/* ============ CIFRAS · contadores (solo con cifras reales) ============ */}
+      {stats.length > 0 && (
+        <section className="px-5 pt-12 md:px-8 md:pt-[88px]">
+          <Reveal>
+            <StatsCounter />
+          </Reveal>
+        </section>
+      )}
 
       {/* ============ SERVICIOS · paneles que se expanden ============ */}
       <section className="px-5 pb-10 pt-14 md:px-8 md:pb-16 md:pt-[120px]">
@@ -92,8 +130,9 @@ export default function Home() {
             Un solo responsable.
           </h2>
           <p className="max-w-[440px] text-[clamp(16px,1.5vw,18px)] leading-[1.55] text-gray-600">
-            Diseño, cálculo, instalación y mantenimiento. Menos coordinación
-            para tu despacho, menos sorpresas en obra.
+            El mismo equipo de ingenieros y cuadrillas para las dos
+            instalaciones, coordinado con tu arquitecto y tu residente. Menos
+            pendientes entre oficios, menos sorpresas en obra.
           </p>
         </Reveal>
         <Reveal delay={120}>
@@ -108,8 +147,9 @@ export default function Home() {
             <h2 className="text-[clamp(30px,4vw,52px)] font-extrabold leading-none tracking-[-0.04em]">
               Obras recientes
             </h2>
-            <p className="max-w-[360px] text-base leading-normal text-gray-600">
-              Instalaciones entregadas para despachos y constructoras.
+            <p className="max-w-[380px] text-base leading-normal text-gray-600">
+              Agencias, residencias, oficinas e industria, en Monterrey y en
+              proyectos fuera del estado.
             </p>
           </Reveal>
           <div className="grid gap-4 md:grid-cols-3 md:gap-6">
@@ -121,11 +161,11 @@ export default function Home() {
           </div>
           <Reveal>
             <Link
-              href="/proyectos"
+              href="/obras"
               className="group flex items-center justify-between gap-4 bg-night px-5 py-[22px] text-white transition-colors duration-300 hover:bg-navy md:px-9 md:py-8"
             >
               <span className="text-[clamp(20px,2.2vw,28px)] font-bold tracking-[-0.02em]">
-                Ver portafolio completo
+                Ver todas las obras
               </span>
               <span
                 aria-hidden="true"
@@ -138,10 +178,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============ TESTIMONIOS · carrusel ============ */}
-      <section className="bg-navy px-5 py-12 text-white md:px-8 md:py-20">
-        <TestimonialCarousel />
-      </section>
+      {/* ============ TESTIMONIOS · src/lib/data.ts (solo si hay) ============ */}
+      {testimonials.length > 0 && (
+        <section className="bg-navy px-5 py-12 text-white md:px-8 md:py-20">
+          <TestimonialCarousel testimonials={testimonials} />
+        </section>
+      )}
 
       {/* ============ ESPECIALIDADES · marquee tipográfico ============ */}
       <section className="border-b border-gray-200 py-7 md:py-12">
@@ -161,10 +203,13 @@ export default function Home() {
         </Marquee>
       </section>
 
-      {/* ============ CTA DE COTIZACIÓN ============ */}
+      {/* ============ COTIZACIÓN + PREGUNTAS FRECUENTES · lado a lado ============ */}
       <section className="px-5 py-14 md:px-8 md:py-[104px]">
-        <Reveal>
+        <Reveal className="mx-auto grid max-w-7xl overflow-hidden border border-ink lg:grid-cols-[5fr_7fr]">
           <QuoteCta />
+          <div className="bg-gray-50 p-7 md:p-12">
+            <Faq structuredData />
+          </div>
         </Reveal>
       </section>
     </>

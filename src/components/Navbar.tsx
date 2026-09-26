@@ -4,12 +4,18 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Logo from "@/components/brand/Logo";
+import { categories } from "@/lib/data";
 
-const navLinks = [
-  { href: "/empresa", label: "Empresa" },
-  { href: "/servicios", label: "Servicios" },
-  { href: "/proyectos", label: "Portafolio" },
-  { href: "/contacto", label: "Contacto" },
+type NavLink = { href: string; label: string; children?: { href: string; label: string }[] };
+
+const navLinks: NavLink[] = [
+  {
+    href: "/servicios",
+    label: "Servicios",
+    children: categories.map((c) => ({ href: `/servicios/${c.id}`, label: c.name })),
+  },
+  { href: "/obras", label: "Obras" },
+  { href: "/nosotros", label: "Nosotros" },
 ];
 
 export default function Navbar() {
@@ -49,22 +55,57 @@ export default function Navbar() {
         <div className="hidden items-center gap-9 text-[15px] font-medium md:flex">
           {navLinks.map((link) => {
             const active = isActive(link.href);
-            return (
+            const item = (
               <Link
-                key={link.href}
                 href={link.href}
-                aria-current={active ? "page" : undefined}
+                aria-current={pathname === link.href ? "page" : undefined}
                 className={`relative flex items-center gap-2 py-1 transition-colors duration-300 after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-navy after:transition-transform after:duration-300 after:ease-smooth hover:text-navy hover:after:scale-x-100 ${
                   active ? "text-navy" : "text-gray-600"
                 }`}
               >
                 {active && <span className="h-1.5 w-1.5 bg-navy" />}
                 {link.label}
+                {link.children && (
+                  <span aria-hidden="true" className="text-[10px] transition-transform duration-300 group-hover:rotate-180">
+                    ▾
+                  </span>
+                )}
               </Link>
+            );
+            if (!link.children) return <div key={link.href}>{item}</div>;
+            // Desplegable: se abre al pasar el cursor o al llegar con el teclado
+            // (:focus-visible, para que no se quede abierto tras un clic).
+            return (
+              <div key={link.href} className="group relative">
+                {item}
+                <div className="invisible absolute left-1/2 top-full -translate-x-1/2 pt-5 opacity-0 transition-[opacity,visibility] duration-300 group-hover:visible group-hover:opacity-100 group-has-[:focus-visible]:visible group-has-[:focus-visible]:opacity-100">
+                  <ul className="w-64 border border-gray-200 bg-white py-2 shadow-[0_16px_40px_-16px_rgba(16,24,40,0.28)]">
+                    {link.children.map((c) => (
+                      <li key={c.href}>
+                        <Link
+                          href={c.href}
+                          aria-current={pathname === c.href ? "page" : undefined}
+                          className={`group/item flex items-center justify-between px-5 py-3 transition-colors duration-300 hover:bg-gray-50 hover:text-navy ${
+                            pathname === c.href ? "text-navy" : "text-gray-700"
+                          }`}
+                        >
+                          {c.label}
+                          <span
+                            aria-hidden="true"
+                            className="text-gray-400 transition-transform duration-300 ease-smooth group-hover/item:translate-x-1 group-hover/item:text-navy"
+                          >
+                            →
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             );
           })}
           <Link
-            href="/contacto"
+            href="/cotizar"
             className="group flex items-center gap-2.5 bg-navy px-5 py-[11px] font-semibold text-white transition-colors duration-300 hover:bg-navy-600"
           >
             Solicitar cotización
@@ -80,7 +121,7 @@ export default function Navbar() {
         {/* Móvil */}
         <div className="flex items-center gap-2.5 md:hidden">
           <Link
-            href="/contacto"
+            href="/cotizar"
             onClick={() => setOpen(false)}
             className="bg-navy px-3.5 py-2 text-sm font-semibold text-white"
           >
@@ -118,21 +159,44 @@ export default function Navbar() {
         <div className="overflow-hidden">
           <div className="border-t border-gray-200 px-5 pb-6 pt-2">
             {navLinks.map((link, i) => (
-              <Link
+              <div
                 key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                tabIndex={open ? 0 : -1}
-                className={`flex items-center justify-between border-b border-gray-200 py-4 text-2xl font-bold tracking-tight transition-[opacity,transform] duration-500 ease-smooth ${
+                className={`border-b border-gray-200 transition-[opacity,transform] duration-500 ease-smooth ${
                   open ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0"
-                } ${isActive(link.href) ? "text-navy" : "text-ink"}`}
+                }`}
                 style={{ transitionDelay: open ? `${80 + i * 50}ms` : "0ms" }}
               >
-                {link.label}
-                <span aria-hidden="true" className="text-gray-400">
-                  →
-                </span>
-              </Link>
+                <Link
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  tabIndex={open ? 0 : -1}
+                  className={`flex items-center justify-between py-4 text-2xl font-bold tracking-tight ${
+                    isActive(link.href) ? "text-navy" : "text-ink"
+                  }`}
+                >
+                  {link.label}
+                  <span aria-hidden="true" className="text-gray-400">
+                    →
+                  </span>
+                </Link>
+                {link.children && (
+                  <div className="grid grid-cols-2 gap-x-4 pb-4">
+                    {link.children.map((c) => (
+                      <Link
+                        key={c.href}
+                        href={c.href}
+                        onClick={() => setOpen(false)}
+                        tabIndex={open ? 0 : -1}
+                        className={`py-2 text-base font-semibold ${
+                          pathname === c.href ? "text-navy" : "text-gray-600"
+                        }`}
+                      >
+                        {c.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         </div>

@@ -103,7 +103,7 @@ export default function ServicePanels() {
                       ))}
                     </ul>
                     <Link
-                      href={`/servicios#${s.id}`}
+                      href={`/servicios/${s.id}`}
                       className="group/cta mt-1 flex w-fit items-center gap-2.5 bg-white px-[18px] py-[13px] font-semibold text-night transition-colors duration-300 hover:bg-navy-100"
                     >
                       Ver {s.name}
@@ -117,7 +117,7 @@ export default function ServicePanels() {
                   </div>
                 ) : (
                   <Link
-                    href={`/servicios#${s.id}`}
+                    href={`/servicios/${s.id}`}
                     className="w-fit text-[15px] font-semibold text-gray-200"
                   >
                     Ver servicios →
@@ -188,7 +188,7 @@ export default function ServicePanels() {
                     ))}
                   </ul>
                   <Link
-                    href={`/servicios#${s.id}`}
+                    href={`/servicios/${s.id}`}
                     className="flex justify-between bg-navy px-[18px] py-4 font-semibold text-white"
                   >
                     Ver {s.name} <span aria-hidden="true">→</span>

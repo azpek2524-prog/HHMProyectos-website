@@ -10,9 +10,12 @@
  */
 
 export type Category = {
+  /** También es la URL: /servicios/<id>. */
   id: string;
   n: string;
   name: string;
+  /** Título de su página (H1 y buscadores). */
+  title: string;
   lead: string;
   image?: string;
   imageAlt?: string;
@@ -24,6 +27,7 @@ export const categories: Category[] = [
     id: "plomeria",
     n: "01",
     name: "Plomería",
+    title: "Instalaciones de plomería para construcción",
     image: "/obras/residencia/10.jpg",
     imageAlt: "Alberca interior de una residencia",
     lead: "Redes de agua, drenaje y gas diseñadas e instaladas conforme a norma, coordinadas con estructura y acabados.",
@@ -33,32 +37,33 @@ export const categories: Category[] = [
       ["Redes de gas", "LP y natural, estacionario o medidor, con pruebas de hermeticidad."],
       ["Bombeo e hidroneumáticos", "Cisternas, tinacos, equipos de presión constante."],
       ["Calentamiento de agua", "Calentadores, boilers y sistemas solares."],
-      ["Protección contra incendio", "Red de hidrantes, rociadores y gabinetes."],
     ],
   },
   {
     id: "electricidad",
     n: "02",
     name: "Electricidad",
+    title: "Instalaciones eléctricas para construcción",
     image: "/obras/agencia-kia/03.jpg",
     imageAlt: "Plafón con iluminación lineal en agencia automotriz",
-    lead: "Desde la acometida hasta el último contacto: media y baja tensión, iluminación y sistemas especiales.",
+    lead: "Desde la acometida en media tensión hasta el último contacto, con verificación de unidad UVIE.",
     items: [
       ["Acometidas y subestaciones", "Trámite, obra civil y montaje en media tensión."],
       ["Tableros y distribución", "Tableros generales, derivados y balanceo de cargas."],
       ["Iluminación", "Interior, exterior, fachadas y control de escenas."],
-      ["Voz, datos y CCTV", "Cableado estructurado, racks y videovigilancia."],
+      ["Canalizaciones para voz, datos y CCTV", "Tubería y charolas listas para el cableado de telecomunicaciones y videovigilancia."],
       ["Tierras físicas y pararrayos", "Sistemas de puesta a tierra y protección atmosférica."],
       ["Plantas de emergencia", "Transferencias automáticas y respaldo UPS."],
     ],
   },
   {
-    id: "proyecto",
+    id: "proyecto-ejecutivo",
     n: "03",
     name: "Proyecto ejecutivo",
+    title: "Proyecto ejecutivo de instalaciones",
     image: "/obras/torre-invex-oficinas/19.jpg",
     imageAlt: "Drenaje y canalizaciones coordinados sobre losa reticular",
-    lead: "Ingeniería lista para licencia y para obra, entregada en el formato de tu despacho.",
+    lead: "Diseñamos las instalaciones sobre el proyecto de tu despacho: cálculo, planos y modelo BIM, listos para licencia y obra.",
     items: [
       ["Memorias de cálculo", "Hidráulico, sanitario, gas y eléctrico."],
       ["Planos e isométricos", "Plantas, cortes, isométricos y unifilares."],
@@ -70,12 +75,13 @@ export const categories: Category[] = [
     id: "mantenimiento",
     n: "04",
     name: "Mantenimiento",
+    title: "Mantenimiento de instalaciones hidráulicas y eléctricas",
     image: "/obras/almacen/03.jpg",
     imageAlt: "Nave de almacenamiento con iluminación de altura",
-    lead: "Pólizas preventivas y atención correctiva para edificios ya entregados.",
+    lead: "Para las obras que instalamos: revisiones preventivas, atención de urgencias y adecuaciones cuando tu proyecto crece.",
     items: [
       ["Preventivo programado", "Revisión periódica de equipos, tableros y redes."],
-      ["Correctivo y urgencias", "Detección de fugas, fallas y cortos."],
+      ["Correctivo y urgencias", "Detección de fugas, fallas y cortos en instalaciones hechas por HHM."],
       ["Adecuaciones", "Ampliaciones de carga y remodelaciones."],
     ],
   },
@@ -87,10 +93,10 @@ export const homeServices = [
     id: "plomeria",
     n: "01",
     name: "Plomería",
-    media: "Red contra incendio en plafón",
-    image: "/obras/torre-invex-oficinas/10.jpg" as string | undefined,
-    lead: "Redes de agua, drenaje y gas diseñadas e instaladas conforme a norma, coordinadas con estructura.",
-    items: ["Hidrosanitaria", "Drenaje y pluviales", "Redes de gas", "Bombeo e hidroneumáticos", "Agua caliente", "Contra incendio"],
+    media: "Tubería de PVC sobre losa reticular",
+    image: "/obras/torre-invex-oficinas/08.jpg" as string | undefined,
+    lead: "Agua, drenaje y gas diseñados e instalados conforme a norma, coordinados con estructura y acabados.",
+    items: ["Hidrosanitaria", "Drenaje y pluviales", "Redes de gas", "Bombeo e hidroneumáticos", "Agua caliente"],
   },
   {
     id: "electricidad",
@@ -98,8 +104,8 @@ export const homeServices = [
     name: "Electricidad",
     media: "Plafón con iluminación lineal",
     image: "/obras/agencia-kia/02.jpg" as string | undefined,
-    lead: "De la acometida al último contacto: media y baja tensión, iluminación y sistemas especiales.",
-    items: ["Acometidas y subestaciones", "Tableros y distribución", "Iluminación", "Voz, datos y CCTV", "Tierras y pararrayos", "Plantas de emergencia"],
+    lead: "De la acometida en media tensión al último contacto, con verificación de unidad UVIE.",
+    items: ["Acometidas y subestaciones", "Tableros y distribución", "Iluminación", "Canalizaciones de voz y datos", "Tierras y pararrayos", "Plantas de emergencia"],
   },
 ];
 
@@ -110,23 +116,34 @@ export const stages = [
   { name: "Operación", text: "As-built, garantía y pólizas de mantenimiento." },
 ];
 
-/* Placeholder: ajusta a las cifras reales de HHM. */
-export const stats = [
-  { value: 15, suffix: "+", label: "años instalando en obra" },
-  { value: 120, suffix: "+", label: "obras entregadas" },
-  { value: 85000, suffix: " m²", label: "de instalaciones ejecutadas" },
-  { value: 90, suffix: "%", label: "de clientes que repiten con nosotros" },
+/*
+ * Cifras de la Home (entrevista con HHM, sep. 2026; salen de sus registros).
+ * Vacío = la sección no se muestra. "Obras en paralelo" cambia con el tiempo:
+ * actualízala cuando cambie.
+ */
+export type Stat = { value: number; suffix: string; label: string };
+export const stats: Stat[] = [
+  { value: 15, suffix: "", label: "años en obra" },
+  { value: 280, suffix: "+", label: "obras entregadas" },
+  { value: 40, suffix: "", label: "personas en equipo propio" },
+  { value: 20, suffix: "", label: "obras en paralelo hoy" },
 ];
 
-/* Placeholder: reemplazar con reseñas reales (y foto en `image`). */
-export const testimonials = [
-  { tag: "Arquitectura", text: "Llegaron desde anteproyecto. Cuando empezó la obra, las instalaciones ya estaban resueltas.", who: "Arq. Nombre Apellido", role: "Despacho de arquitectura", image: undefined as string | undefined },
-  { tag: "Constructora", text: "Un solo contratista para plomería y electricidad nos ahorró semanas de coordinación.", who: "Ing. Nombre Apellido", role: "Constructora", image: undefined as string | undefined },
-  { tag: "Desarrollo", text: "Entregaron memorias, planos as-built y pruebas completas. Cero pendientes en la entrega.", who: "Nombre Apellido", role: "Desarrollador inmobiliario", image: undefined as string | undefined },
-  { tag: "Industrial", text: "La subestación quedó energizada en fecha. Coordinaron directo con la compañía eléctrica.", who: "Ing. Nombre Apellido", role: "Gerente de planta", image: undefined as string | undefined },
-  { tag: "Corporativo", text: "Planta libre de 2,000 m² con iluminación y datos listos antes de la mudanza.", who: "Nombre Apellido", role: "Facility manager", image: undefined as string | undefined },
-  { tag: "Residencial", text: "Limpios, puntuales y con reporte semanal. Así da gusto supervisar una obra.", who: "Arq. Nombre Apellido", role: "Supervisión de obra", image: undefined as string | undefined },
-];
+/*
+ * Testimonios de la Home, en el orden en que deben aparecer.
+ * Vacío = la sección no se muestra. Solo testimonios reales, con permiso del
+ * cliente para publicar su nombre. Sin foto se muestran sus iniciales.
+ * Formato:
+ *   {
+ *     tag: "Arquitectura",            // tipo de obra o de cliente
+ *     text: "…",                      // con las palabras del cliente, 1 a 3 frases
+ *     who: "Arq. Nombre Apellido",
+ *     role: "Director · Despacho",    // cargo y empresa
+ *     image: "/testimonios/nombre.jpg", // opcional
+ *   },
+ */
+export type Testimonial = { tag: string; text: string; who: string; role: string; image?: string };
+export const testimonials: Testimonial[] = [];
 
 export const specialties = [
   "Hidrosanitaria",
@@ -135,8 +152,8 @@ export const specialties = [
   "Iluminación",
   "Redes de gas",
   "Subestaciones",
-  "Contra incendio",
-  "Voz y datos",
+  "Bombeo",
+  "Tierras físicas",
 ];
 
 /* Placeholder: logos de clientes (ruta en /public o vacío). */
@@ -150,11 +167,24 @@ export type ClientLogo = {
   height: number;
 };
 
+/*
+ * Logos de marcas y clientes que HHM autorizó mostrar (entrevista, sep. 2026).
+ * Nissan, Toyota, Chevrolet y KIA: Simple Icons. Geely: paquete
+ * car-brand-logos (MIT). Chirey, Fertilità y Solanum: vectorizados de las
+ * imágenes que envió HHM (de Solanum solo la palabra; conviene pedirles el
+ * archivo oficial). TODO: agregar Invex cuando esté su logo.
+ */
 export const clientLogos: ClientLogo[] = [
+  { name: "Nissan", src: "/clientes/nissan.svg", ratio: 1.194, height: 46 },
   { name: "KIA", src: "/clientes/kia.svg", ratio: 4.24, height: 21 },
-  { name: "Zeekr", src: "/clientes/zeekr.svg", ratio: 1, height: 40 },
+  { name: "Solanum", src: "/clientes/solanum.svg", ratio: 4.907, height: 22 },
+  { name: "Toyota", src: "/clientes/toyota.svg", ratio: 1.468, height: 34 },
   { name: "LCA Arquitectos", src: "/clientes/lca.svg", ratio: 1.995, height: 54 },
-  // TODO: agregar Invex cuando esté el archivo de su logo (de preferencia SVG).
+  { name: "Chevrolet", src: "/clientes/chevrolet.svg", ratio: 3.057, height: 24 },
+  { name: "Fertilità", src: "/clientes/fertilita.svg", ratio: 1.911, height: 64 },
+  { name: "Chirey", src: "/clientes/chirey.svg", ratio: 2.775, height: 34 },
+  { name: "Zeekr", src: "/clientes/zeekr.svg", ratio: 1, height: 40 },
+  { name: "Geely", src: "/clientes/geely.svg", ratio: 3.384, height: 21 },
 ];
 
 /* ------------------------------ Obras ------------------------------ */
@@ -193,7 +223,7 @@ export const projects: Project[] = [
     title: "Torre Invex · Oficinas",
     type: "Corporativo",
     scope: "Plomería + Electricidad",
-    summary: "Oficinas corporativas con plafón abierto: tuberías, canalizaciones, red contra incendio e iluminación quedan a la vista, así que su trazo es parte del diseño.",
+    summary: "Oficinas corporativas con plafón abierto: tuberías, canalizaciones e iluminación quedan a la vista, así que su trazo es parte del diseño.",
     cover: { src: "/obras/torre-invex-oficinas/01.jpg", alt: "Área de trabajo con instalaciones aparentes", w: 1280, h: 892 },
     gallery: [
       {
@@ -210,7 +240,6 @@ export const projects: Project[] = [
       {
         title: "En obra",
         photos: [
-          { src: "/obras/torre-invex-oficinas/10.jpg", alt: "Red contra incendio en plafón", w: 959, h: 1280 },
           { src: "/obras/torre-invex-oficinas/19.jpg", alt: "Drenaje y canalizaciones sobre losa reticular", w: 1280, h: 960 },
           { src: "/obras/torre-invex-oficinas/13.jpg", alt: "Ductos y tuberías coordinados en losa", w: 960, h: 1280 },
           { src: "/obras/torre-invex-oficinas/14.jpg", alt: "Ductos y equipo en plafón, con red contra incendio", w: 1280, h: 960 },
@@ -315,20 +344,81 @@ export function getProject(slug: string) {
   return projects.find((p) => p.slug === slug);
 }
 
+export function getCategory(id: string) {
+  return categories.find((c) => c.id === id);
+}
+
+/** Servicios que cubre una obra, a partir de su alcance ("Plomería + Electricidad"). */
+export function projectCategories(project: Project): Category[] {
+  return project.scope
+    .split("+")
+    .map((name) => categories.find((c) => c.name === name.trim()))
+    .filter((c): c is Category => c !== undefined);
+}
+
 /* ------------------------------ Empresa ------------------------------ */
 
 export const principles = [
-  { n: "01", title: "Entramos temprano.", text: "Revisar el arquitectónico antes de que se cuele la primera losa evita perforaciones, cambios y sobrecostos." },
-  { n: "02", title: "Un solo responsable.", text: "Plomería y electricidad en el mismo contrato. Un interlocutor para tu residente y tu programa de obra." },
-  { n: "03", title: "Todo por escrito.", text: "Memorias de cálculo, pruebas documentadas, planos as-built y garantía en cada entrega." },
+  { n: "01", title: "Tu patrimonio primero.", text: "No hacemos nada que ponga en riesgo la instalación o tu inversión, aunque nos lo pidan. Trabajamos con unidad de verificación (UVIE) y personal con constancias DC-3 y procedimientos LOTO." },
+  { n: "02", title: "Seguimiento constante.", text: "Visitamos la obra antes de cotizar y, durante la ejecución, te enviamos reportes de avance y fotos y nos vemos en obra. Siempre sabes cómo va tu proyecto." },
+  { n: "03", title: "Un solo equipo.", text: "Electricidad y plomería con ingenieros y cuadrillas propias. Un responsable para tu arquitecto y tu residente, sin pendientes entre oficios." },
 ];
 
-/* Placeholder: nombres y retratos del equipo. */
-export const team: { name: string; role: string; image?: string }[] = [
-  { name: "Nombre Apellido", role: "Dirección" },
-  { name: "Nombre Apellido", role: "Eléctrica" },
-  { name: "Nombre Apellido", role: "Hidrosanitaria" },
-  { name: "Nombre Apellido", role: "Obra" },
+/* Respaldo en /nosotros (entrevista con HHM, sep. 2026). */
+export const credentials = [
+  { title: "Unidad de verificación (UVIE)", text: "Las instalaciones eléctricas se verifican con una unidad acreditada." },
+  { title: "Constancias DC-3", text: "Personal capacitado y con constancias de competencias laborales." },
+  { title: "Procedimientos LOTO", text: "Bloqueo y etiquetado de energía para trabajar sin riesgos." },
+  { title: "Facturación", text: "Cobro por anticipo y estimaciones, con factura." },
+];
+
+/*
+ * Equipo en /nosotros. Vacío = la sección no se muestra.
+ * TODO (HHM): nombres, puestos y retratos reales. Formato:
+ *   { name: "Nombre Apellido", role: "Dirección", image: "/equipo/nombre.jpg" },
+ */
+export const team: { name: string; role: string; image?: string }[] = [];
+
+/* ------------------------ Preguntas frecuentes ------------------------ */
+
+/*
+ * Dudas comunes de quienes contratan instalaciones eléctricas y de plomería,
+ * respondidas con la información de la entrevista con HHM (sep. 2026).
+ * Aparecen en el inicio (antes del CTA de cotización) y en /cotizar.
+ */
+export const faqs: { q: string; a: string }[] = [
+  {
+    q: "¿Qué servicios ofrecen?",
+    a: "Instalaciones eléctricas (acometidas y subestaciones, tableros, iluminación, tierras físicas, plantas de emergencia y canalizaciones para voz y datos), de plomería (hidrosanitaria, drenaje, gas, bombeo y calentamiento de agua) y el proyecto ejecutivo de ambas. No hacemos instalaciones contra incendio.",
+  },
+  {
+    q: "¿Qué tipo de proyectos realizan?",
+    a: "Agencias automotrices, autolavados, residencias, oficinas, comercios, naves y parques industriales. Trabajamos con despachos de arquitectura, constructoras, desarrolladores, marcas y particulares.",
+  },
+  {
+    q: "¿En qué zona trabajan?",
+    a: "Nuestra base es el área metropolitana de Monterrey, pero también tomamos proyectos en el resto del país: cuéntanos dónde está tu obra y lo revisamos al cotizar. Ya hemos trabajado en ciudades como Saltillo y Mazatlán.",
+  },
+  {
+    q: "¿Cómo es el proceso para cotizar y cuánto tardan?",
+    a: "Nos compartes tu proyecto (con planos si los tienes), visitamos la obra y te enviamos la propuesta. Según la complejidad, la cotización toma de unos días a algunas semanas. Ya en obra, te mandamos reportes de avance y fotos.",
+  },
+  {
+    q: "¿Ofrecen garantía en los trabajos realizados?",
+    a: "Sí. El plazo depende de la obra; por lo general es de 3 meses y te lo confirmamos al cotizar.",
+  },
+  {
+    q: "¿Sus instalaciones cumplen con la normativa?",
+    a: "Sí. Las instalaciones eléctricas se verifican con una unidad de verificación (UVIE), y nuestro personal cuenta con constancias DC-3 y trabaja con procedimientos de seguridad LOTO.",
+  },
+  {
+    q: "¿Atienden urgencias o fuera del horario habitual?",
+    a: "Sí, a los clientes con los que tenemos o tuvimos un proyecto. No damos servicio de emergencia para instalaciones hechas por terceros.",
+  },
+  {
+    q: "¿Cómo se paga? ¿Facturan?",
+    a: "Con anticipo y estimaciones conforme avanza la obra. Sí facturamos.",
+  },
 ];
 
 /* ---------------------------- Cotización ---------------------------- */

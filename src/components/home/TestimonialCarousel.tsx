@@ -3,17 +3,27 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import Reveal from "@/components/motion/Reveal";
-import { testimonials } from "@/lib/data";
+import type { Testimonial } from "@/lib/data";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 const FADE_MS = 280;
+
+/** "Arq. Ana López" → "AL" (se ignoran títulos como Arq., Ing., Lic.). */
+const initials = (name: string) =>
+  name
+    .split(/\s+/)
+    .filter((w) => w && !/^(arq|ing|lic|dr|dra|sr|sra)\.?$/i.test(w))
+    .slice(0, 2)
+    .map((w) => w[0]!.toUpperCase())
+    .join("");
 
 /**
  * Carrusel de testimonios. La cuadrícula muestra solo la primera fila (tantas
  * tarjetas como quepan); las flechas o un deslizamiento rotan el orden.
  * Sin avance automático: el usuario controla el ritmo (menos fatiga visual).
+ * Los testimonios se editan en src/lib/data.ts.
  */
-export default function TestimonialCarousel() {
+export default function TestimonialCarousel({ testimonials }: { testimonials: Testimonial[] }) {
   const n = testimonials.length;
   const [offset, setOffset] = useState(0);
   const [leaving, setLeaving] = useState(false);
@@ -100,8 +110,8 @@ export default function TestimonialCarousel() {
                     {q.image ? (
                       <Image src={q.image} alt="" fill sizes="44px" className="object-cover" />
                     ) : (
-                      <span className="flex h-full items-center justify-center font-mono text-[10px] opacity-60">
-                        FOTO
+                      <span aria-hidden="true" className="flex h-full items-center justify-center text-sm font-bold">
+                        {initials(q.who)}
                       </span>
                     )}
                   </div>
