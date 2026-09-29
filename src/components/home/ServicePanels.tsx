@@ -120,7 +120,7 @@ export default function ServicePanels() {
                     href={`/servicios/${s.id}`}
                     className="w-fit text-[15px] font-semibold text-gray-200"
                   >
-                    Ver servicios →
+                    Ver {s.name} →
                   </Link>
                 )}
               </div>

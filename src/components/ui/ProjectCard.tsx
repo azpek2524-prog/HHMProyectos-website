@@ -19,12 +19,15 @@ export default function ProjectCard({
   tag,
   aspect = "aspect-[4/5]",
   sizes = "(min-width: 1024px) 33vw, 100vw",
+  heading: Heading = "h3",
 }: {
   project: Project;
   /** Etiqueta de la esquina (tipo de obra o número). */
   tag: string;
   aspect?: string;
   sizes?: string;
+  /** Nivel del título: h2 cuando la tarjeta cuelga directo del h1 de la página. */
+  heading?: "h2" | "h3";
 }) {
   const preview = project.videos?.[0];
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -82,15 +85,15 @@ export default function ProjectCard({
             <span aria-hidden="true">▶</span> Video
           </span>
         )}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 flex translate-y-[101%] justify-between bg-navy px-[18px] py-4 font-semibold text-white transition-transform duration-[450ms] ease-smooth group-hover:translate-y-0 group-focus-visible:translate-y-0">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 flex translate-y-[101%] justify-between bg-navy px-[18px] py-4 font-semibold text-white transition-transform duration-[450ms] ease-smooth group-hover:translate-y-0 group-focus-visible:translate-y-0">
           <span>Ver obra</span>
           <span aria-hidden="true">→</span>
         </div>
       </div>
       <div className="flex items-baseline justify-between gap-3">
-        <h3 className="text-lg font-bold leading-snug tracking-[-0.01em] decoration-1 underline-offset-4 group-hover:underline group-focus-visible:underline">
+        <Heading className="text-lg font-bold leading-snug tracking-[-0.01em] decoration-1 underline-offset-4 group-hover:underline group-focus-visible:underline">
           {project.title}
-        </h3>
+        </Heading>
         <span className="whitespace-nowrap text-[13px] text-gray-500">
           {project.scope}
         </span>

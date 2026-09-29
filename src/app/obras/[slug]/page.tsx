@@ -8,13 +8,22 @@ import type { ReactNode } from "react";
 import ArrowLink from "@/components/ui/ArrowLink";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import ProjectGallery from "@/components/project/ProjectGallery";
-import { getProject, projectCategories, projects } from "@/lib/data";
+import { getProject, projectCategories, projects, type Project } from "@/lib/data";
 import { pageMetadata } from "@/lib/seo";
 
 export const dynamicParams = false;
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
+}
+
+/** Qué instaló HHM, para el título en buscadores ("Instalación eléctrica en Agencia KIA"). */
+function scopeTitle(project: Project) {
+  const ids = projectCategories(project).map((c) => c.id);
+  if (ids.includes("electricidad") && ids.includes("plomeria")) return "Electricidad y plomería";
+  if (ids.includes("electricidad")) return "Instalación eléctrica";
+  if (ids.includes("plomeria")) return "Instalación de plomería";
+  return project.scope;
 }
 
 export async function generateMetadata({
@@ -26,7 +35,7 @@ export async function generateMetadata({
   const project = getProject(slug);
   if (!project) return {};
   return pageMetadata({
-    title: project.title,
+    title: `${scopeTitle(project)} en ${project.title}`,
     description: project.summary,
     path: `/obras/${project.slug}`,
     images: [{ url: project.cover.src, width: project.cover.w, height: project.cover.h, alt: project.cover.alt }],
@@ -70,7 +79,7 @@ export default async function ProjectDetail({
       ["Entramos en", project.stage],
       ["Arquitectura", project.architect],
       ["Constructora", project.builder],
-      ["Material", `${photos} fotos${videos ? ` · ${videos} videos` : ""}`],
+      ["Galería", `${photos} fotos${videos ? ` · ${videos} videos` : ""}`],
   ];
   const facts = allFacts.filter((f): f is [string, ReactNode] => Boolean(f[1]));
 
@@ -83,7 +92,7 @@ export default async function ProjectDetail({
             label="Foto principal de la obra"
             src={project.cover.src}
             alt={project.cover.alt}
-            priority
+            preload
             labelAt="top"
           />
         </Parallax>

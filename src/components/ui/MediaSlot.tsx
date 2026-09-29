@@ -11,7 +11,7 @@ export default function MediaSlot({
   alt,
   tone = "dark",
   sizes = "100vw",
-  priority = false,
+  preload = false,
   labelAt = "center",
   className = "",
 }: {
@@ -21,7 +21,8 @@ export default function MediaSlot({
   alt?: string;
   tone?: "dark" | "light";
   sizes?: string;
-  priority?: boolean;
+  /** Carga la foto desde el <head>: solo para la foto principal arriba del pliegue. */
+  preload?: boolean;
   /** "top" cuando hay títulos encima de la foto, para que no se encimen. */
   labelAt?: "center" | "top";
   className?: string;
@@ -33,7 +34,7 @@ export default function MediaSlot({
         alt={alt ?? label}
         fill
         sizes={sizes}
-        priority={priority}
+        preload={preload}
         className={`object-cover ${className}`}
       />
     );

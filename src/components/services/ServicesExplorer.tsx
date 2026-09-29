@@ -131,7 +131,7 @@ export default function ServicesExplorer() {
             <div className="mt-7 flex flex-wrap gap-3">
               <ArrowLink href={`/servicios/${cur.id}`}>Ver {cur.name.toLowerCase()} en detalle</ArrowLink>
               <ArrowLink href={`/cotizar?alcance=${cur.id}`} variant="ink">
-                Cotizar
+                Cotizar {cur.name.toLowerCase()}
               </ArrowLink>
             </div>
           </div>
