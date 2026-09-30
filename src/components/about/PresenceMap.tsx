@@ -72,7 +72,7 @@ export default function PresenceMap() {
             <path
               key={i}
               d={d}
-              className="presence-band fill-navy-200"
+              className="presence-band fill-navy-200 max-md:stroke-navy-200 max-md:[stroke-width:3]"
               style={{ "--d": `${150 + i * 80}ms` } as CSSProperties}
             />
           ))}
