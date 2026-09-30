@@ -2,6 +2,7 @@
 
 import { useState, type CSSProperties, type ReactNode } from "react";
 import Reveal from "@/components/motion/Reveal";
+import Eyebrow from "@/components/ui/Eyebrow";
 import type { Place } from "@/lib/data";
 import { mexicoMap } from "@/lib/mexico-map";
 
@@ -34,9 +35,7 @@ export default function PresenceMapClient({ places, dots }: { places: MapPlace[]
     <div className="grid gap-8 border-t border-ink pt-8 md:pt-10 lg:grid-cols-3 lg:gap-16">
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-4">
-          <p className="font-mono text-[13px] font-semibold uppercase tracking-[0.06em] text-gray-500">
-            Dónde hemos trabajado
-          </p>
+          <Eyebrow>Dónde hemos trabajado</Eyebrow>
           <h3 className="text-[clamp(26px,3vw,40px)] font-extrabold leading-[1.02] tracking-[-0.035em] text-balance">
             De Monterrey a donde esté tu obra.
           </h3>

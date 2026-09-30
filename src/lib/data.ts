@@ -373,6 +373,34 @@ export const credentials = [
 ];
 
 /*
+ * Fotos de la cabecera de /nosotros. Sin `src` se muestra un recuadro con la
+ * descripción (`label`) de la foto que va ahí.
+ * TODO (HHM): foto del equipo y retrato del fundador. Originales del
+ * teléfono (en WhatsApp, enviarlas como "Documento"), horizontal 3:2 de al
+ * menos 2560 px para el equipo y vertical 4:5 de al menos 1600 px para el
+ * retrato.
+ */
+export type AboutPhoto = { src?: string; label: string; alt: string; caption: string };
+export const aboutPhotos: Record<"team" | "founder" | "work", AboutPhoto> = {
+  team: {
+    label: "Foto del equipo HHM en obra: grupo con uniforme y equipo de seguridad, horizontal",
+    alt: "Equipo de HHM Proyectos en obra",
+    caption: "Equipo HHM · ingenieros y cuadrillas propias",
+  },
+  founder: {
+    label: "Retrato de Héctor Hugo Martínez en obra, vertical",
+    alt: "Héctor Hugo Martínez, fundador de HHM Proyectos",
+    caption: "Héctor Hugo Martínez · Fundador",
+  },
+  work: {
+    src: "/obras/agencia-kia/02.jpg",
+    label: "Obra entregada",
+    alt: "Piso de exhibición de una agencia KIA con plafón de iluminación lineal",
+    caption: "Obra entregada · Agencia KIA",
+  },
+};
+
+/*
  * Mapa de /nosotros: base y ciudades donde HHM ya tuvo obra (entrevista,
  * sep. 2026). Para agregar una ciudad basta con su longitud y latitud.
  * `label` indica dónde va el nombre respecto al punto, para que no se encimen.
