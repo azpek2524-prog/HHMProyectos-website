@@ -34,7 +34,7 @@ export default function Nosotros() {
         <div className="mx-auto grid max-w-7xl gap-3 lg:grid-cols-3">
           <Reveal variant="clip" className="relative aspect-[16/10] overflow-hidden lg:col-span-2">
             <div className="absolute inset-0">
-              <MediaSlot label="Equipo instalando en Torre Invex" src="/obras/torre-invex-oficinas/20.jpg" sizes="(min-width: 1024px) 66vw, 100vw" />
+              <MediaSlot label="Canalización eléctrica y ductos sobre losa reticular, en obra en Torre Invex" src="/obras/torre-invex-oficinas/20.jpg" sizes="(min-width: 1024px) 66vw, 100vw" />
             </div>
           </Reveal>
           <Reveal variant="clip" delay={150} className="relative aspect-[4/3] overflow-hidden lg:aspect-auto">
@@ -95,7 +95,7 @@ export default function Nosotros() {
       {/* Principios */}
       <section className="px-5 py-14 md:px-8 md:py-[120px]">
         <div className="mx-auto max-w-7xl">
-          <Reveal as="p" className="mb-8 font-mono text-[13px] font-semibold uppercase tracking-[0.06em] text-gray-500">
+          <Reveal as="h2" className="mb-8 font-mono text-[13px] font-semibold uppercase tracking-[0.06em] text-gray-500">
             Cómo trabajamos
           </Reveal>
           {principles.map((p, i) => (
@@ -171,7 +171,12 @@ export default function Nosotros() {
           <h2 className="max-w-[760px] text-[clamp(30px,4.4vw,60px)] font-extrabold leading-none tracking-[-0.045em]">
             ¿Tienes un proyecto en puerta? Platiquemos desde el anteproyecto.
           </h2>
-          <ArrowLink href="/cotizar">Cotizar mi proyecto</ArrowLink>
+          <div className="flex flex-wrap gap-3">
+            <ArrowLink href="/cotizar">Cotizar mi proyecto</ArrowLink>
+            <ArrowLink href="/obras" variant="ink">
+              Ver obras
+            </ArrowLink>
+          </div>
         </Reveal>
       </section>
     </>

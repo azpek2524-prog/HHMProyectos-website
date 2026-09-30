@@ -99,7 +99,7 @@ export default async function ServiceDetail({
                 label={`Foto de ${cat.name} en obra`}
                 src={cat.image}
                 alt={cat.imageAlt}
-                priority
+                preload
                 sizes="(min-width: 1024px) 50vw, 100vw"
               />
             </div>
@@ -143,7 +143,7 @@ export default async function ServiceDetail({
               href={filter ? `/obras?instalacion=${filter}` : "/obras"}
               className="font-semibold text-navy underline-offset-4 hover:underline"
             >
-              Ver todas las obras →
+              {filter ? `Ver obras con ${cat.name.toLowerCase()} →` : "Ver todas las obras →"}
             </Link>
           </Reveal>
           <div className="grid gap-4 md:grid-cols-3 md:gap-6">

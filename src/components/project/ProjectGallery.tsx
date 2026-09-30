@@ -73,7 +73,7 @@ export default function ProjectGallery({ project }: { project: Project }) {
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
             {videos.map((v, i) => (
               <Reveal key={v.src} delay={i * 100}>
-                <VideoTile clip={v} onOpen={() => setOpen(photoCount + i)} />
+                <VideoTile clip={v} label={`Ver video ${i + 1} de ${videos.length}: ${v.alt}`} onOpen={() => setOpen(photoCount + i)} />
               </Reveal>
             ))}
           </div>
@@ -111,7 +111,7 @@ function SectionHeader({ title, count }: { title: string; count: string }) {
  * está en pantalla (fuera de pantalla se pausa). No se descarga hasta que
  * se necesita. Con "reducir movimiento" se queda en su póster.
  */
-function VideoTile({ clip, onOpen }: { clip: Clip; onOpen: () => void }) {
+function VideoTile({ clip, label, onOpen }: { clip: Clip; label: string; onOpen: () => void }) {
   const ref = useRef<HTMLVideoElement>(null);
   const inView = useInView(ref, { rootMargin: "0px 0px -15% 0px" });
   const reduced = useReducedMotion();
@@ -127,7 +127,7 @@ function VideoTile({ clip, onOpen }: { clip: Clip; onOpen: () => void }) {
     <button
       type="button"
       onClick={onOpen}
-      aria-label={`Ver video: ${clip.alt}`}
+      aria-label={label}
       className="group relative block aspect-[9/16] w-full cursor-zoom-in overflow-hidden bg-night outline-none"
     >
       <video

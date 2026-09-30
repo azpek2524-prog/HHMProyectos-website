@@ -45,6 +45,9 @@ const business = {
   },
 };
 
+const inlineLink =
+  "font-semibold text-navy underline decoration-navy/30 underline-offset-4 transition-colors hover:decoration-navy";
+
 /* Obras destacadas en la Home (por slug). */
 const featured = ["torre-invex-oficinas", "agencia-kia", "residencia"]
   .map((slug) => projects.find((p) => p.slug === slug))
@@ -117,6 +120,11 @@ export default function Home() {
         <section className="px-5 pt-12 md:px-8 md:pt-[88px]">
           <Reveal>
             <StatsCounter />
+            <div className="mx-auto mt-8 max-w-7xl md:mt-10">
+              <Link href="/nosotros" className="font-semibold text-navy underline-offset-4 hover:underline">
+                Conoce nuestra historia y cómo trabajamos →
+              </Link>
+            </div>
           </Reveal>
         </section>
       )}
@@ -137,6 +145,19 @@ export default function Home() {
         </Reveal>
         <Reveal delay={120}>
           <ServicePanels />
+        </Reveal>
+        <Reveal className="mx-auto mt-6 max-w-7xl md:mt-8">
+          <p className="max-w-[760px] text-[clamp(16px,1.5vw,18px)] leading-[1.55] text-gray-600">
+            También hacemos el{" "}
+            <Link href="/servicios/proyecto-ejecutivo" className={inlineLink}>
+              proyecto ejecutivo de instalaciones
+            </Link>{" "}
+            (cálculo, planos y BIM) y el{" "}
+            <Link href="/servicios/mantenimiento" className={inlineLink}>
+              mantenimiento de las obras que entregamos
+            </Link>
+            .
+          </p>
         </Reveal>
       </section>
 

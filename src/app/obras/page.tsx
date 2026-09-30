@@ -7,7 +7,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Obras",
   description:
-    "Obras de plomería y electricidad entregadas para despachos de arquitectura y constructoras: residencial, corporativo, industrial y comercial.",
+    "Obras de electricidad y plomería entregadas en agencias automotrices, oficinas, residencias e industria, con fotos y video de cada proyecto.",
   path: "/obras",
 });
 

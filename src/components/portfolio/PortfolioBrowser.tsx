@@ -57,16 +57,23 @@ export default function PortfolioBrowser() {
     <>
       <section className="px-5 pb-7 pt-12 md:px-8 md:pb-10 md:pt-[104px]">
         <div className="mx-auto flex max-w-7xl flex-wrap items-end justify-between gap-6">
-          <div className="flex items-baseline gap-4">
-            <h1 className="animate-rise text-[clamp(44px,8vw,120px)] font-extrabold leading-[0.9] tracking-[-0.05em]">
-              Obras
-            </h1>
-            <span
-              aria-live="polite"
-              className="animate-rise font-mono text-sm font-semibold text-gray-500 [animation-delay:80ms]"
-            >
-              {pad(list.length)}
-            </span>
+          <div className="flex flex-col gap-5">
+            <div className="flex items-baseline gap-4">
+              <h1 className="animate-rise text-[clamp(44px,8vw,120px)] font-extrabold leading-[0.9] tracking-[-0.05em]">
+                Obras
+              </h1>
+              <span
+                aria-live="polite"
+                className="animate-rise font-mono text-sm font-semibold text-gray-500 [animation-delay:80ms]"
+              >
+                {pad(list.length)}
+              </span>
+            </div>
+            <p className="max-w-[520px] animate-rise text-[clamp(16px,1.5vw,19px)] leading-[1.6] text-gray-600 [animation-delay:120ms]">
+              Instalaciones eléctricas y de plomería que entregamos en agencias
+              automotrices, oficinas, residencias e industria. Cada obra tiene
+              sus fotos y, en algunas, video del recorrido.
+            </p>
           </div>
           <div className="flex animate-rise flex-wrap items-center gap-4 [animation-delay:160ms] md:gap-6">
             <div className="flex border border-ink" role="group" aria-label="Filtrar por instalación">
@@ -130,6 +137,7 @@ export default function PortfolioBrowser() {
                     <ProjectCard
                       project={p}
                       tag={pad(i + 1)}
+                      heading="h2"
                       aspect={wide ? "aspect-[4/3] md:aspect-[16/8]" : "aspect-[4/3]"}
                       sizes={wide ? "(min-width: 768px) 66vw, 100vw" : "(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"}
                     />

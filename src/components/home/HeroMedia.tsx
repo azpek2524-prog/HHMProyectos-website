@@ -27,8 +27,8 @@ export default function HeroMedia() {
       <MediaSlot
         label="Video de obra a pantalla completa (loop sin audio)"
         src={heroPoster}
-        alt="Oficina con plafón abierto: red contra incendio, canalizaciones e iluminación a la vista"
-        priority
+        alt="Oficina corporativa con plafón abierto: canalizaciones, tuberías e iluminación a la vista"
+        preload
         labelAt="top"
       />
     );

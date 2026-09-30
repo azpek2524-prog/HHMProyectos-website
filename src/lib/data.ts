@@ -46,7 +46,7 @@ export const categories: Category[] = [
     title: "Instalaciones eléctricas para construcción",
     image: "/obras/agencia-kia/03.jpg",
     imageAlt: "Plafón con iluminación lineal en agencia automotriz",
-    lead: "Desde la acometida en media tensión hasta el último contacto, con verificación de unidad UVIE.",
+    lead: "Desde la acometida en media tensión hasta el último contacto, revisado por una unidad de verificación (UVIE).",
     items: [
       ["Acometidas y subestaciones", "Trámite, obra civil y montaje en media tensión."],
       ["Tableros y distribución", "Tableros generales, derivados y balanceo de cargas."],
@@ -104,7 +104,7 @@ export const homeServices = [
     name: "Electricidad",
     media: "Plafón con iluminación lineal",
     image: "/obras/agencia-kia/02.jpg" as string | undefined,
-    lead: "De la acometida en media tensión al último contacto, con verificación de unidad UVIE.",
+    lead: "De la acometida en media tensión al último contacto, revisado por una unidad de verificación (UVIE).",
     items: ["Acometidas y subestaciones", "Tableros y distribución", "Iluminación", "Canalizaciones de voz y datos", "Tierras y pararrayos", "Plantas de emergencia"],
   },
 ];
@@ -113,7 +113,7 @@ export const stages = [
   { name: "Anteproyecto", text: "Factibilidad, cargas estimadas y trazos preliminares." },
   { name: "Proyecto ejecutivo", text: "Cálculo, planos y catálogo de conceptos para licencia." },
   { name: "Obra", text: "Instalación, supervisión y pruebas con tu residente." },
-  { name: "Operación", text: "As-built, garantía y pólizas de mantenimiento." },
+  { name: "Operación", text: "As-built, garantía y mantenimiento de lo que instalamos." },
 ];
 
 /*
@@ -229,7 +229,7 @@ export const projects: Project[] = [
       {
         title: "Terminado",
         photos: [
-          { src: "/obras/torre-invex-oficinas/05.jpg", alt: "Plafón abierto: red contra incendio, canalizaciones e iluminación a la vista", w: 1280, h: 960 },
+          { src: "/obras/torre-invex-oficinas/05.jpg", alt: "Plafón abierto con canalizaciones, tuberías e iluminación a la vista", w: 1280, h: 960 },
           { src: "/obras/torre-invex-oficinas/01.jpg", alt: "Área de trabajo con instalaciones aparentes", w: 1280, h: 892 },
           { src: "/obras/torre-invex-oficinas/03.jpg", alt: "Luminarias suspendidas sobre estaciones de trabajo", w: 1280, h: 960 },
           { src: "/obras/torre-invex-oficinas/04.jpg", alt: "Iluminación en área abierta con vista a la ciudad", w: 1280, h: 960 },
@@ -242,7 +242,7 @@ export const projects: Project[] = [
         photos: [
           { src: "/obras/torre-invex-oficinas/19.jpg", alt: "Drenaje y canalizaciones sobre losa reticular", w: 1280, h: 960 },
           { src: "/obras/torre-invex-oficinas/13.jpg", alt: "Ductos y tuberías coordinados en losa", w: 960, h: 1280 },
-          { src: "/obras/torre-invex-oficinas/14.jpg", alt: "Ductos y equipo en plafón, con red contra incendio", w: 1280, h: 960 },
+          { src: "/obras/torre-invex-oficinas/14.jpg", alt: "Ductos y equipos colgados del plafón durante la obra", w: 1280, h: 960 },
           { src: "/obras/torre-invex-oficinas/08.jpg", alt: "Tubería de PVC sobre losa reticular", w: 960, h: 1280 },
           { src: "/obras/torre-invex-oficinas/17.jpg", alt: "Tubería junto a fachada de cristal", w: 960, h: 1280 },
         ],

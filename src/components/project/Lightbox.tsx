@@ -98,7 +98,7 @@ export default function Lightbox({
               fill
               sizes="100vw"
               className="object-contain"
-              priority
+              loading="eager"
             />
           ) : (
             <video
