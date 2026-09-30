@@ -16,7 +16,7 @@ export default function AboutHero() {
         <div className="mx-auto flex max-w-7xl flex-col gap-6 md:gap-8">
           <Eyebrow className="animate-rise">Nosotros</Eyebrow>
           <h1 className="max-w-[1180px] animate-rise text-[clamp(38px,6.4vw,92px)] font-extrabold leading-[0.96] tracking-[-0.045em] text-balance [animation-delay:80ms]">
-            15 años respondiendo
+            Más de 15 años respondiendo
             <br />
             <span className="font-medium text-navy-600">por cada instalación.</span>
           </h1>
@@ -24,7 +24,7 @@ export default function AboutHero() {
             <strong className="font-semibold text-ink">
               Somos un contratista de electricidad y plomería con base en Monterrey.
             </strong>{" "}
-            Nuestro equipo propio de 40 personas ha entregado más de 280 obras,
+            Nuestro equipo propio, de más de 40 personas, ha entregado más de 280 obras,
             del cálculo a la puesta en marcha.
           </p>
         </div>

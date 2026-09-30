@@ -1,6 +1,6 @@
 # Product Marketing Context
 
-**Document version:** v3
+**Document version:** v3.1
 **Last updated:** 2026-09-30
 
 > Fuente: entrevista de discovery con HHM (Notion › Idea Bank › "ENTREVISTA", 2026-09-26).
@@ -122,6 +122,7 @@ HHM dice que "no hay competencia" (todo llega por recomendación). Aun así, el 
 
 ## Changelog
 *Newest first. One line per revision: what changed and why.*
+- v3.1 (2026-09-30) — En el sitio las cifras de años y equipo se muestran como «15+» / «más de 15 años» y «40+» / «más de 40 personas» (indicación del usuario).
 - v3 (2026-09-30) — Alcance ampliado: además de proyectos nacionales, abiertos a cotizar obras en el extranjero (indicación del usuario al reescribir Nosotros).
 - v2 (2026-09-26) — Zona confirmada (base en el área metropolitana de Monterrey, abiertos a proyectos nacionales) y garantía (depende de la obra; por lo general 3 meses).
 - v1 (2026-09-26) — Initial context, a partir de la entrevista de discovery con HHM.
