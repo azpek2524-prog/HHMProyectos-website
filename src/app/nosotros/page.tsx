@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Reveal from "@/components/motion/Reveal";
-import PageHeader from "@/components/ui/PageHeader";
 import MediaSlot from "@/components/ui/MediaSlot";
+import Eyebrow from "@/components/ui/Eyebrow";
 import ArrowLink from "@/components/ui/ArrowLink";
+import AboutHero from "@/components/about/AboutHero";
 import PresenceMap from "@/components/about/PresenceMap";
 import { credentials, principles, team } from "@/lib/data";
 import { pageMetadata } from "@/lib/seo";
-import { site } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: "Nosotros",
@@ -18,40 +18,13 @@ export const metadata: Metadata = pageMetadata({
 export default function Nosotros() {
   return (
     <>
-      <PageHeader
-        eyebrow="Nosotros"
-        title={
-          <>
-            No jugamos con el patrimonio{" "}
-            <span className="text-gray-400">de nuestros clientes.</span>
-          </>
-        }
-        lead={`Somos un contratista de electricidad y plomería con 15 años en obra, más de 280 proyectos entregados y un equipo propio de 40 personas en ${site.serviceArea}.`}
-      />
-
-      {/* Imágenes: se descubren como cortina al entrar en pantalla */}
-      <section className="px-5 md:px-8">
-        <div className="mx-auto grid max-w-7xl gap-3 lg:grid-cols-3">
-          <Reveal variant="clip" className="relative aspect-[16/10] overflow-hidden lg:col-span-2">
-            <div className="absolute inset-0">
-              <MediaSlot label="Canalización eléctrica y ductos sobre losa reticular, en obra en Torre Invex" src="/obras/torre-invex-oficinas/20.jpg" sizes="(min-width: 1024px) 66vw, 100vw" />
-            </div>
-          </Reveal>
-          <Reveal variant="clip" delay={150} className="relative aspect-[4/3] overflow-hidden lg:aspect-auto">
-            <div className="absolute inset-0">
-              <MediaSlot label="Ductos y tuberías coordinados en losa" src="/obras/torre-invex-oficinas/13.jpg" sizes="(min-width: 1024px) 33vw, 100vw" />
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <AboutHero />
 
       {/* Historia */}
       <section className="px-5 pt-14 md:px-8 md:pt-[120px]">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-3 lg:gap-16">
           <Reveal className="flex flex-col gap-4">
-            <p className="font-mono text-[13px] font-semibold uppercase tracking-[0.06em] text-gray-500">
-              Nuestra historia
-            </p>
+            <Eyebrow>Nuestra historia</Eyebrow>
             <h2 className="text-[clamp(30px,4vw,52px)] font-extrabold leading-none tracking-[-0.04em]">
               Nacimos del oficio.
             </h2>
@@ -99,8 +72,8 @@ export default function Nosotros() {
       {/* Principios */}
       <section className="px-5 py-14 md:px-8 md:py-[120px]">
         <div className="mx-auto max-w-7xl">
-          <Reveal as="h2" className="mb-8 font-mono text-[13px] font-semibold uppercase tracking-[0.06em] text-gray-500">
-            Cómo trabajamos
+          <Reveal className="mb-8">
+            <Eyebrow as="h2">Cómo trabajamos</Eyebrow>
           </Reveal>
           {principles.map((p, i) => (
             <Reveal key={p.n} delay={i * 100}>

@@ -140,6 +140,16 @@ html[data-motion] [data-reveal="clip"][data-shown] > * {
   -webkit-text-stroke: 1.5px var(--color-ink);
 }
 
+/* Mosaico de /nosotros: la foto se asienta con un leve alejamiento al aparecer */
+html[data-motion] .about-shot [data-shot] {
+  transform: scale(1.1);
+  transition: transform 1.6s var(--ease-smooth);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+html[data-motion] .about-shot[data-shown] [data-shot] {
+  transform: none;
+}
+
 /* Mapa de /nosotros: la retícula aparece en ondas desde la base, luego se
    trazan los arcos y aparecen las ciudades. `--d` es el retraso de cada capa. */
 .presence-marker,
