@@ -69,7 +69,9 @@ export default function PresenceMapClient({ places, dots }: { places: MapPlace[]
         </ul>
       </div>
 
-      <Reveal className="presence-map lg:col-span-2">
+      {/* En móvil el mapa va de borde a borde y sus puntos, marcadores y
+          etiquetas crecen para que se lea en pantalla chica. */}
+      <Reveal className="presence-map max-md:-mx-5 lg:col-span-2">
         <div
           role="img"
           aria-label={summary}
@@ -100,7 +102,7 @@ export default function PresenceMapClient({ places, dots }: { places: MapPlace[]
             {places.map((p) => {
               const size = p.base ? 20 : 14;
               return (
-                <g key={p.name}>
+                <g key={p.name} className="origin-center [transform-box:fill-box] max-md:scale-150">
                   {p.base &&
                     [0, 1200].map((d) => (
                       <rect
@@ -137,7 +139,7 @@ export default function PresenceMapClient({ places, dots }: { places: MapPlace[]
           {places.map((p) => (
             <span
               key={p.name}
-              className={`presence-label pointer-events-none absolute whitespace-nowrap px-1.5 py-0.5 font-mono text-[10px] font-semibold uppercase transition-colors duration-300 sm:text-[11px] ${
+              className={`presence-label pointer-events-none absolute whitespace-nowrap px-1.5 py-0.5 font-mono text-[11px] font-semibold uppercase transition-colors duration-300 max-md:text-[12px] ${
                 p.base || active === p.name ? "bg-navy text-white" : "bg-white text-ink"
               }`}
               style={
