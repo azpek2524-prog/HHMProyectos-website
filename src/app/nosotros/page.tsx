@@ -3,8 +3,8 @@ import Reveal from "@/components/motion/Reveal";
 import PageHeader from "@/components/ui/PageHeader";
 import MediaSlot from "@/components/ui/MediaSlot";
 import ArrowLink from "@/components/ui/ArrowLink";
-import StatsCounter from "@/components/home/StatsCounter";
-import { credentials, principles, stats, team } from "@/lib/data";
+import PresenceMap from "@/components/about/PresenceMap";
+import { credentials, principles, team } from "@/lib/data";
 import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
@@ -74,10 +74,11 @@ export default function Nosotros() {
             </p>
             <p>
               Hoy somos 40 personas, entre ingenieros y cuadrillas propias, con
-              20 obras en paralelo. Instalamos en agencias automotrices,
-              autolavados, residencias, oficinas y parques industriales. Nuestra
-              base está en Monterrey, aunque ya hemos tenido proyectos en Saltillo
-              y Mazatlán. Cotizamos obras en todo México, incluso fuera del país.
+              20 obras en paralelo. Entre los proyectos que hemos realizado se
+              encuentran agencias automotrices de siete marcas, autolavados,
+              residencias, oficinas corporativas y parques industriales. Desde
+              nuestra base en Monterrey también hemos trabajado en Saltillo y
+              Mazatlán. Cotizamos obras en todo México, incluso fuera del país.
             </p>
             <p>
               Esa capacidad se puso a prueba en un parque industrial para una
@@ -90,11 +91,9 @@ export default function Nosotros() {
             </p>
           </Reveal>
         </div>
-        {stats.length > 0 && (
-          <Reveal className="mt-14 md:mt-20">
-            <StatsCounter />
-          </Reveal>
-        )}
+        <div className="mx-auto mt-14 max-w-7xl md:mt-20">
+          <PresenceMap />
+        </div>
       </section>
 
       {/* Principios */}
