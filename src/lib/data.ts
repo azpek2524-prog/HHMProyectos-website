@@ -261,15 +261,15 @@ export const projects: Project[] = [
     type: "Comercial",
     scope: "Electricidad",
     summary: "Agencia automotriz con fachada de cristal y plafón de iluminación lineal en todo el piso de exhibición, de la obra en proceso a la apertura.",
-    cover: { src: "/obras/agencia-kia/04.jpg", alt: "Fachada de cristal iluminada de noche", w: 1280, h: 960 },
+    cover: { src: "/obras/agencia-kia/04.jpg", alt: "Fachada de cristal iluminada de noche", w: 2880, h: 1607 },
     gallery: [
       {
         title: "Terminado",
         photos: [
-          { src: "/obras/agencia-kia/04.jpg", alt: "Fachada de cristal iluminada de noche", w: 1280, h: 960 },
+          { src: "/obras/agencia-kia/04.jpg", alt: "Fachada de cristal iluminada de noche", w: 2880, h: 1607 },
           { src: "/obras/agencia-kia/02.jpg", alt: "Plafón con iluminación lineal en piso de exhibición", w: 1280, h: 960 },
-          { src: "/obras/agencia-kia/08.jpg", alt: "Fachada durante los últimos detalles de obra", w: 1024, h: 845 },
-          { src: "/obras/agencia-kia/11.jpg", alt: "Vista nocturna del conjunto", w: 1024, h: 768 },
+          { src: "/obras/agencia-kia/08.jpg", alt: "Fachada durante los últimos detalles de obra", w: 2880, h: 1607 },
+          { src: "/obras/agencia-kia/11.jpg", alt: "Vista nocturna del conjunto", w: 2880, h: 1607 },
         ],
       },
       {
