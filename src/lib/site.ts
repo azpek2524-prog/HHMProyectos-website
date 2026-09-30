@@ -27,14 +27,6 @@ export const site = {
   address: undefined as string | undefined,
   whatsappMessage:
     "Hola HHM Proyectos, me gustaría solicitar información sobre sus servicios de plomería y electricidad.",
-  media: {
-    // Video de obra para el hero de la Home (loop sin audio), p. ej. "/video/obra.mp4".
-    // Mientras esté vacío se muestra un placeholder.
-    heroVideo: undefined as string | undefined,
-    // Foto del hero (y póster del video si se agrega uno). Oficina de Torre
-    // Invex con las instalaciones a la vista.
-    heroPoster: "/obras/torre-invex-oficinas/05.jpg" as string | undefined,
-  },
 } as const;
 
 /** URL lista para abrir una conversación de WhatsApp con mensaje precargado. */

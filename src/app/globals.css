@@ -140,6 +140,63 @@ html[data-motion] [data-reveal="clip"][data-shown] > * {
   -webkit-text-stroke: 1.5px var(--color-ink);
 }
 
+/* Hero del inicio: plano que se dibuja solo (HeroBlueprint).
+   Solo CSS: corre sin JavaScript y termina con el plano completo.
+   `--d` = retraso, `--t` = duración (o periodo, en los pulsos). */
+.bp-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: bp-draw var(--t, 1s) var(--ease-smooth) var(--d, 0s) forwards;
+}
+.bp-fade {
+  opacity: 0;
+  animation: bp-fade 0.8s ease-out var(--d, 0s) forwards;
+}
+.bp-pulse {
+  stroke-dasharray: 0.05 0.95;
+  stroke-dashoffset: 1;
+  opacity: 0;
+  filter: drop-shadow(0 0 3px rgba(190, 219, 255, 0.9));
+  animation: bp-pulse var(--t, 3s) linear var(--d, 3s) infinite;
+}
+@keyframes bp-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes bp-fade {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes bp-pulse {
+  0% {
+    stroke-dashoffset: 1;
+    opacity: 0;
+  }
+  8%,
+  92% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bp-draw {
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+  .bp-fade {
+    opacity: 1;
+    animation: none;
+  }
+  .bp-pulse {
+    display: none;
+  }
+}
+
 /* Mosaico de /nosotros: la foto se asienta con un leve alejamiento al aparecer */
 html[data-motion] .about-shot [data-shot] {
   transform: scale(1.1);
