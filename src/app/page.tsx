@@ -6,7 +6,7 @@ import Parallax from "@/components/motion/Parallax";
 import Marquee from "@/components/motion/Marquee";
 import ArrowLink from "@/components/ui/ArrowLink";
 import ProjectCard from "@/components/ui/ProjectCard";
-import HeroMedia from "@/components/home/HeroMedia";
+import HeroBlueprint from "@/components/home/HeroBlueprint";
 import StatsCounter from "@/components/home/StatsCounter";
 import ServicePanels from "@/components/home/ServicePanels";
 import TestimonialCarousel from "@/components/home/TestimonialCarousel";
@@ -27,7 +27,7 @@ const business = {
   name: site.name,
   url: site.url,
   logo: `${site.url}/apple-icon.png`,
-  image: `${site.url}${site.media.heroPoster ?? "/opengraph-image.jpg"}`,
+  image: `${site.url}/opengraph-image.jpg`,
   description:
     "Contratista de electricidad y plomería: 15 años y más de 280 obras para agencias automotrices, residencias, comercios e industria.",
   email: site.email,
@@ -58,12 +58,12 @@ export default function Home() {
     <>
       <JsonLd data={business} />
 
-      {/* ============ HERO · parallax + entrada escalonada ============ */}
-      <section className="relative h-[clamp(560px,52vw,720px)] overflow-hidden bg-night">
-        <Parallax speed={0.22} scale={1.18}>
-          <HeroMedia />
+      {/* ============ HERO · plano que se dibuja solo + entrada escalonada ============ */}
+      <section className="relative h-[clamp(560px,52vw,720px)] overflow-hidden bg-navy">
+        <Parallax speed={0.1} scale={1.04}>
+          <HeroBlueprint />
         </Parallax>
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(3,7,18,.2)_0%,rgba(3,7,18,.35)_35%,rgba(3,7,18,.92)_100%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(22,36,86,0)_0%,rgba(22,36,86,0)_38%,rgba(3,7,18,.82)_100%)]" />
         <div className="absolute inset-x-0 bottom-0 px-5 py-8 md:px-8 md:py-12">
           <div className="mx-auto flex max-w-7xl flex-col gap-6 text-white">
             <h1 className="max-w-[1100px] animate-rise text-[clamp(42px,7.2vw,104px)] font-extrabold leading-[0.95] tracking-[-0.045em] text-balance">
