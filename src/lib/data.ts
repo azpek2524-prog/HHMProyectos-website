@@ -469,6 +469,20 @@ export const faqs: { q: string; a: string }[] = [
   },
 ];
 
+/* ------------------------- Cómo trabajamos ------------------------- */
+
+/*
+ * Metodología de HHM del primer contacto a la obra (bloque de cotización del
+ * inicio). Una o dos líneas por paso: el bloque es angosto.
+ */
+export const processSteps: { title: string; text: string }[] = [
+  { title: "Datos", text: "Déjanos tu nombre con un teléfono o correo. Un responsable de HHM te atiende directamente." },
+  { title: "Proyecto", text: "Compártenos planos, fotos o la idea de tu obra. Sin planos, empezamos con una visita." },
+  { title: "Revisión", text: "Validamos viabilidad técnica conforme a la normativa vigente. Antes de proponer, visitamos tu obra." },
+  { title: "Cotización", text: "Recibes una propuesta desglosada por alcance. Pagas con anticipo, luego por estimaciones de avance." },
+  { title: "Ejecución", text: "Mano de obra especializada: personal propio con constancias DC-3, supervisado hasta la entrega." },
+];
+
 /* ---------------------------- Cotización ---------------------------- */
 
 export const quoteSteps = [
