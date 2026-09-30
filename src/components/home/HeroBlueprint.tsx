@@ -12,8 +12,8 @@ import type { CSSProperties, ReactNode } from "react";
  * la derecha) quedan despejadas.
  * El dibujo (x 0–1600) escala con la altura del hero y va centrado: en
  * pantallas anchas mantiene su tamaño y la cuadrícula se extiende a los
- * lados; en móvil se recorta por los lados y se atenúa, porque el titular
- * ocupa casi todo el alto.
+ * lados. En móvil se oculta: ahí se usa HeroBlueprintMobile, en su propia
+ * franja arriba del titular.
  *
  * Solo SVG y CSS (clases .bp-* en globals.css): no usa JavaScript, se ve
  * nítido en cualquier pantalla y con "reducir movimiento" aparece completo.
@@ -22,7 +22,7 @@ export default function HeroBlueprint() {
   return (
     <svg
       viewBox="-800 0 3200 800"
-      className="absolute left-1/2 top-0 h-full w-auto max-w-none -translate-x-1/2 opacity-60 md:opacity-100"
+      className="absolute left-1/2 top-0 h-full w-auto max-w-none -translate-x-1/2 max-md:hidden"
       style={{ aspectRatio: "4 / 1" }}
       aria-hidden="true"
     >
@@ -358,5 +358,129 @@ function Pulse({ d, delay, period }: { d: string; delay: number; period: number 
       strokeLinecap="round"
       style={timing(delay, period)}
     />
+  );
+}
+
+/* ------------------------------ Versión móvil ------------------------------ */
+
+/**
+ * Plano compacto para móvil: va en su propia franja arriba del titular, a
+ * intensidad completa, con el unifilar, una planta de sanitarios y el cuadro
+ * de datos. Usa las mismas animaciones que la versión de escritorio.
+ */
+export function HeroBlueprintMobile() {
+  const line = "stroke-navy-100/80";
+  const loads: { x: number; id: string; amps: string; load: Load; mark?: string }[] = [
+    { x: 104, id: "C-1", amps: "20 A", load: "lamp" },
+    { x: 160, id: "C-2", amps: "20 A", load: "outlet" },
+    { x: 216, id: "C-3", amps: "30 A", load: "motor", mark: "M" },
+    { x: 272, id: "C-4", amps: "40 A", load: "motor", mark: "B" },
+  ];
+  return (
+    <svg viewBox="0 0 400 262" className="block h-auto w-full" aria-hidden="true">
+      <defs>
+        <pattern id="bpm-minor" width="10" height="10" patternUnits="userSpaceOnUse">
+          <path d="M10 0H0V10" className="fill-none stroke-white/[0.05]" />
+        </pattern>
+        <pattern id="bpm-major" width="50" height="50" patternUnits="userSpaceOnUse">
+          <path d="M50 0H0V50" className="fill-none stroke-white/[0.09]" />
+        </pattern>
+      </defs>
+      <rect width="400" height="262" fill="url(#bpm-minor)" />
+      <rect width="400" height="262" fill="url(#bpm-major)" />
+
+      {/* Unifilar: acometida, transformador, interruptor y tablero */}
+      <Line d="M56 8V36" delay={0.2} time={0.4} className={line} />
+      <Circle cx={56} cy={47} r={11} delay={0.45} className={line} />
+      <Circle cx={56} cy={63} r={11} delay={0.55} className={line} />
+      <Line d="M56 74V84" delay={0.7} time={0.2} className={line} />
+      <Line d="M50 84H62V96H50ZM50 96L62 84" delay={0.8} time={0.3} className={line} />
+      <Line d="M56 96V112" delay={0.9} time={0.2} className={line} />
+      <Line d="M30 112H382" delay={1} time={1} className="stroke-white/80" width={2.5} />
+      <Line d="M30 112V126M22 126H38M25.5 131H34.5M28.5 136H31.5" delay={1.4} time={0.4} className={line} width={1.2} />
+
+      {/* Planta de emergencia */}
+      <Circle cx={344} cy={34} r={11} delay={0.5} className={line} />
+      <Text x={344} y={37.5} delay={1.1} anchor="middle" size={9}>G</Text>
+      <Line d="M344 45V70" delay={0.8} time={0.3} className={line} />
+      <Line d="M337 70H351V84H337Z" delay={0.95} time={0.3} className={line} />
+      <Text x={344} y={79.5} delay={1.3} anchor="middle" size={6}>TA</Text>
+      <Line d="M344 84V112" delay={1.05} time={0.2} className={line} />
+
+      {/* Circuitos */}
+      {loads.map((c, i) => {
+        const d0 = 1.5 + i * 0.1;
+        return (
+          <g key={c.id}>
+            <Line d={`M${c.x} 112V122`} delay={d0} time={0.2} className={line} />
+            <Line d={`M${c.x} 122a6 6 0 0 1 0 12`} delay={d0 + 0.1} time={0.25} className={line} />
+            <Line d={`M${c.x} 134V158`} delay={d0 + 0.2} time={0.3} className={line} />
+            <MiniLoad x={c.x} y={167} load={c.load} mark={c.mark} delay={d0 + 0.45} />
+            <Text x={c.x + 7} y={129} delay={d0 + 0.7} size={7}>{c.id}</Text>
+            <Text x={c.x + 7} y={150} delay={d0 + 0.75} size={6.5} className="fill-white/35">{c.amps}</Text>
+          </g>
+        );
+      })}
+
+      {/* Rótulos del unifilar */}
+      <Text x={70} y={22} delay={1.6} size={8}>ACOMETIDA · 13.2 KV</Text>
+      <Text x={72} y={59} delay={1.7} size={8}>TR-1 · 150 KVA</Text>
+      <Text x={68} y={93} delay={1.8} size={8}>ITM 3×400 A</Text>
+      <Text x={104} y={105} delay={1.9} size={7.5}>TG-1 · 220/127 V</Text>
+      <Text x={328} y={37.5} delay={2} anchor="end" size={8}>PE-1 · 80 KW</Text>
+
+      {/* Planta de sanitarios */}
+      <Line d="M16 192H206V252H16Z" delay={0.3} time={1.2} className="stroke-white/45" />
+      <Line d="M21 197H201V247H21Z" delay={0.45} time={1.2} className="stroke-white/45" />
+      <Line d="M120 197V214M120 234V247" delay={0.8} time={0.4} className="stroke-white/45" />
+      <Line d="M120 234H140A20 20 0 0 0 120 214" delay={1} time={0.5} className="stroke-white/30" width={1} />
+      {[40, 66].map((x) => (
+        <g key={x}>
+          <Line d={`M${x - 9} 241H${x + 9}V246H${x - 9}Z`} delay={2} time={0.4} className="stroke-white/55" width={1} />
+          <Ellipse cx={x} cy={232} rx={6} ry={8} delay={2.05} />
+        </g>
+      ))}
+      <Line d="M86 200H108V211H86Z" delay={2.1} time={0.4} className="stroke-white/55" width={1} />
+      <Ellipse cx={97} cy={205.5} rx={6} ry={3.5} delay={2.15} />
+      <Line d="M170 215H196V241H170ZM170 215L196 241M196 215L170 241" delay={2.2} time={0.5} className="stroke-white/55" width={1} />
+      <Dashed d="M190 219H34M40 219V224M66 219V224M97 219V211" delay={2.3} className="stroke-navy-200/75" width={1.2} />
+      <Text x={16} y={186} delay={2.4} size={7.5}>IH-01 · SANITARIOS</Text>
+
+      {/* Cuadro de datos */}
+      <Line d="M222 184H384V252H222ZM222 208H384M222 232H384" delay={1.6} time={0.8} className="stroke-white/35" width={1} />
+      <Text x={230} y={200.5} delay={2.4} size={10.5} className="fill-white/75 font-bold">HHM PROYECTOS</Text>
+      <Text x={230} y={224} delay={2.5} size={7}>INSTALACIONES ELÉCTRICAS</Text>
+      <Text x={230} y={246} delay={2.55} size={7}>IE-01 · ESC 1:100 · REV A</Text>
+
+      <Pulse d="M56 8V112H382" delay={3} period={3} />
+      <Pulse d="M216 112V158" delay={3.6} period={2.2} />
+      <Pulse d="M190 219H34" delay={3.3} period={3} />
+    </svg>
+  );
+}
+
+function MiniLoad({ x, y, load, mark, delay }: { x: number; y: number; load: Load; mark?: string; delay: number }) {
+  const cls = "stroke-navy-200/80";
+  if (load === "lamp") {
+    return (
+      <g>
+        <Circle cx={x} cy={y} r={8} delay={delay} className={cls} />
+        <Line d={`M${x - 5.5} ${y - 5.5}L${x + 5.5} ${y + 5.5}M${x + 5.5} ${y - 5.5}L${x - 5.5} ${y + 5.5}`} delay={delay + 0.1} time={0.3} className={cls} width={1} />
+      </g>
+    );
+  }
+  if (load === "outlet") {
+    return (
+      <g>
+        <Circle cx={x} cy={y} r={8} delay={delay} className={cls} />
+        <Line d={`M${x - 3} ${y - 4}V${y + 4}M${x + 3} ${y - 4}V${y + 4}`} delay={delay + 0.1} time={0.3} className={cls} width={1} />
+      </g>
+    );
+  }
+  return (
+    <g>
+      <Circle cx={x} cy={y} r={9} delay={delay} className={cls} />
+      <Text x={x} y={y + 3} delay={delay + 0.2} anchor="middle" size={8.5} className="fill-navy-200/80">{mark}</Text>
+    </g>
   );
 }
