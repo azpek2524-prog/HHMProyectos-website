@@ -60,35 +60,33 @@ export default function Nosotros() {
             {/* Hilo: origen (el problema) → filosofía → capacidad y alcance → caso como prueba. */}
             <p>
               Nuestro fundador, Héctor Hugo Martínez, empezó a trabajar en
-              instalaciones a los 17 años, junto a su padre. En obra vio lo mismo
-              una y otra vez: clientes que no recibían un trato correcto ni
-              respuestas claras, y trabajos que no estaban a la altura de lo que
-              pagaban.
+              instalaciones a los 17 años, junto a su padre. En cada obra veía el
+              mismo problema: clientes sin un trato correcto, sin respuestas
+              claras, pagando por una calidad que no recibían.
             </p>
             <p>
-              Con esa experiencia fundó HHM y una regla que seguimos hasta hoy:
+              Con esa experiencia fundó HHM bajo una regla que seguimos hasta hoy:
               nadie debería arriesgar su patrimonio por una instalación mal hecha.
               Por eso no tomamos atajos que pongan en riesgo tu instalación,
               aunque nos lo pidan. Para ti, eso significa instalaciones hechas
-              conforme a norma, pensadas para funcionar durante años y no solo el
+              conforme a norma, pensadas para funcionar durante años, no solo el
               día de la entrega.
             </p>
             <p>
-              Hoy somos 40 personas, entre ingenieros y cuadrillas propias, y
-              llevamos 20 obras en paralelo. Instalamos en agencias automotrices,
+              Hoy somos 40 personas, entre ingenieros y cuadrillas propias, con
+              20 obras en paralelo. Instalamos en agencias automotrices,
               autolavados, residencias, oficinas y parques industriales. Nuestra
-              base está en Monterrey, hemos tenido proyectos en Saltillo y
-              Mazatlán, y cotizamos obras en el resto de México y en el
-              extranjero.
+              base está en Monterrey, aunque ya hemos tenido proyectos en Saltillo
+              y Mazatlán. Cotizamos obras en todo México, incluso fuera del país.
             </p>
             <p>
               Esa capacidad se puso a prueba en un parque industrial para una
               línea de tráileres, con naves, talleres y dormitorios. El
-              contratista eléctrico que estaba a cargo no pudo con la obra;
-              entramos con todo el equipo y la sacamos adelante. Al terminar, el
-              cliente nos encargó su siguiente parque. Por resultados así, hasta
-              hoy nuestros proyectos llegan por recomendación de arquitectos, y
-              muchos de sus clientes nos vuelven a llamar para sus propias obras.
+              contratista eléctrico a cargo no pudo con la obra; entramos con todo
+              nuestro equipo para sacarla adelante. Al terminar, el cliente nos
+              encargó su siguiente parque. Por resultados así, hasta hoy nuestros
+              proyectos llegan por recomendación de arquitectos. Muchos de sus
+              clientes nos llaman después para sus propias obras.
             </p>
           </Reveal>
         </div>
