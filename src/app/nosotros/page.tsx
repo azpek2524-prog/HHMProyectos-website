@@ -57,31 +57,38 @@ export default function Nosotros() {
             </h2>
           </Reveal>
           <Reveal delay={120} className="flex flex-col gap-5 text-[clamp(17px,1.5vw,19px)] leading-[1.65] text-gray-700 text-pretty lg:col-span-2">
+            {/* Hilo: origen (el problema) → filosofía → capacidad y alcance → caso como prueba. */}
             <p>
-              Héctor Hugo Martínez, la H, H y M de HHM, empezó a trabajar en
+              Nuestro fundador, Héctor Hugo Martínez, empezó a trabajar en
               instalaciones a los 17 años, junto a su padre. En obra vio lo mismo
               una y otra vez: clientes que no recibían un trato correcto ni
               respuestas claras, y trabajos que no estaban a la altura de lo que
               pagaban.
             </p>
             <p>
-              Fundó HHM con una idea simple: nadie debería arriesgar su
-              patrimonio por una instalación mal hecha. Por eso no aceptamos
-              atajos que pongan en riesgo la instalación, aunque nos lo pidan.
+              Con esa experiencia fundó HHM y una regla que seguimos hasta hoy:
+              nadie debería arriesgar su patrimonio por una instalación mal hecha.
+              Por eso no tomamos atajos que pongan en riesgo tu instalación,
+              aunque nos lo pidan. Para ti, eso significa instalaciones hechas
+              conforme a norma, pensadas para funcionar durante años y no solo el
+              día de la entrega.
             </p>
             <p>
-              Hoy somos 40 personas, entre ingenieros y cuadrillas propias.
-              Trabajamos en agencias automotrices, autolavados, residencias,
-              oficinas y parques industriales, en Monterrey y en proyectos en
-              Saltillo y Mazatlán. Casi todos nuestros clientes llegan por
-              recomendación de arquitectos, y muchos de sus clientes nos vuelven a
-              llamar para sus propios proyectos.
+              Hoy somos 40 personas, entre ingenieros y cuadrillas propias, y
+              llevamos 20 obras en paralelo. Instalamos en agencias automotrices,
+              autolavados, residencias, oficinas y parques industriales. Nuestra
+              base está en Monterrey, hemos tenido proyectos en Saltillo y
+              Mazatlán, y cotizamos obras en el resto de México y en el
+              extranjero.
             </p>
             <p>
-              Cuando otro contratista eléctrico no pudo con un parque industrial,
-              con naves, talleres y dormitorios para una línea de tráileres,
-              entramos con todo el equipo y sacamos la obra adelante. Al terminar,
-              el cliente nos encargó su siguiente parque.
+              Esa capacidad se puso a prueba en un parque industrial para una
+              línea de tráileres, con naves, talleres y dormitorios. El
+              contratista eléctrico que estaba a cargo no pudo con la obra;
+              entramos con todo el equipo y la sacamos adelante. Al terminar, el
+              cliente nos encargó su siguiente parque. Por resultados así, hasta
+              hoy nuestros proyectos llegan por recomendación de arquitectos, y
+              muchos de sus clientes nos vuelven a llamar para sus propias obras.
             </p>
           </Reveal>
         </div>

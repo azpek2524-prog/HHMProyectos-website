@@ -1,13 +1,13 @@
 # Product Marketing Context
 
-**Document version:** v2
-**Last updated:** 2026-09-26
+**Document version:** v3
+**Last updated:** 2026-09-30
 
 > Fuente: entrevista de discovery con HHM (Notion › Idea Bank › "ENTREVISTA", 2026-09-26).
 > Lo marcado como **[supuesto]** no salió de la entrevista y hay que confirmarlo.
 
 ## Product Overview
-**One-liner:** Contratista de electricidad y plomería para obras residenciales, comerciales e industriales. Base en el área metropolitana de Monterrey; también toma proyectos en el resto del país, que evalúa al cotizar.
+**One-liner:** Contratista de electricidad y plomería para obras residenciales, comerciales e industriales. Base en el área metropolitana de Monterrey; ha tenido proyectos en Saltillo y Mazatlán y cotiza obras en el resto de México y en el extranjero.
 **What it does:** Diseña, calcula e instala las instalaciones eléctricas (desde acometida en media tensión hasta iluminación) e hidrosanitarias y de gas de un proyecto, y les da seguimiento hasta la entrega. Trabaja sobre todo en proyecto nuevo; el mantenimiento es secundario y se ofrece a clientes de proyecto.
 **Product category:** Instalaciones eléctricas y de plomería para construcción (contratista MEP / "instalaciones").
 **Product type:** Servicio B2B (contratista especializado).
@@ -122,5 +122,6 @@ HHM dice que "no hay competencia" (todo llega por recomendación). Aun así, el 
 
 ## Changelog
 *Newest first. One line per revision: what changed and why.*
+- v3 (2026-09-30) — Alcance ampliado: además de proyectos nacionales, abiertos a cotizar obras en el extranjero (indicación del usuario al reescribir Nosotros).
 - v2 (2026-09-26) — Zona confirmada (base en el área metropolitana de Monterrey, abiertos a proyectos nacionales) y garantía (depende de la obra; por lo general 3 meses).
 - v1 (2026-09-26) — Initial context, a partir de la entrevista de discovery con HHM.
