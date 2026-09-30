@@ -207,9 +207,9 @@ export const stages = [
  */
 export type Stat = { value: number; suffix: string; label: string };
 export const stats: Stat[] = [
-  { value: 15, suffix: "", label: "años en obra" },
+  { value: 15, suffix: "+", label: "años en obra" },
   { value: 280, suffix: "+", label: "obras entregadas" },
-  { value: 40, suffix: "", label: "personas en equipo propio" },
+  { value: 40, suffix: "+", label: "personas en equipo propio" },
   { value: 20, suffix: "", label: "obras en paralelo hoy" },
 ];
 
