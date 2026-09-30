@@ -5,6 +5,7 @@ import Reveal from "@/components/motion/Reveal";
 import Parallax from "@/components/motion/Parallax";
 import Marquee from "@/components/motion/Marquee";
 import ArrowLink from "@/components/ui/ArrowLink";
+import Eyebrow from "@/components/ui/Eyebrow";
 import ProjectCard from "@/components/ui/ProjectCard";
 import HeroBlueprint, { HeroBlueprintMobile } from "@/components/home/HeroBlueprint";
 import StatsCounter from "@/components/home/StatsCounter";
@@ -70,14 +71,17 @@ export default function Home() {
         </div>
         <div className="relative px-5 pb-10 pt-3 md:absolute md:inset-x-0 md:bottom-0 md:px-8 md:py-12">
           <div className="mx-auto flex max-w-7xl flex-col gap-6 text-white">
-            <h1 className="max-w-[1100px] animate-rise text-[clamp(42px,7.2vw,104px)] font-extrabold leading-[0.95] tracking-[-0.045em] text-balance">
-              Electricidad y plomería que cuidan tu patrimonio.
+            <Eyebrow tone="light" className="animate-rise">
+              Contratista de instalaciones para obra · Monterrey
+            </Eyebrow>
+            <h1 className="max-w-[1100px] animate-rise text-[clamp(42px,7.2vw,104px)] font-extrabold leading-[0.95] tracking-[-0.045em] text-balance [animation-delay:80ms]">
+              Electricidad y plomería sin sorpresas en obra.
             </h1>
             <div className="flex flex-wrap items-end justify-between gap-5">
               <p className="max-w-[540px] animate-rise text-[clamp(16px,1.5vw,19px)] leading-[1.55] text-gray-200 [animation-delay:150ms]">
-                15 años y más de 280 obras para agencias automotrices,
-                residencias, comercios e industria. Equipo propio en{" "}
-                {site.serviceArea}, del cálculo a la entrega.
+                Un solo equipo calcula, instala y entrega tus instalaciones, con
+                reportes de avance en cada etapa. Así tu obra avanza a tiempo,
+                sin retrabajos ni pendientes al cierre.
               </p>
               <div className="flex animate-rise flex-wrap gap-2.5 [animation-delay:300ms]">
                 <ArrowLink href="/cotizar" variant="white">

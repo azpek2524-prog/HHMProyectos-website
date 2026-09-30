@@ -20,6 +20,10 @@ export type Category = {
   image?: string;
   imageAlt?: string;
   items: [title: string, description: string][];
+  /** Cómo trabajamos en este servicio (4 pasos, una o dos frases cada uno). */
+  process: { title: string; text: string }[];
+  /** Preguntas propias del servicio; no repetir las generales del inicio. */
+  faqs: { q: string; a: string }[];
 };
 
 export const categories: Category[] = [
@@ -38,6 +42,26 @@ export const categories: Category[] = [
       ["Bombeo e hidroneumáticos", "Cisternas, tinacos, equipos de presión constante."],
       ["Calentamiento de agua", "Calentadores, boilers y sistemas solares."],
     ],
+    process: [
+      { title: "Revisión", text: "Revisamos tus planos y visitamos la obra antes de proponer: tomas, bajadas, cisternas, equipos." },
+      { title: "Cotización", text: "Propuesta según la complejidad de las redes. Pagas con anticipo, luego por estimaciones de avance." },
+      { title: "Instalación", text: "Cuadrillas propias coordinadas con estructura y acabados. Recibes reportes de avance con fotos." },
+      { title: "Pruebas y entrega", text: "Probamos las redes con tu residente; el gas, con prueba de hermeticidad. Entregamos con garantía." },
+    ],
+    faqs: [
+      {
+        q: "¿Instalan redes de gas?",
+        a: "Sí, de gas LP o natural, con tanque estacionario o medidor. Antes de entregar hacemos pruebas de hermeticidad.",
+      },
+      {
+        q: "¿Hacen instalaciones contra incendio?",
+        a: "No. Hacemos la red hidrosanitaria, el drenaje, el gas, el bombeo y el calentamiento de agua. Los sistemas contra incendio no los instalamos.",
+      },
+      {
+        q: "¿Atienden fugas o reparaciones en casa?",
+        a: "Trabajamos en obra: proyecto nuevo, ampliaciones o remodelaciones. Las reparaciones las atendemos solo en instalaciones que hicimos nosotros.",
+      },
+    ],
   },
   {
     id: "electricidad",
@@ -55,6 +79,26 @@ export const categories: Category[] = [
       ["Tierras físicas y pararrayos", "Sistemas de puesta a tierra y protección atmosférica."],
       ["Plantas de emergencia", "Transferencias automáticas y respaldo UPS."],
     ],
+    process: [
+      { title: "Revisión", text: "Revisamos tus planos con las cargas del proyecto. Visitamos la obra antes de proponer." },
+      { title: "Cotización", text: "Propuesta según la complejidad de la instalación. Pagas con anticipo, luego por estimaciones de avance." },
+      { title: "Instalación", text: "De la acometida al último contacto, con personal DC-3 que trabaja con bloqueo y etiquetado (LOTO)." },
+      { title: "Verificación y entrega", text: "Una unidad de verificación (UVIE) revisa la instalación. Entregamos con garantía." },
+    ],
+    faqs: [
+      {
+        q: "¿Se encargan de la acometida en media tensión?",
+        a: "Sí. Hacemos el trámite, la obra civil y el montaje, tanto de la acometida como de la subestación.",
+      },
+      {
+        q: "¿La instalación queda verificada?",
+        a: "Sí. Las instalaciones eléctricas se verifican con una unidad de verificación (UVIE) acreditada.",
+      },
+      {
+        q: "¿Hacen el cableado de voz y datos?",
+        a: "Dejamos lista la canalización: tubería y charolas para voz, datos, CCTV. El cableado queda a cargo de tu proveedor de telecomunicaciones.",
+      },
+    ],
   },
   {
     id: "proyecto-ejecutivo",
@@ -70,6 +114,26 @@ export const categories: Category[] = [
       ["Coordinación BIM", "Modelado MEP y detección de interferencias."],
       ["Planos as-built", "Registro final de lo instalado para el cliente."],
     ],
+    process: [
+      { title: "Revisión", text: "Partimos del proyecto arquitectónico de tu despacho, con el uso que tendrá cada espacio." },
+      { title: "Cotización", text: "Propuesta según la complejidad del proyecto. Pagas con anticipo, luego por estimaciones de avance." },
+      { title: "Cálculo y planos", text: "Memorias de cálculo, plantas, isométricos, unifilares. Modelo BIM coordinado con estructura." },
+      { title: "Entrega", text: "Proyecto listo para licencia y obra. Al terminar la obra, planos as-built de lo instalado." },
+    ],
+    faqs: [
+      {
+        q: "¿Qué incluye el proyecto ejecutivo?",
+        a: "Memorias de cálculo hidráulico, sanitario, de gas y eléctrico. Plantas, cortes, isométricos, unifilares. Además, el modelo BIM coordinado con las demás disciplinas.",
+      },
+      {
+        q: "¿Trabajan sobre el proyecto de mi despacho?",
+        a: "Sí. Partimos de tu proyecto arquitectónico. En el modelo BIM detectamos interferencias con las demás disciplinas antes de llegar a obra.",
+      },
+      {
+        q: "¿Entregan planos as-built?",
+        a: "Sí. Al terminar la obra entregamos el registro de lo que realmente se instaló, útil para operar o dar mantenimiento después.",
+      },
+    ],
   },
   {
     id: "mantenimiento",
@@ -83,6 +147,26 @@ export const categories: Category[] = [
       ["Preventivo programado", "Revisión periódica de equipos, tableros y redes."],
       ["Correctivo y urgencias", "Detección de fugas, fallas y cortos en instalaciones hechas por HHM."],
       ["Adecuaciones", "Ampliaciones de carga y remodelaciones."],
+    ],
+    process: [
+      { title: "Obras HHM", text: "Damos mantenimiento a las instalaciones que hicimos: conocemos cada red, cada tablero." },
+      { title: "Preventivo", text: "Revisiones periódicas de equipos, tableros y redes para evitar fallas." },
+      { title: "Urgencias", text: "Si algo falla, atendemos fugas, fallas o cortos en instalaciones hechas por HHM." },
+      { title: "Adecuaciones", text: "Cuando tu proyecto crece, ampliamos cargas o adecuamos la instalación." },
+    ],
+    faqs: [
+      {
+        q: "¿Dan mantenimiento a instalaciones que no hicieron ustedes?",
+        a: "No. El mantenimiento es para las obras que instalamos, porque conocemos cómo se hicieron.",
+      },
+      {
+        q: "¿Atienden urgencias?",
+        a: "Sí, a los clientes con los que tenemos o tuvimos un proyecto: fugas, fallas o cortos en instalaciones hechas por HHM.",
+      },
+      {
+        q: "¿Pueden ampliar la instalación si mi proyecto crece?",
+        a: "Sí. Hacemos ampliaciones de carga o adecuaciones cuando remodelas o creces.",
+      },
     ],
   },
 ];

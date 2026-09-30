@@ -7,8 +7,10 @@ import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import MediaSlot from "@/components/ui/MediaSlot";
 import ArrowLink from "@/components/ui/ArrowLink";
 import ProjectCard from "@/components/ui/ProjectCard";
+import Eyebrow from "@/components/ui/Eyebrow";
 import JsonLd from "@/components/seo/JsonLd";
-import { categories, getCategory, projects } from "@/lib/data";
+import Faq from "@/components/Faq";
+import { categories, credentials, getCategory, projects } from "@/lib/data";
 import { pageMetadata } from "@/lib/seo";
 import { site, whatsappUrl } from "@/lib/site";
 
@@ -132,8 +134,49 @@ export default async function ServiceDetail({
         </div>
       </section>
 
+      {/* Cómo trabajamos: la línea superior de cada paso se llena en secuencia */}
+      <section className="border-y border-gray-200 bg-gray-50 px-5 py-14 md:px-8 md:py-[104px]">
+        <div className="mx-auto flex max-w-7xl flex-col gap-10 md:gap-14">
+          <Reveal className="flex flex-col gap-5">
+            <Eyebrow>Proceso</Eyebrow>
+            <h2 className="text-[clamp(30px,4vw,52px)] font-extrabold leading-none tracking-[-0.04em] text-balance">
+              Cómo trabajamos en {cat.name.toLowerCase()}.
+            </h2>
+          </Reveal>
+          <ol className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+            {cat.process.map((step, i) => (
+              <Reveal as="li" key={step.title} delay={i * 120} className="group flex flex-col gap-3">
+                <div className="relative h-px bg-gray-300">
+                  <span
+                    className="absolute inset-0 origin-left scale-x-0 bg-navy transition-transform duration-1000 ease-smooth group-data-[shown]:scale-x-100"
+                    style={{ transitionDelay: `${300 + i * 180}ms` }}
+                  />
+                </div>
+                <h3 className="pt-3 font-mono text-xs font-semibold uppercase text-navy-600">
+                  {String(i + 1).padStart(2, "0")} · {step.title}
+                </h3>
+                <p className="leading-[1.55] text-gray-600">{step.text}</p>
+              </Reveal>
+            ))}
+          </ol>
+
+          {/* Respaldo: lo que garantiza que la instalación se hace bien */}
+          <Reveal className="flex flex-col gap-6 border-t border-ink pt-8">
+            <Eyebrow as="h3">Respaldo</Eyebrow>
+            <ul className="grid gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-4">
+              {credentials.map((c) => (
+                <li key={c.title} className="flex flex-col gap-1">
+                  <span className="font-bold tracking-[-0.01em]">{c.title}</span>
+                  <span className="text-[14px] leading-snug text-gray-600">{c.text}</span>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        </div>
+      </section>
+
       {/* Obras relacionadas */}
-      <section className="px-5 pb-14 md:px-8 md:pb-[104px]">
+      <section className="px-5 py-14 md:px-8 md:py-[104px]">
         <div className="mx-auto flex max-w-7xl flex-col gap-8">
           <Reveal className="flex flex-wrap items-end justify-between gap-4 border-t border-ink pt-6">
             <h2 className="text-[clamp(28px,3.6vw,48px)] font-extrabold leading-none tracking-[-0.04em]">
@@ -154,6 +197,30 @@ export default async function ServiceDetail({
             ))}
           </div>
         </div>
+      </section>
+
+      {/* Preguntas del servicio + contacto directo */}
+      <section className="px-5 pb-14 md:px-8 md:pb-[104px]">
+        <Reveal className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[7fr_5fr] lg:gap-16">
+          <Faq title={`Preguntas sobre ${cat.name.toLowerCase()}`} items={cat.faqs} structuredData />
+          <div className="flex flex-col gap-5 self-start bg-navy p-7 text-white md:p-10">
+            <p className="font-mono text-[13px] font-semibold uppercase text-navy-200">¿Otra duda?</p>
+            <p className="text-[clamp(24px,2.4vw,32px)] font-extrabold leading-[1.05] tracking-[-0.03em]">
+              Te responde un responsable de HHM.
+            </p>
+            <p className="leading-[1.55] text-navy-100/90">
+              Escríbenos por WhatsApp o sube tus planos para cotizar {cat.name.toLowerCase()}.
+            </p>
+            <div className="flex flex-wrap gap-2.5 pt-2">
+              <ArrowLink href={`/cotizar?alcance=${cat.id}`} variant="white">
+                Cotizar {cat.name.toLowerCase()}
+              </ArrowLink>
+              <ArrowLink href={whatsappUrl(`Hola HHM Proyectos, tengo una duda sobre su servicio de ${cat.name.toLowerCase()}.`)} variant="outline" external>
+                WhatsApp
+              </ArrowLink>
+            </div>
+          </div>
+        </Reveal>
       </section>
 
       {/* Otros servicios */}
