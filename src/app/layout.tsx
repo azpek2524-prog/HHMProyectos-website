@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "HHM Proyectos | Electricidad y plomería para construcción en Monterrey",
     description:
-      "Electricidad y plomería que cuidan tu patrimonio. 15 años y más de 280 obras.",
+      "Electricidad y plomería sin sorpresas en obra. Un solo equipo, del cálculo a la entrega, con reportes de avance.",
     type: "website",
     locale: "es_MX",
     siteName: site.name,

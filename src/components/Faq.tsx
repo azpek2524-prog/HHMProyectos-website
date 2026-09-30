@@ -5,13 +5,17 @@ import { faqs } from "@/lib/data";
  * Preguntas frecuentes: título arriba y acordeón debajo (el contenedor define
  * el ancho y el fondo). Usa <details>: funciona sin JavaScript y las
  * respuestas quedan en el HTML (buscadores y asistentes de IA las leen).
- * `structuredData` agrega el FAQPage de schema.org; úsalo en una sola página.
+ * `items` cambia las preguntas (por defecto, las generales del inicio).
+ * `structuredData` agrega el FAQPage de schema.org; úsalo solo en una página
+ * por lista de preguntas.
  */
 export default function Faq({
   title = "Preguntas frecuentes",
+  items = faqs,
   structuredData = false,
 }: {
   title?: string;
+  items?: { q: string; a: string }[];
   structuredData?: boolean;
 }) {
   return (
@@ -21,7 +25,7 @@ export default function Faq({
           data={{
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            mainEntity: faqs.map((f) => ({
+            mainEntity: items.map((f) => ({
               "@type": "Question",
               name: f.q,
               acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -33,7 +37,7 @@ export default function Faq({
         {title}
       </h2>
       <div className="border-t border-ink">
-        {faqs.map((f) => (
+        {items.map((f) => (
           <details key={f.q} className="group border-b border-gray-300">
             <summary className="flex cursor-pointer list-none items-center gap-5 py-5 text-left [&::-webkit-details-marker]:hidden">
               <span className="flex-1 text-[clamp(16px,1.4vw,18px)] font-bold tracking-[-0.01em] transition-colors duration-300 group-hover:text-navy group-open:text-navy">
