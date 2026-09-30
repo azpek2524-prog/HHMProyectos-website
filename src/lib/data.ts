@@ -261,15 +261,15 @@ export const projects: Project[] = [
     type: "Comercial",
     scope: "Electricidad",
     summary: "Agencia automotriz con fachada de cristal y plafón de iluminación lineal en todo el piso de exhibición, de la obra en proceso a la apertura.",
-    cover: { src: "/obras/agencia-kia/04.jpg", alt: "Fachada de cristal iluminada de noche", w: 1280, h: 960 },
+    cover: { src: "/obras/agencia-kia/04.jpg", alt: "Fachada de cristal iluminada de noche", w: 2880, h: 1607 },
     gallery: [
       {
         title: "Terminado",
         photos: [
-          { src: "/obras/agencia-kia/04.jpg", alt: "Fachada de cristal iluminada de noche", w: 1280, h: 960 },
+          { src: "/obras/agencia-kia/04.jpg", alt: "Fachada de cristal iluminada de noche", w: 2880, h: 1607 },
           { src: "/obras/agencia-kia/02.jpg", alt: "Plafón con iluminación lineal en piso de exhibición", w: 1280, h: 960 },
-          { src: "/obras/agencia-kia/08.jpg", alt: "Fachada durante los últimos detalles de obra", w: 1024, h: 845 },
-          { src: "/obras/agencia-kia/11.jpg", alt: "Vista nocturna del conjunto", w: 1024, h: 768 },
+          { src: "/obras/agencia-kia/08.jpg", alt: "Fachada durante los últimos detalles de obra", w: 2880, h: 1607 },
+          { src: "/obras/agencia-kia/11.jpg", alt: "Vista nocturna del conjunto", w: 2880, h: 1607 },
         ],
       },
       {
@@ -467,6 +467,20 @@ export const faqs: { q: string; a: string }[] = [
     q: "¿Cómo se paga? ¿Facturan?",
     a: "Con anticipo y estimaciones conforme avanza la obra. Sí facturamos.",
   },
+];
+
+/* ------------------------- Cómo trabajamos ------------------------- */
+
+/*
+ * Metodología de HHM del primer contacto a la obra (bloque de cotización del
+ * inicio). Una o dos líneas por paso: el bloque es angosto.
+ */
+export const processSteps: { title: string; text: string }[] = [
+  { title: "Datos", text: "Déjanos tu nombre con un teléfono o correo. Un responsable de HHM te atiende directamente." },
+  { title: "Proyecto", text: "Compártenos planos, fotos o la idea de tu obra. Sin planos, empezamos con una visita." },
+  { title: "Revisión", text: "Validamos viabilidad técnica conforme a la normativa vigente. Antes de proponer, visitamos tu obra." },
+  { title: "Cotización", text: "Recibes una propuesta desglosada por alcance. Pagas con anticipo, luego por estimaciones de avance." },
+  { title: "Ejecución", text: "Mano de obra especializada: personal propio con constancias DC-3, supervisado hasta la entrega." },
 ];
 
 /* ---------------------------- Cotización ---------------------------- */

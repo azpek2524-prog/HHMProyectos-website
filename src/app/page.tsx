@@ -13,7 +13,7 @@ import TestimonialCarousel from "@/components/home/TestimonialCarousel";
 import QuoteCta from "@/components/home/QuoteCta";
 import JsonLd from "@/components/seo/JsonLd";
 import Faq from "@/components/Faq";
-import { categories, clientLogos, projects, specialties, stats, testimonials } from "@/lib/data";
+import { categories, clientLogos, credentials, projects, specialties, stats, testimonials } from "@/lib/data";
 import { site } from "@/lib/site";
 
 // Título, descripción y vista previa vienen del layout.
@@ -228,8 +228,17 @@ export default function Home() {
       <section className="px-5 py-14 md:px-8 md:py-[104px]">
         <Reveal className="mx-auto grid max-w-7xl overflow-hidden border border-ink lg:grid-cols-[5fr_7fr]">
           <QuoteCta />
-          <div className="bg-gray-50 p-7 md:p-12">
+          <div className="flex flex-col gap-10 bg-gray-50 p-7 md:p-12">
             <Faq structuredData />
+            {/* Respaldo: en escritorio equilibra el alto con la tarjeta de pasos */}
+            <ul className="mt-auto hidden grid-cols-2 gap-x-8 gap-y-5 border-t border-ink pt-6 lg:grid">
+              {credentials.map((c) => (
+                <li key={c.title} className="flex flex-col gap-1">
+                  <span className="text-[15px] font-bold tracking-[-0.01em]">{c.title}</span>
+                  <span className="text-sm leading-snug text-gray-600">{c.text}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </Reveal>
       </section>
