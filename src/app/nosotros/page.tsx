@@ -11,7 +11,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Nosotros",
   description:
-    "HHM Proyectos nació del oficio: 15 años, más de 280 obras y un equipo propio de 40 personas en electricidad y plomería. No jugamos con el patrimonio de nuestros clientes.",
+    "HHM Proyectos nació del oficio: 15+ años, 280+ obras y un equipo propio de 40+ personas en electricidad y plomería. No jugamos con el patrimonio de nuestros clientes.",
   path: "/nosotros",
 });
 
@@ -46,7 +46,7 @@ export default function Nosotros() {
               día de la entrega.
             </p>
             <p>
-              Hoy somos 40 personas, entre ingenieros y cuadrillas propias, con
+              Hoy somos más de 40 personas, entre ingenieros y cuadrillas propias, con
               20 obras en paralelo. Entre los proyectos que hemos realizado se
               encuentran agencias automotrices de siete marcas, autolavados,
               residencias, oficinas corporativas y parques industriales. Desde
