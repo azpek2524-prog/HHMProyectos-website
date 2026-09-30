@@ -6,7 +6,7 @@ import Parallax from "@/components/motion/Parallax";
 import Marquee from "@/components/motion/Marquee";
 import ArrowLink from "@/components/ui/ArrowLink";
 import ProjectCard from "@/components/ui/ProjectCard";
-import HeroBlueprint from "@/components/home/HeroBlueprint";
+import HeroBlueprint, { HeroBlueprintMobile } from "@/components/home/HeroBlueprint";
 import StatsCounter from "@/components/home/StatsCounter";
 import ServicePanels from "@/components/home/ServicePanels";
 import TestimonialCarousel from "@/components/home/TestimonialCarousel";
@@ -59,12 +59,16 @@ export default function Home() {
       <JsonLd data={business} />
 
       {/* ============ HERO · plano que se dibuja solo + entrada escalonada ============ */}
-      <section className="relative h-[clamp(560px,52vw,720px)] overflow-hidden bg-navy">
+      <section className="relative overflow-hidden bg-navy md:h-[clamp(560px,52vw,720px)]">
         <Parallax speed={0.1} scale={1.04}>
           <HeroBlueprint />
         </Parallax>
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(22,36,86,0)_0%,rgba(22,36,86,0)_38%,rgba(3,7,18,.82)_100%)]" />
-        <div className="absolute inset-x-0 bottom-0 px-5 py-8 md:px-8 md:py-12">
+        {/* Móvil: el plano va en su propia franja y el titular debajo */}
+        <div className="relative md:hidden">
+          <HeroBlueprintMobile />
+        </div>
+        <div className="relative px-5 pb-10 pt-3 md:absolute md:inset-x-0 md:bottom-0 md:px-8 md:py-12">
           <div className="mx-auto flex max-w-7xl flex-col gap-6 text-white">
             <h1 className="max-w-[1100px] animate-rise text-[clamp(42px,7.2vw,104px)] font-extrabold leading-[0.95] tracking-[-0.045em] text-balance">
               Electricidad y plomería que cuidan tu patrimonio.
@@ -226,9 +230,10 @@ export default function Home() {
 
       {/* ============ COTIZACIÓN + PREGUNTAS FRECUENTES · lado a lado ============ */}
       <section className="px-5 py-14 md:px-8 md:py-[104px]">
-        <Reveal className="mx-auto grid max-w-7xl overflow-hidden border border-ink lg:grid-cols-[5fr_7fr]">
+        {/* En móvil, tarjeta y preguntas van separadas (sin el marco común) */}
+        <Reveal className="mx-auto grid max-w-7xl overflow-hidden border border-ink max-md:gap-12 max-md:overflow-visible max-md:border-0 lg:grid-cols-[5fr_7fr]">
           <QuoteCta />
-          <div className="flex flex-col gap-10 bg-gray-50 p-7 md:p-12">
+          <div className="flex flex-col gap-10 bg-gray-50 p-7 max-md:bg-transparent max-md:p-0 md:p-12">
             <Faq structuredData />
             {/* Respaldo: en escritorio equilibra el alto con la tarjeta de pasos */}
             <ul className="mt-auto hidden grid-cols-2 gap-x-8 gap-y-5 border-t border-ink pt-6 lg:grid">

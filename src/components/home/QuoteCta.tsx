@@ -2,12 +2,15 @@
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Link from "next/link";
-import { useInView, useReducedMotion } from "@/lib/motion";
+import { useInView, useMediaQuery, useReducedMotion } from "@/lib/motion";
 import { processSteps as steps } from "@/lib/data";
 import { site, whatsappUrl } from "@/lib/site";
 
-// Tiempo por paso: alcanza para leer su descripción.
+// Tiempo por paso: alcanza para leer su descripción. En móvil se muestra
+// una descripción a la vez, así que cada paso dura un poco más.
 const STEP_MS = 2400;
+const STEP_MS_MOBILE = 3800;
+const pad = (n: number) => String(n).padStart(2, "0");
 
 /**
  * CTA principal de conversión (columna izquierda del bloque de cotización y
@@ -17,24 +20,31 @@ const STEP_MS = 2400;
  *   secuencia mientras el bloque está en pantalla; fuera de pantalla o con
  *   "reducir movimiento" se quedan quietos. Las descripciones siempre están
  *   en el HTML.
+ * - En móvil los pasos son una barra de 5 segmentos y solo se lee la
+ *   descripción del paso activo, para no ocupar toda la pantalla.
  */
 export default function QuoteCta() {
   const cardRef = useRef<HTMLAnchorElement>(null);
   const inView = useInView(cardRef);
   const reduced = useReducedMotion();
   const [step, setStep] = useState(0);
+  const wide = useMediaQuery("(min-width: 768px)");
+  const stepMs = wide ? STEP_MS : STEP_MS_MOBILE;
   const playing = inView && !reduced;
   const shown = reduced ? steps.length : step;
+  // Móvil: paso cuya descripción se muestra (al final se queda en el último).
+  const focus = steps[Math.min(shown, steps.length - 1)];
+  const focusIndex = Math.min(shown, steps.length - 1);
 
   useEffect(() => {
     if (!playing) return;
     // Recorre los pasos y mantiene todo lleno un momento antes de reiniciar.
     const t = window.setTimeout(
       () => setStep((s) => (s + 1) % (steps.length + 2)),
-      STEP_MS,
+      stepMs,
     );
     return () => window.clearTimeout(t);
-  }, [playing, step]);
+  }, [playing, step, stepMs]);
 
   const setGlow = (x: number, y: number) => {
     cardRef.current?.style.setProperty("--mx", `${x}px`);
@@ -69,7 +79,12 @@ export default function QuoteCta() {
           <br />
           Te cotizamos.
         </h2>
-        <ol className="mt-auto flex flex-col border-b border-white/15" aria-label="Cómo trabajamos, paso a paso">
+        {/* Lista completa. En móvil queda solo para lectores de pantalla (salvo
+            con "reducir movimiento") y se ve la versión compacta de abajo. */}
+        <ol
+          className={`mt-auto flex flex-col border-b border-white/15 ${reduced ? "" : "max-md:sr-only"}`}
+          aria-label="Cómo trabajamos, paso a paso"
+        >
           {steps.map((s, i) => {
             const done = i < shown;
             const current = i === shown && playing;
@@ -83,7 +98,7 @@ export default function QuoteCta() {
                     <div
                       key={`s-${step}`}
                       className="absolute inset-0 origin-left animate-progress bg-white"
-                      style={{ "--progress-duration": `${STEP_MS}ms` } as CSSProperties}
+                      style={{ "--progress-duration": `${stepMs}ms` } as CSSProperties}
                     />
                   )}
                 </div>
@@ -114,6 +129,47 @@ export default function QuoteCta() {
             );
           })}
         </ol>
+
+        {/* Móvil: barra de 5 segmentos y la descripción del paso activo */}
+        {!reduced && (
+          <div aria-hidden="true" className="mt-auto flex flex-col gap-4 md:hidden">
+            <ol className="grid grid-cols-5 gap-1.5">
+              {steps.map((s, i) => {
+                const done = i < shown;
+                const current = i === shown && playing;
+                return (
+                  <li key={s.title} className="flex flex-col gap-2">
+                    <div className="relative h-[3px] overflow-hidden bg-white/20">
+                      {done && <div className="absolute inset-0 bg-white/70" />}
+                      {current && (
+                        <div
+                          key={`m-${step}`}
+                          className="absolute inset-0 origin-left animate-progress bg-white"
+                          style={{ "--progress-duration": `${stepMs}ms` } as CSSProperties}
+                        />
+                      )}
+                    </div>
+                    <span
+                      className={`font-mono text-[11px] font-semibold transition-colors duration-300 ${
+                        done || current ? "text-white" : "text-navy-200/60"
+                      }`}
+                    >
+                      {pad(i + 1)}
+                    </span>
+                  </li>
+                );
+              })}
+            </ol>
+            <div key={`d-${focusIndex}`} className="flex min-h-[124px] animate-enter flex-col gap-1.5 border-t border-white/15 pt-4">
+              <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-navy-200">
+                Paso {pad(focusIndex + 1)} de {pad(steps.length)}
+              </span>
+              <span className="text-xl font-bold tracking-[-0.01em]">{focus.title}</span>
+              <span className="text-[15px] leading-snug text-navy-100/90">{focus.text}</span>
+            </div>
+          </div>
+        )}
+
         <span className="flex w-fit items-center gap-3 bg-white px-6 py-4 font-semibold text-navy transition-colors duration-300 group-hover:bg-navy-100">
           Empezar cotización
           <span

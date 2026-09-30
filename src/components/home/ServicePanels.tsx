@@ -12,7 +12,8 @@ const ROTATE_MS = 5000;
  * Escritorio: dos paneles con foto; el activo se expande. Rotan solos cada
  * 5 s con barra de progreso, y se pausan al pasar el cursor, fuera de
  * pantalla o con "reducir movimiento".
- * Móvil: pestañas con transición lateral, sin rotación automática.
+ * Móvil y tablet: tarjetas con foto que se deslizan de lado (la siguiente
+ * se asoma para invitar a deslizar), con indicador de avance.
  */
 export default function ServicePanels() {
   const ref = useRef<HTMLDivElement>(null);
@@ -22,6 +23,22 @@ export default function ServicePanels() {
   const reduced = useReducedMotion();
   const desktop = useMediaQuery("(min-width: 1024px)");
   const rotating = desktop && inView && !hovering && !reduced;
+
+  // Móvil: tarjeta visible en el carrusel deslizable.
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [slide, setSlide] = useState(0);
+  const cardStep = () => {
+    const track = trackRef.current;
+    const card = track?.firstElementChild as HTMLElement | null;
+    return card ? card.offsetWidth + 12 : 1;
+  };
+  const onTrackScroll = () => {
+    const track = trackRef.current;
+    if (track) setSlide(Math.min(homeServices.length - 1, Math.round(track.scrollLeft / cardStep())));
+  };
+  const goToSlide = (i: number) => {
+    trackRef.current?.scrollTo({ left: i * cardStep(), behavior: reduced ? "auto" : "smooth" });
+  };
 
   useEffect(() => {
     if (!rotating) return;
@@ -129,74 +146,73 @@ export default function ServicePanels() {
         })}
       </div>
 
-      {/* ---------- Móvil / tablet ---------- */}
-      <div className="border border-ink lg:hidden">
-        <div className="grid grid-cols-2 border-b border-ink" role="tablist">
-          {homeServices.map((s, i) => {
-            const on = active === i;
-            return (
+      {/* ---------- Móvil / tablet: tarjetas que se deslizan ---------- */}
+      <div className="lg:hidden">
+        <div
+          ref={trackRef}
+          onScroll={onTrackScroll}
+          className="-mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-px-5 px-5 [scrollbar-width:none] md:-mx-8 md:scroll-px-8 md:px-8 [&::-webkit-scrollbar]:hidden"
+        >
+          {homeServices.map((s) => (
+            <article
+              key={s.id}
+              className="relative flex min-h-[500px] w-[86%] shrink-0 snap-start flex-col justify-end overflow-hidden bg-night text-white md:w-[calc(50%-6px)]"
+            >
+              <div className="absolute inset-0">
+                <MediaSlot label={s.media} src={s.image} sizes="(min-width: 768px) 50vw, 86vw" labelAt="top" />
+              </div>
+              <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(3,7,18,.1)_0%,rgba(3,7,18,.5)_42%,rgba(3,7,18,.95)_100%)]" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 flex justify-between p-5">
+                <span className="bg-white px-2 py-1 font-mono text-xs font-semibold text-night">{s.n}</span>
+                <span className="font-mono text-[11px] font-semibold text-gray-200">
+                  {String(s.items.length).padStart(2, "0")} SERVICIOS
+                </span>
+              </div>
+              <div className="relative flex flex-col gap-4 p-5">
+                <h3 className="text-[40px] font-extrabold leading-none tracking-[-0.045em]">{s.name}</h3>
+                <p className="text-[15px] leading-normal text-gray-200">{s.lead}</p>
+                <ul className="flex flex-wrap gap-1.5">
+                  {s.items.map((item) => (
+                    <li key={item} className="border border-white/25 bg-white/5 px-2.5 py-1 text-[13px] font-medium">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  href={`/servicios/${s.id}`}
+                  className="mt-1 flex w-fit items-center gap-2.5 bg-white px-[18px] py-3.5 font-semibold text-night"
+                >
+                  Ver {s.name} <span aria-hidden="true">→</span>
+                </Link>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        {/* Indicador: cuál tarjeta se ve y cuántas hay */}
+        <div className="mt-4 flex items-center justify-between md:hidden">
+          <div className="flex gap-1">
+            {homeServices.map((s, i) => (
               <button
                 key={s.id}
                 type="button"
-                role="tab"
-                aria-selected={on}
-                onClick={() => setActive(i)}
-                className={`flex h-14 items-center justify-center gap-2 text-base font-bold tracking-[-0.01em] transition-colors duration-300 ${
-                  on ? "bg-navy text-white" : "bg-white text-ink"
-                }`}
+                aria-label={`Ver ${s.name}`}
+                aria-current={slide === i}
+                onClick={() => goToSlide(i)}
+                className="py-3 pr-1"
               >
-                <span className="font-mono text-[11px] font-semibold opacity-70">
-                  {s.n}
-                </span>
-                {s.name}
+                <span
+                  className={`block h-[3px] transition-all duration-500 ease-smooth ${
+                    slide === i ? "w-10 bg-navy" : "w-5 bg-gray-300"
+                  }`}
+                />
               </button>
-            );
-          })}
-        </div>
-        <div className="grid overflow-hidden">
-          {homeServices.map((s, i) => {
-            const on = active === i;
-            return (
-              <div
-                key={s.id}
-                role="tabpanel"
-                inert={!on}
-                className="flex flex-col bg-white transition-[opacity,transform] duration-[450ms] ease-smooth [grid-area:1/1]"
-                style={{
-                  opacity: on ? 1 : 0,
-                  transform: `translateX(${on ? 0 : i < active ? -24 : 24}px)`,
-                }}
-              >
-                <div className="relative aspect-[4/3] overflow-hidden bg-night">
-                  <MediaSlot label={s.media} src={s.image} sizes="100vw" labelAt="top" />
-                  <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(3,7,18,0)_45%,rgba(3,7,18,.85)_100%)]" />
-                  <h3 className="pointer-events-none absolute bottom-[18px] left-5 text-[40px] font-extrabold leading-none tracking-[-0.045em] text-white">
-                    {s.name}
-                  </h3>
-                </div>
-                <div className="flex flex-col gap-[18px] p-5">
-                  <p className="text-base leading-normal text-gray-600">{s.lead}</p>
-                  <ul className="flex flex-col border-t border-gray-200">
-                    {s.items.map((item) => (
-                      <li
-                        key={item}
-                        className="flex justify-between border-b border-gray-200 py-3 text-[15px] font-medium"
-                      >
-                        {item}
-                        <span className="text-gray-400">+</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Link
-                    href={`/servicios/${s.id}`}
-                    className="flex justify-between bg-navy px-[18px] py-4 font-semibold text-white"
-                  >
-                    Ver {s.name} <span aria-hidden="true">→</span>
-                  </Link>
-                </div>
-              </div>
-            );
-          })}
+            ))}
+          </div>
+          <span className="font-mono text-xs font-semibold text-gray-500">
+            {String(slide + 1).padStart(2, "0")} / {String(homeServices.length).padStart(2, "0")} ·{" "}
+            {slide === homeServices.length - 1 ? "← Desliza" : "Desliza →"}
+          </span>
         </div>
       </div>
     </div>
