@@ -140,6 +140,60 @@ html[data-motion] [data-reveal="clip"][data-shown] > * {
   -webkit-text-stroke: 1.5px var(--color-ink);
 }
 
+/* Mapa de /nosotros: la retícula aparece en ondas desde la base, luego se
+   trazan los arcos y aparecen las ciudades. `--d` es el retraso de cada capa. */
+.presence-marker,
+.presence-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+html[data-motion] .presence-map .presence-band,
+html[data-motion] .presence-map .presence-label {
+  opacity: 0;
+  transition: opacity 0.7s var(--ease-smooth);
+  transition-delay: var(--d, 0ms);
+}
+html[data-motion] .presence-map .presence-arc {
+  stroke-dashoffset: 1;
+  transition:
+    stroke-dashoffset 1.1s var(--ease-smooth),
+    stroke-width 0.3s ease;
+  transition-delay: var(--d, 0ms), 0ms;
+}
+html[data-motion] .presence-map .presence-marker {
+  opacity: 0;
+  transform: scale(0);
+  transition:
+    opacity 0.4s ease-out,
+    transform 0.6s var(--ease-smooth);
+  transition-delay: var(--d, 0ms);
+}
+html[data-motion] .presence-map[data-shown] .presence-band,
+html[data-motion] .presence-map[data-shown] .presence-label,
+html[data-motion] .presence-map[data-shown] .presence-marker {
+  opacity: 1;
+  transform: none;
+}
+html[data-motion] .presence-map[data-shown] .presence-arc {
+  stroke-dashoffset: 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .presence-pulse {
+    animation: presence-pulse 2.4s var(--ease-smooth) infinite;
+    animation-delay: var(--d, 0ms);
+  }
+}
+@keyframes presence-pulse {
+  from {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(4.5);
+    opacity: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

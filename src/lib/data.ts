@@ -373,6 +373,26 @@ export const credentials = [
 ];
 
 /*
+ * Mapa de /nosotros: base y ciudades donde HHM ya tuvo obra (entrevista,
+ * sep. 2026). Para agregar una ciudad basta con su longitud y latitud.
+ * `label` indica dónde va el nombre respecto al punto, para que no se encimen.
+ */
+export type Place = {
+  name: string;
+  region: string;
+  note: string;
+  lon: number;
+  lat: number;
+  base?: boolean;
+  label: "left" | "right" | "below";
+};
+export const places: Place[] = [
+  { name: "Monterrey", region: "Nuevo León", note: "Base de operaciones", lon: -100.3161, lat: 25.6866, base: true, label: "right" },
+  { name: "Saltillo", region: "Coahuila", note: "Obra realizada", lon: -101.0053, lat: 25.4232, label: "below" },
+  { name: "Mazatlán", region: "Sinaloa", note: "Obra realizada", lon: -106.4111, lat: 23.2494, label: "left" },
+];
+
+/*
  * Equipo en /nosotros. Vacío = la sección no se muestra.
  * TODO (HHM): nombres, puestos y retratos reales. Formato:
  *   { name: "Nombre Apellido", role: "Dirección", image: "/equipo/nombre.jpg" },
