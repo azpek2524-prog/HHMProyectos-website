@@ -486,7 +486,8 @@ export const aboutPhotos: Record<"team" | "founder" | "work", AboutPhoto> = {
 /*
  * Mapa de /nosotros: base y ciudades donde HHM ya tuvo obra (entrevista,
  * sep. 2026). Para agregar una ciudad basta con su longitud y latitud.
- * `label` indica dónde va el nombre respecto al punto, para que no se encimen.
+ * `label` indica dónde va el nombre respecto al punto, para que no se encimen;
+ * `labelMobile` lo cambia solo en pantallas chicas, donde las etiquetas pesan más.
  */
 export type Place = {
   name: string;
@@ -495,12 +496,14 @@ export type Place = {
   lon: number;
   lat: number;
   base?: boolean;
-  label: "left" | "right" | "below";
+  label: "left" | "right" | "below" | "below-left";
+  labelMobile?: "left" | "right" | "below" | "below-left";
 };
 export const places: Place[] = [
   { name: "Monterrey", region: "Nuevo León", note: "Base de operaciones", lon: -100.3161, lat: 25.6866, base: true, label: "right" },
-  { name: "Saltillo", region: "Coahuila", note: "Obra realizada", lon: -101.0053, lat: 25.4232, label: "below" },
+  { name: "Saltillo", region: "Coahuila", note: "Obra realizada", lon: -101.0053, lat: 25.4232, label: "below", labelMobile: "below-left" },
   { name: "Mazatlán", region: "Sinaloa", note: "Obra realizada", lon: -106.4111, lat: 23.2494, label: "left" },
+  { name: "Ciudad de México", region: "CDMX", note: "Obra realizada", lon: -99.1332, lat: 19.4326, label: "right", labelMobile: "below" },
 ];
 
 /*
@@ -528,7 +531,7 @@ export const faqs: { q: string; a: string }[] = [
   },
   {
     q: "¿En qué zona trabajan?",
-    a: "Nuestra base es el área metropolitana de Monterrey, pero también tomamos proyectos en el resto del país: cuéntanos dónde está tu obra y lo revisamos al cotizar. Ya hemos trabajado en ciudades como Saltillo y Mazatlán.",
+    a: "Nuestra base es el área metropolitana de Monterrey, pero también tomamos proyectos en el resto del país: cuéntanos dónde está tu obra y lo revisamos al cotizar. Ya hemos trabajado en ciudades como Saltillo, Mazatlán y la Ciudad de México.",
   },
   {
     q: "¿Cómo es el proceso para cotizar y cuánto tardan?",

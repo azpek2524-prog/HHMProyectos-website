@@ -1,13 +1,13 @@
 # Product Marketing Context
 
-**Document version:** v3.1
-**Last updated:** 2026-09-30
+**Document version:** v4
+**Last updated:** 2026-10-01
 
 > Fuente: entrevista de discovery con HHM (Notion › Idea Bank › "ENTREVISTA", 2026-09-26).
 > Lo marcado como **[supuesto]** no salió de la entrevista y hay que confirmarlo.
 
 ## Product Overview
-**One-liner:** Contratista de electricidad y plomería para obras residenciales, comerciales e industriales. Base en el área metropolitana de Monterrey; ha tenido proyectos en Saltillo y Mazatlán y cotiza obras en el resto de México y en el extranjero.
+**One-liner:** Contratista de electricidad y plomería para obras residenciales, comerciales e industriales. Base en el área metropolitana de Monterrey; ha tenido proyectos en Saltillo, Mazatlán y la Ciudad de México, y cotiza obras en todo el país (solo nacional).
 **What it does:** Diseña, calcula e instala las instalaciones eléctricas (desde acometida en media tensión hasta iluminación) e hidrosanitarias y de gas de un proyecto, y les da seguimiento hasta la entrega. Trabaja sobre todo en proyecto nuevo; el mantenimiento es secundario y se ofrece a clientes de proyecto.
 **Product category:** Instalaciones eléctricas y de plomería para construcción (contratista MEP / "instalaciones").
 **Product type:** Servicio B2B (contratista especializado).
@@ -27,7 +27,7 @@
 - Residencias con iluminación arquitectónica (luz indirecta, tiras LED, cine en casa).
 - Parques industriales y naves (subestaciones, tableros, iluminación de altura).
 - Oficinas corporativas (Torre Invex).
-- Proyectos fuera de Monterrey: Bisquets Obregón en Saltillo, Torre Baluarte (torre departamental) en Mazatlán.
+- Proyectos fuera de Monterrey: Bisquets Obregón en Saltillo, Torre Baluarte (torre departamental) en Mazatlán, obra en la Ciudad de México (sin detalle aún).
 
 ## Personas
 | Persona | Cares about | Challenge | Value we promise |
@@ -122,6 +122,7 @@ HHM dice que "no hay competencia" (todo llega por recomendación). Aun así, el 
 
 ## Changelog
 *Newest first. One line per revision: what changed and why.*
+- v4 (2026-10-01) — Alcance solo nacional (se retira lo de obras en el extranjero). Se agrega la Ciudad de México a las ciudades con obra realizada (indicación del usuario).
 - v3.1 (2026-09-30) — En el sitio las cifras de años y equipo se muestran como «15+» / «más de 15 años» y «40+» / «más de 40 personas» (indicación del usuario).
 - v3 (2026-09-30) — Alcance ampliado: además de proyectos nacionales, abiertos a cotizar obras en el extranjero (indicación del usuario al reescribir Nosotros).
 - v2 (2026-09-26) — Zona confirmada (base en el área metropolitana de Monterrey, abiertos a proyectos nacionales) y garantía (depende de la obra; por lo general 3 meses).

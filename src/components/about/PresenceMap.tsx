@@ -40,12 +40,18 @@ const bands = groups.map((pts) => {
   return d;
 });
 
-/** Arco de la base a una ciudad, curvado hacia arriba. */
+/**
+ * Arco de la base a una ciudad, curvado hacia arriba. Si la ciudad queda más
+ * al sur que al lado (CDMX), se curva hacia el este para no cruzar las
+ * etiquetas de las ciudades del oeste.
+ */
 function arc(x: number, y: number) {
   const mx = (bx + x) / 2;
   const my = (by + y) / 2;
-  const lift = Math.hypot(x - bx, y - by) * 0.35;
-  return `M${bx.toFixed(1)} ${by.toFixed(1)}Q${mx.toFixed(1)} ${(my - lift).toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)}`;
+  const dist = Math.hypot(x - bx, y - by);
+  const south = Math.abs(y - by) > Math.abs(x - bx);
+  const [cx, cy] = south ? [mx + dist * 0.6, my] : [mx, my - dist * 0.35];
+  return `M${bx.toFixed(1)} ${by.toFixed(1)}Q${cx.toFixed(1)} ${cy.toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)}`;
 }
 
 const mapPlaces: MapPlace[] = places.map((p) => {
