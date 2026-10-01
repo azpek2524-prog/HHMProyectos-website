@@ -50,8 +50,8 @@ export default function Nosotros() {
               20 obras en paralelo. Entre los proyectos que hemos realizado se
               encuentran agencias automotrices de siete marcas, autolavados,
               residencias, oficinas corporativas y parques industriales. Desde
-              nuestra base en Monterrey también hemos trabajado en Saltillo y
-              Mazatlán. Cotizamos obras en todo México, incluso fuera del país.
+              nuestra base en Monterrey también hemos trabajado en Saltillo,
+              Mazatlán y la Ciudad de México. Cotizamos obras en todo el país.
             </p>
             <p>
               Esa capacidad se puso a prueba en un parque industrial para una

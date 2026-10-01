@@ -15,6 +15,7 @@ const labelOffset: Record<Place["label"], string> = {
   right: "translate(16px, -50%)",
   left: "translate(calc(-100% - 16px), -50%)",
   below: "translate(-50%, 14px)",
+  "below-left": "translate(calc(-100% + 24px), 16px)",
 };
 
 /**
@@ -25,7 +26,7 @@ const labelOffset: Record<Place["label"], string> = {
 export default function PresenceMapClient({ places, dots }: { places: MapPlace[]; dots: ReactNode }) {
   const [active, setActive] = useState<string | null>(null);
   const others = places.filter((p) => !p.base);
-  const summary = `Mapa de México: base en ${places.find((p) => p.base)?.name ?? "Monterrey"}, obras en ${others.map((p) => p.name).join(" y ")}.`;
+  const summary = `Mapa de México: base en ${places.find((p) => p.base)?.name ?? "Monterrey"}, obras en ${new Intl.ListFormat("es").format(others.map((p) => p.name))}.`;
 
   // Orden de aparición: base, luego cada arco y al final su ciudad.
   const arcDelay = (i: number) => 900 + i * 250;
@@ -62,7 +63,7 @@ export default function PresenceMapClient({ places, dots }: { places: MapPlace[]
             <span aria-hidden="true" className="h-2.5 w-2.5 shrink-0 border border-gray-400" />
             <span className="flex-1">
               <span className="font-semibold">Otras ciudades</span>
-              <span className="text-gray-500"> · México o extranjero</span>
+              <span className="text-gray-500"> · Resto de México</span>
             </span>
             <span className="text-right text-sm text-gray-600">Lo revisamos al cotizar</span>
           </li>
@@ -139,14 +140,15 @@ export default function PresenceMapClient({ places, dots }: { places: MapPlace[]
           {places.map((p) => (
             <span
               key={p.name}
-              className={`presence-label pointer-events-none absolute whitespace-nowrap px-1.5 py-0.5 font-mono text-[11px] font-semibold uppercase transition-colors duration-300 max-md:text-[12px] ${
+              className={`presence-label pointer-events-none absolute whitespace-nowrap [transform:var(--lbl)] max-md:[transform:var(--lbl-m)] px-1.5 py-0.5 font-mono text-[11px] font-semibold uppercase transition-colors duration-300 max-md:text-[12px] ${
                 p.base || active === p.name ? "bg-navy text-white" : "bg-white text-ink"
               }`}
               style={
                 {
                   left: pct(p.x, mexicoMap.width),
                   top: pct(p.y, mexicoMap.height),
-                  transform: labelOffset[p.label],
+                  "--lbl": labelOffset[p.label],
+                  "--lbl-m": labelOffset[p.labelMobile ?? p.label],
                   "--d": `${delay(p)}ms`,
                 } as CSSProperties
               }
