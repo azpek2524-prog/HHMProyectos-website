@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     template: "%s | HHM Proyectos",
   },
   description:
-    "Contratista de electricidad y plomería en Monterrey: 15+ años y 280+ obras para agencias automotrices, residencias, comercios e industria, con equipo propio.",
+    "Contratista de electricidad y plomería en Monterrey: 18+ años y 280+ obras para agencias automotrices, residencias, comercios e industria, con equipo propio.",
   keywords: [
     "contratista eléctrico Monterrey",
     "instalaciones eléctricas Monterrey",

@@ -16,7 +16,7 @@ export default function AboutHero() {
         <div className="mx-auto flex max-w-7xl flex-col gap-6 md:gap-8">
           <Eyebrow className="animate-rise">Nosotros</Eyebrow>
           <h1 className="max-w-[1180px] animate-rise text-[clamp(38px,6.4vw,92px)] font-extrabold leading-[0.96] tracking-[-0.045em] text-balance [animation-delay:80ms]">
-            Más de 15 años respondiendo
+            Más de 18 años respondiendo
             <br />
             <span className="font-medium text-navy-600">por cada instalación.</span>
           </h1>

@@ -11,7 +11,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Nosotros",
   description:
-    "HHM Proyectos nació del oficio: 15+ años, 280+ obras y un equipo propio de 40+ personas en electricidad y plomería. No jugamos con el patrimonio de nuestros clientes.",
+    "HHM Proyectos nació del oficio: 18+ años, 280+ obras y un equipo propio de 40+ personas en electricidad y plomería. No jugamos con el patrimonio de nuestros clientes.",
   path: "/nosotros",
 });
 
@@ -33,9 +33,11 @@ export default function Nosotros() {
             {/* Hilo: origen (el problema) → filosofía → capacidad y alcance → caso como prueba. */}
             <p>
               Nuestro fundador, Héctor Hugo Martínez, empezó a trabajar en
-              instalaciones a los 17 años, junto a su padre. En cada obra veía el
-              mismo problema: clientes sin un trato correcto, sin respuestas
-              claras, pagando por una calidad que no recibían.
+              instalaciones a los 22 años, junto a su padre, y se capacitó en la
+              FIME (Facultad de Ingeniería Mecánica y Eléctrica), sumando formación
+              técnica a la experiencia de campo. En cada obra veía el mismo
+              problema: clientes sin un trato correcto, sin respuestas claras,
+              pagando por una calidad que no recibían.
             </p>
             <p>
               Con esa experiencia fundó HHM bajo una regla que seguimos hasta hoy:
@@ -59,8 +61,7 @@ export default function Nosotros() {
               contratista eléctrico a cargo no pudo con la obra; entramos con todo
               nuestro equipo para sacarla adelante. Al terminar, el cliente nos
               encargó su siguiente parque. Por resultados así, hasta hoy nuestros
-              proyectos llegan por recomendación de arquitectos. Muchos de sus
-              clientes nos llaman después para sus propias obras.
+              proyectos llegan por recomendación de arquitectos.
             </p>
           </Reveal>
         </div>

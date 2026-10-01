@@ -31,7 +31,7 @@ export default function Footer() {
           <div className="flex flex-col gap-4">
             <Logo variant="horizontal" title="HHM Proyectos" className="h-11 w-auto self-start text-white" />
             <p className="max-w-[260px] text-sm leading-relaxed">
-              Electricidad y plomería para construcción. Más de 15 años cuidando el
+              Electricidad y plomería para construcción. Más de 18 años cuidando el
               patrimonio de nuestros clientes.
             </p>
           </div>
