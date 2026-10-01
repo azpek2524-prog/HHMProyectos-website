@@ -160,11 +160,11 @@ export default async function ServiceDetail({
             ))}
           </ol>
 
-          {/* Respaldo: lo que garantiza que la instalación se hace bien */}
+          {/* Respaldo: lo que garantiza que la instalación se hace bien (el propio del servicio, si lo tiene) */}
           <Reveal className="flex flex-col gap-6 border-t border-ink pt-8">
             <Eyebrow as="h3">Respaldo</Eyebrow>
             <ul className="grid gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-4">
-              {credentials.map((c) => (
+              {(cat.credentials ?? credentials).map((c) => (
                 <li key={c.title} className="flex flex-col gap-1">
                   <span className="font-bold tracking-[-0.01em]">{c.title}</span>
                   <span className="text-[14px] leading-snug text-gray-600">{c.text}</span>

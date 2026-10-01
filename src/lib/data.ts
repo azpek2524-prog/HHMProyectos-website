@@ -24,6 +24,11 @@ export type Category = {
   process: { title: string; text: string }[];
   /** Preguntas propias del servicio; no repetir las generales del inicio. */
   faqs: { q: string; a: string }[];
+  /**
+   * "Respaldo" propio del servicio (debajo de "Cómo trabajamos", 4 puntos).
+   * Si falta, se usa el general (`credentials`), que incluye conceptos eléctricos.
+   */
+  credentials?: { title: string; text: string }[];
 };
 
 export const categories: Category[] = [
@@ -61,6 +66,13 @@ export const categories: Category[] = [
         q: "¿Atienden fugas o reparaciones en casa?",
         a: "Trabajamos en obra: proyecto nuevo, ampliaciones o remodelaciones. Las reparaciones las atendemos solo en instalaciones que hicimos nosotros.",
       },
+    ],
+    // Sin UVIE ni LOTO: son exclusivos de electricidad.
+    credentials: [
+      { title: "Pruebas de presión y hermeticidad", text: "Cada red de agua y gas se prueba a presión antes de taparla y entregarla." },
+      { title: "Constancias DC-3", text: "Personal capacitado y con constancias de competencias laborales." },
+      { title: "Garantía contra fugas", text: "Si aparece una fuga en una red que instalamos, la atendemos dentro de la garantía." },
+      { title: "Facturación", text: "Cobro por anticipo y estimaciones, con factura." },
     ],
   },
   {
@@ -207,7 +219,7 @@ export const stages = [
  */
 export type Stat = { value: number; suffix: string; label: string };
 export const stats: Stat[] = [
-  { value: 15, suffix: "+", label: "años en obra" },
+  { value: 18, suffix: "+", label: "años en obra" },
   { value: 280, suffix: "+", label: "obras entregadas" },
   { value: 40, suffix: "+", label: "personas en equipo propio" },
   { value: 20, suffix: "", label: "obras en paralelo hoy" },

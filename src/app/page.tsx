@@ -30,7 +30,7 @@ const business = {
   logo: `${site.url}/apple-icon.png`,
   image: `${site.url}/opengraph-image.jpg`,
   description:
-    "Contratista de electricidad y plomería: más de 15 años y más de 280 obras para agencias automotrices, residencias, comercios e industria.",
+    "Contratista de electricidad y plomería: más de 18 años y más de 280 obras para agencias automotrices, residencias, comercios e industria.",
   email: site.email,
   telephone: site.phoneE164,
   ...(site.address && { address: site.address }),
