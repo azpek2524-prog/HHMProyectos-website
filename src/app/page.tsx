@@ -10,11 +10,11 @@ import ProjectCard from "@/components/ui/ProjectCard";
 import HeroBlueprint, { HeroBlueprintMobile } from "@/components/home/HeroBlueprint";
 import StatsCounter from "@/components/home/StatsCounter";
 import ServicePanels from "@/components/home/ServicePanels";
-import TestimonialCarousel from "@/components/home/TestimonialCarousel";
+import TestimonialWall from "@/components/home/TestimonialWall";
 import QuoteCta from "@/components/home/QuoteCta";
 import JsonLd from "@/components/seo/JsonLd";
 import Faq from "@/components/Faq";
-import { categories, clientLogos, credentials, projects, specialties, stats, testimonials } from "@/lib/data";
+import { categories, clientLogos, credentials, projects, specialties, stats, testimonialDrafts, testimonials } from "@/lib/data";
 import { site } from "@/lib/site";
 
 // Título, descripción y vista previa vienen del layout.
@@ -48,6 +48,14 @@ const business = {
 
 const inlineLink =
   "font-semibold text-navy underline decoration-navy/30 underline-offset-4 transition-colors hover:decoration-navy";
+
+/*
+ * Testimonios: en el sitio oficial solo los reales y aprobados. Mientras no
+ * haya, las vistas previas de Vercel y el desarrollo local muestran los
+ * borradores (marcados como tales) para revisar el diseño.
+ */
+const showDrafts = process.env.VERCEL_ENV === "preview" || process.env.NODE_ENV === "development";
+const homeTestimonials = testimonials.length ? testimonials : showDrafts ? testimonialDrafts : [];
 
 /* Obras destacadas en la Home (por slug). */
 const featured = ["torre-invex-oficinas", "agencia-kia", "residencia"]
@@ -207,10 +215,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============ TESTIMONIOS · src/lib/data.ts (solo si hay) ============ */}
-      {testimonials.length > 0 && (
-        <section className="bg-navy px-5 py-12 text-white md:px-8 md:py-20">
-          <TestimonialCarousel testimonials={testimonials} />
+      {/* ============ TESTIMONIOS · cuadrícula asimétrica, sin carrusel ============ */}
+      {homeTestimonials.length > 0 && (
+        <section className="bg-night px-5 py-14 text-white md:px-8 md:py-[104px]">
+          <TestimonialWall testimonials={homeTestimonials} draft={testimonials.length === 0} />
         </section>
       )}
 

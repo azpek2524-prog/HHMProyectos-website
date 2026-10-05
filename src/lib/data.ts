@@ -226,20 +226,63 @@ export const stats: Stat[] = [
 ];
 
 /*
- * Testimonios de la Home, en el orden en que deben aparecer.
- * Vacío = la sección no se muestra. Solo testimonios reales, con permiso del
- * cliente para publicar su nombre. Sin foto se muestran sus iniciales.
- * Formato:
+ * Testimonios de la Home (cuadrícula, sin carrusel). El primero va destacado.
+ * Solo testimonios reales, con permiso del cliente para publicar su nombre:
+ * vacío = la sección no se muestra en el sitio oficial. Sin foto se muestran
+ * sus iniciales. Formato:
  *   {
- *     tag: "Arquitectura",            // tipo de obra o de cliente
- *     text: "…",                      // con las palabras del cliente, 1 a 3 frases
+ *     tag: "Rescate de obra",          // lo que respalda la cita
+ *     text: "…",                       // con las palabras del cliente, 2 a 3 frases
  *     who: "Arq. Nombre Apellido",
- *     role: "Director · Despacho",    // cargo y empresa
+ *     role: "Director de proyectos",
+ *     company: "Despacho",
  *     image: "/testimonios/nombre.jpg", // opcional
  *   },
  */
-export type Testimonial = { tag: string; text: string; who: string; role: string; image?: string };
+export type Testimonial = {
+  tag: string;
+  text: string;
+  /** Sin nombre (solo en borradores) se muestra "Nombre por confirmar". */
+  who?: string;
+  role: string;
+  company: string;
+  image?: string;
+};
 export const testimonials: Testimonial[] = [];
+
+/*
+ * Borradores para que HHM los envíe a cada cliente real: el cliente corrige el
+ * texto a su gusto, da su nombre y cargo, autoriza publicarlo y entonces pasa a
+ * `testimonials`. Se basan en casos reales de la entrevista. Nunca salen en el
+ * sitio oficial: solo en vistas previas de Vercel y en desarrollo local, con
+ * la etiqueta "Borrador", para revisar el diseño.
+ */
+export const testimonialDrafts: Testimonial[] = [
+  {
+    tag: "Rescate de obra",
+    text: "El contratista eléctrico anterior no pudo con la obra y el calendario ya estaba comprometido. HHM entró con su equipo completo, ordenó la instalación y la terminó. El siguiente parque se lo dimos a ellos desde el inicio.",
+    role: "Dirección de proyecto",
+    company: "Parque industrial para una línea de tráileres",
+  },
+  {
+    tag: "Coordinación de oficios",
+    text: "Como despacho, cuidamos que la obra quede como se diseñó. Con HHM no coordino a un eléctrico y a un plomero por separado: un solo equipo resuelve las dos instalaciones y me manda reportes con fotos.",
+    role: "Dirección de proyectos",
+    company: "LCA Arquitectos",
+  },
+  {
+    tag: "UVIE · DC-3 · LOTO",
+    text: "No tuvimos que vigilar la parte eléctrica: la verificó una UVIE, el personal llegó con constancias DC-3 y cada tablero se trabajó con bloqueo y etiquetado. Con agencias en operación, no podemos arriesgar ninguna instalación.",
+    role: "Gerencia de construcción",
+    company: "Agencia automotriz",
+  },
+  {
+    tag: "Patrimonio",
+    text: "Nos dijeron con claridad qué no iban a hacer aunque se los pidiéramos, porque ponía en riesgo la instalación. Hoy la casa funciona como el día de la entrega.",
+    role: "Cliente residencial",
+    company: "Residencia en Monterrey",
+  },
+];
 
 export const specialties = [
   "Hidrosanitaria",
